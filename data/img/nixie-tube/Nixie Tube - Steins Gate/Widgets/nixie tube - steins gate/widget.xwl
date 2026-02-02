@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xwidget version="1.0">
+	<info>
+		<name>Nixie Tube - Steins Gate</name>
+		<namespace/>
+		<displayName>Nixie Tube - Steins Gate Date / Time</displayName>
+		<version>1.2.0</version>
+		<authorName>AdiimEF</authorName>
+		<description/>
+		<permissions/>
+		<CloseBoxInsetX>6</CloseBoxInsetX>
+		<CloseBoxInsetY>8</CloseBoxInsetY>
+		<Width>1040</Width>
+		<Height>374</Height>
+		<minPlatformVersion>0.1</minPlatformVersion>
+		<uiType>xul</uiType>
+		<mainSrc>main.xul</mainSrc>
+		<guid/>
+		<updateLog/>
+		<category>3</category>
+		<authorContact>adiim.deviantart.com</authorContact>
+		<portAuthorName/>
+		<portAuthorContact/>
+		<tag/>
+		<enabledCloseBox>false</enabledCloseBox>
+		<platform>0</platform>
+	</info>
+</xwidget>

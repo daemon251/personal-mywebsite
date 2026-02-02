@@ -1,0 +1,486 @@
+/*fix centering*/
+@font-face {
+    font-family: 'VCROSDMONO'; 
+    src: url("data/font/VCR_OSD_MONO_1.001.ttf"); 
+}
+
+@font-face {
+    font-family: 'ANONPRO'; 
+    src: url("data/font/AnonymousPro-Regular.ttf"); 
+}
+
+@font-face {
+    font-family: 'mainfont'; 
+    src: url("data/font/AnonymousPro-Regular.ttf"); 
+}
+
+:root {
+    /* some of this is handled in js aswell.*/
+    --color-bg: rgba(0, 0, 0, 1);
+    --color1: rgba(255, 255, 255, 1);
+    --color1a: rgba(204, 204, 204, 1);
+    --color2: rgba(0, 0, 0, 0.75);
+    --color2a: rgba(0, 0, 0, 1);
+    --color3: rgba(32, 32, 32, 1);
+
+    --hue-rotate: 0deg;
+    --value: 1;
+}
+
+html {
+    /* nice color: #0b0e12 */
+    background-color: var(--color-bg);
+}
+
+body {
+    width: calc(100% - 0);
+    background-color: rgb(0, 0, 0);
+    border: 0px solid var(--color3);
+    padding: 0px 10px 0px 0px; /*second arg fixes alignment issues due to border */
+    margin-top: 0px;
+    margin-left: auto;
+    margin-right: auto;
+    align-items: center;
+    display: flex; 
+    flex-direction: column;
+}
+
+h1 {
+    color: var(--color1);
+    font-size: 36px;
+    font-family: 'VCROSDMONO';
+}
+
+h2 {
+    color: var(--color1);
+    font-size: 24px;
+    font-family: 'VCROSDMONO';
+}
+
+p {
+    color: var(--color1);
+    font-size: calc(16px);
+    /*text-shadow: 2px 2px 0px red, 0px -2px 0px green, -2px 2px 0px blue;*/
+    line-height: 1;
+}
+
+li {
+    color: var(--color1)
+}
+
+img {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 100%;
+    height: auto;
+}
+
+.maincontainer {
+    margin-top: 25px;
+    padding: 0px 10px 0px 0px;
+    /*flex: 0 0 min(1080px, 90%);
+    width: min(1080px, 90%);*/
+    flex: 0 0 1080px;
+    width: 1080px;
+    /*transform: translate(calc(25% + 0vw), 0px);*/
+    align-items: center;
+    justify-content: center;
+}
+
+/*.maincontainer {
+    margin-top: 25px;
+    padding: 0px 10px 0px 0px;
+    flex: 0 0 min(1080px, calc(90% + 240px));
+    width: min(1080px, calc(90% + 240px));
+    align-items: center;
+    justify-content: center;
+}*/
+
+.genericcontainer {
+    /*padding: 20px 20px 20px -125px;*/
+    /*width: min(800px, 100%);*/
+    width: 100%;
+    background-color: var(--color2);
+    border: 5px solid var(--color1); /*border shifts things to side */
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    opacity: 100%;
+}
+
+.row {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+}
+
+.column {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+}
+
+.aligner {
+    padding: 0px 20px 10px 20px;
+    width: calc(100% - 40px);
+}
+
+.imageadjust1 {
+    padding: 0px 0px 0px 38px;
+    width: 100%;
+}
+
+.imageadjust2 {
+    padding: 0px 0px 0px 6px;
+    width: 100%;
+}
+
+canvas {
+    padding: 0px 0px 0px 0px;
+    position: absolute;
+    left: 0%;
+    z-index: 0
+}
+
+.emptybar {
+    padding: 0px 0px 0px 10px; /*exists because border exists */
+    height: 25px;
+    width: 100%;
+    margin: 0px;  
+    background-color: var(--color2); /* doesnt matter */
+    opacity: 0%;
+}
+
+.largeemptybar {
+    padding: 0px 0px 0px 10px; /*exists because border exists */
+    height: 400px;
+    width: 100%;
+    margin: 0px;  
+    background-color: var(--color2); /* doesnt matter */
+    opacity: 0%;
+}
+
+
+    /*display: flex;
+    width: 100%;
+    flex-direction: row;*/
+
+.topbar {
+    width: calc(100% + 10px);
+    height: 40px;
+    padding: 0px 10px 0px 0px; 
+    display: flex; 
+    flex-direction: row;
+    position: relative;
+}
+
+.signature {
+    font-family: 'VCROSDMONO';
+    font-size: 12px; /*only really looks good in mult of 4 - old browser support*/
+    font-size: calc(2px + 0.75vw);
+    position: relative;
+    line-height: 1;
+    display: flex;
+    width: 50%;
+    color: var(--color1);
+}
+
+.buttonholder {
+    width: 50%;
+    padding: 0px 0px 8px 10px; 
+    margin-left: auto;
+    margin-right: auto;
+    display: flex; /*lets stuff in it be centered*/
+    /*flex-direction: row;*/
+}
+
+a {
+    display: block;
+    width: auto;
+    color: var(--color1);
+    text-decoration: underline;
+    display: flex;
+    justify-content: left;
+}
+
+a:hover {
+    color: #ff5500ff;
+    text-decoration: underline;
+    text-shadow: 0px 0px 8px #ff5500ff;
+    filter: hue-rotate(var(--hue-rotate)) brightness(var(--value));
+}
+
+.button {
+    font-family: 'mainfont';
+    width: 100%;
+    opacity: 100%;
+    background-color: var(--color2);
+    border: 2px solid var(--color1); /*border shifts things to side */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px; /*old browser support*/
+    /*font-size: calc(4px + 0.7vw);*/
+    text-align: center;
+
+    /*make buttons not have annoying text highlighting when you click on them*/
+    user-select: none;
+}
+
+
+.button-nolink {
+    font-family: 'mainfont';
+    width: 100%;
+    opacity: 100%;
+    background-color: var(--color2);
+    border: 2px solid var(--color1); /*border shifts things to side */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px; /*old browser support*/
+    /*font-size: calc(4px + 0.7vw);*/
+    text-align: center;
+
+    /*make buttons not have annoying text highlighting when you click on them*/
+    user-select: none;
+}
+
+.smallsegment {
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+}
+
+.largesegment {
+    width: 80%;
+}
+
+.imagecontainer {
+    align-items: center;
+    justify-content: center;
+}
+
+.contentsmallsegment {
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+    align-items: top;
+    justify-content: center;
+    padding-left: 4px;
+}
+
+.contentlargesegment {
+    width: 80%;
+}
+
+.contentcontainer {
+    width: calc(100% - 6px);
+    /*background-color: var(--color2);*/
+    border: 2px solid var(--color1) !important; /*border shifts things to side */
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    opacity: 100%;
+}
+
+.contentbar {
+    width: calc(100% - 4px);
+    height: calc(9vw);
+    margin-bottom: 0px;
+    border: 2px solid var(--color1) !important; /*border shifts things to side */
+    position: relative;
+    opacity: 100%;
+}
+
+.contentbar-noimg {
+    width: calc(100% - 4px);
+    height: calc(124px);
+    margin-bottom: 0px;
+    border: 2px solid var(--color1) !important; /*border shifts things to side */
+    position: relative;
+    opacity: 100%;
+}
+
+.contentbar-tall {
+    width: calc(100% - 4px);
+    height: calc(27vw);
+    border: 2px solid var(--color1) !important; /*border shifts things to side */
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    opacity: 100%;
+}
+
+.contentbarbottom {
+    width: calc(100% - 40px);
+    height: calc(9vw);
+    padding: 0px 0px 0px 20px; 
+    position: relative;
+    align-items: bottom;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    opacity: 100%;
+}
+
+.contentimagecontainer {
+    /*transform: translate(5px, 5px);*/
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    border: 2px solid var(--color1);
+}
+
+.textbox {
+    /*border: 2px solid var(--color1);*/
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    align-self: center;
+    text-align: center;
+    margin: 0px;
+    line-height: 1;
+    font-size: calc(8px); /*compat*/
+    font-size: calc(2px + 0.9vw);
+}
+
+.contentgrid {
+    display:grid;
+    width:calc(100%);
+    grid-template-columns: 1fr 1fr;/*controlled in script*/
+    /*padding: 10px;*/
+}
+
+.sidebar {
+    width: 240px;
+    flex: 0 0 240px;
+    padding: 0px 0px 0px 30px; 
+    display: block;
+}
+
+@keyframes glow {
+  from {
+    text-shadow: 0 0 10px #ffffff, 0 0 20px #0000ff, 0 0 80px #0000ff;
+  }
+  
+  to {
+    text-shadow: 0 0 20px #ffffff, 0 0 30px #ff0000;
+  }
+}
+
+.text-styled {
+    background: url('data/img/text/patternGif.gif'); 
+    filter: hue-rotate(var(--hue-rotate)) brightness(var(--value));
+    /*background-size: cover;*/
+    background-position: center;
+    /*-webkit-background-clip: text;*/
+    background-clip: text;
+    color: transparent;
+    /*font-weight: bold;*/
+    /*STILL BAD FIX TIHS */
+    padding-left: 2px; /*for some reason, required so that stuff doesnt get cut off*/
+    padding-right: 2px; /*for consistency I guess*/
+    display:inline-block; /*makes transform work properly*/
+    transform: translate(-0px, 0px); /*undoes padding*/
+    text-shadow: 0px 0px 8px #ff5500ff !important;
+    margin-bottom: 0px;
+}
+
+.a-styled {
+    background: url('data/img/text/patternGifMedium.gif');
+    filter: hue-rotate(var(--hue-rotate)) brightness(var(--value));
+    /*background-size: cover;*/
+    background-position: center;
+    /*-webkit-background-clip: text;*/
+    background-clip: text;
+    color: transparent;
+    font-weight: bold;
+    /*STILL BAD FIX TIHS */
+    padding-left: 2px; /*for some reason, required so that stuff doesnt get cut off*/
+    padding-right: 2px; /*for consistency I guess*/
+    display:inline-block; /*makes transform work properly*/
+    transform: translate(-0px, 0px); /*undoes padding*/
+    text-shadow: 0px 0px 8px #ff5500ff !important;
+    margin-bottom: 0px;
+    text-decoration: underline;
+}
+
+.a-styled:hover {
+    color: #ff5500ff;
+    text-decoration: underline;
+    text-shadow: 0px 0px 8px #ff5500ff;
+    filter: hue-rotate(var(--hue-rotate)) brightness(var(--value));
+}
+
+.nixie-array {
+    display: flex;
+    width: auto;
+    background-color: var(--color2a);
+    height:50px;
+    /*border: 2px solid orange;*/
+}
+
+.nixie {
+    width: 16px;
+    margin: 1px;
+    margin-top: 2px;
+    height: 46px;
+    background-image: url('data/img/nixie-tube/0.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    box-shadow: 0px 0px 25px #ff550038;
+    filter: hue-rotate(var(--hue-rotate)) brightness(var(--value));
+}
+
+.slider {
+    border-radius: 0px;
+    background: var(--color2a);
+    color: white;
+    appearance: none;
+    border: 2px solid var(--color1);
+    width: 150px;
+    padding: 3px;
+    margin-left: 0px;
+    
+}
+
+/*fix manual adjust gfx*/
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 12px;
+    height: 12px;
+    background: var(--color1);
+    cursor: pointer;
+}
+
+.slider::-moz-slider-thumb {
+    -moz-appearance: none;
+    appearance: none;
+    width: 12px;
+    height: 12px;
+    background: var(--color1);
+    cursor: pointer;
+}
+
+button {
+    font-family: 'mainfont';
+    font-size: 16px;
+    border: 2px solid var(--color1);
+    background-color: var(--color2);
+    color: var(--color1);
+    height: 36px;
+}
+
+button:hover {
+    color: #ff5500ff;
+    border: 2px solid #ff5500ff;
+    filter: hue-rotate(var(--hue-rotate)) brightness(var(--value));
+}
+
+.checkbox {
+    color: var(--color1);
+}

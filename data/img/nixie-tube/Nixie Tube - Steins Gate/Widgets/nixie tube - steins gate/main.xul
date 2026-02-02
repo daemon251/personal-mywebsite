@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xul Version="1.0">
+	<script type="text/javascript" src="script.js"/>
+	<window type="widget" height="374" onLoad="Load_Configuration" onResize="Save_Configuration" width="1040">
+		<layer name="Group" width="1040" height="374" allowDrag="false">
+			<image name="Edit_Number" left="300" top="100" width="400" height="160" background.solidColor.color="0,0,0,200" border.enabled="true" border.color="255,200,150,255" effect.glow.color="255,200,150,255" effect.glow.softness=".3" effect.glow.opacity="1" effect.glow.enabled="true" background.pattern.color="255,200,150,25" allowDrag="false" background.solidColor.enabled="true" background.pattern.enabled="true" visible="false">
+				<text name="Close" width="30" font.size="20" font.family="Arial" font.fill.color="255,200,150,255" left="370" hAlign="0" vAlign="0" font.antiAlias="true" effect.glow.color="255,175,150,255" effect.glow.opacity="1" effect.glow.softness=".3" effect.glow.enabled="true" height="30" text="X" cursor="-21" onClick="Custom_NumberOnClick" font.privateFont.src="Font\segoeui.ttf" font.privateFont.family="Segoe UI" allowDrag="false"/>
+				<text name="OK" width="60" font.size="30" font.family="Arial" font.fill.color="255,200,150,255" hAlign="0" vAlign="0" font.antiAlias="true" effect.glow.color="255,175,150,255" effect.glow.opacity="1" effect.glow.softness=".3" height="60" text="OK" left="320" top="80" border.enabled="true" border.color="255,200,150,255" cursor="-21" background.solidColor.color="255,200,150,100" onMouseEnter="OKOnMouseEnter" onMouseLeave="OKOnMouseLeave" onClick="Input_Checker" font.privateFont.src="Font\AGENCYR.TTF" font.privateFont.family="Agency FB" allowDrag="false"/>
+				<edit name="Input" left="20" top="80" width="280" height="60" background.style="0" frame.color="255,200,150,255" font.size="30" font.family="Arial" font.fill.color="255,200,150,255" onKeyDown="InputOnKeyDown" font.privateFont.src="Font\AGENCYR.TTF" font.privateFont.family="Agency FB"/>
+				<text name="Title" width="360" font.size="40" font.family="Arial" font.fill.color="255,200,150,255" text="Custom Number" left="20" top="20" hAlign="0" vAlign="0" font.antiAlias="true" effect.glow.color="255,175,150,255" effect.glow.opacity="1" effect.glow.softness=".3" effect.glow.enabled="true" font.privateFont.src="Font\AGENCYR.TTF" font.privateFont.family="Agency FB" allowDrag="false"/>
+			</image>
+			<text name="Hint" width="1040" height="374" hAlign="0" vAlign="0" font.size="100" font.fill.color="255,255,255,255" font.family="Agency FB" allowDrag="false" mouseThrough="true" flatStyle.color="0,0,0,255" flatStyle.offsetX="9" textFrame.enabled="true" textFrame.color="0,0,0,255" textFrame.size="5" visible="false"/>
+			<image name="Drag" width="1040" height="374" background.solidColor.enabled="true" background.solidColor.color="255,255,255,1" cursor="-21" onMouseDown="DragOnMouseDown" onMouseUp="DragOnMouseUp" onDragDrop="DragOnDragDrop" acceptFileDragDrop="true" dragDisablehighlight="false"/>
+			<layer name="Steins_Gate" width="260" height="374" visible="false" allowDrag="false">
+				<image name="Dot_3" width="130" height="374" src="Image\Dot.png" left="130" allowDrag="false"/>
+				<image name="One_Percent" width="130" height="374" src="Image\1.png" allowDrag="false"/>
+			</layer>
+			<layer name="Original_Alternative" width="1300" height="374" allowDrag="false">
+				<image name="Year_Right" width="130" height="374" src="Image\5.png" left="1170" allowDrag="false"/>
+				<image name="Year_Left" width="130" height="374" src="Image\5.png" left="1040" allowDrag="false"/>
+				<image name="Second_Right" width="130" height="374" src="Image\9.png" left="910" animateChange.duration=".1" animateChange.switchEffect="1" allowDrag="false"/>
+				<image name="Second_Left" width="130" height="374" src="Image\5.png" left="780" allowDrag="false"/>
+				<image name="Dot_2" width="130" height="374" src="Image\Dot.png" left="650" allowDrag="false"/>
+				<image name="Minute_Right" width="130" height="374" src="Image\9.png" left="520" allowDrag="false"/>
+				<image name="Minute_Left" width="130" height="374" src="Image\5.png" left="390" allowDrag="false"/>
+				<image name="Dot_1" width="130" height="374" src="Image\Dot.png" left="260" allowDrag="false"/>
+				<image name="Hour_Right" width="130" height="374" src="Image\3.png" left="130" allowDrag="false"/>
+				<image name="Hour_Left" width="130" height="374" src="Image\2.png" allowDrag="false"/>
+			</layer>
+		</layer>
+	</window>
+	<menu>
+		<item name="Mode" caption="Mode">
+			<item name="Mode_Date" caption="Date" onClick="Mode_DateOnClick"/>
+			<item name="Mode_Time" caption="Time" enabled="false" checked="true" onClick="Mode_TimeOnClick"/>
+		</item>
+		<item name="Version" caption="Version">
+			<item name="Version_Original" caption="Original" checked="true" enabled="false" onClick="Version_OriginalOnClick"/>
+			<item name="Version_Alternative" caption="Alternative" onClick="Version_AlternativeOnClick"/>
+			<item name="Version_Steins_Gate" caption="Steins Gate" onClick="Version_Steins_GateOnClick"/>
+		</item>
+		<item name="Space_1" caption="-"/>
+		<item name="Date_Format" caption="Date Format">
+			<item name="Date_Format_DMY" caption="Day, Month, Year" enabled="false" checked="true" onClick="Date_Format_DMYOnClick"/>
+			<item name="Date_Format_MDY" caption="Month, Day, Year" onClick="Date_Format_MDYOnClick"/>
+		</item>
+		<item name="Time_Format" caption="Time Format">
+			<item name="Time_Format_12" caption="12 Hour" onClick="Time_Format_12OnClick"/>
+			<item name="Time_Format_24" caption="24 Hour" enabled="false" checked="true" onClick="Time_Format_24OnClick"/>
+		</item>
+		<item name="Space_2" caption="-"/>
+		<item name="Default_Number" caption="Default Number" onClick="Default_NumberOnClick" checked="true"/>
+		<item name="Custom_Number" caption="Custom Number" onClick="Custom_NumberOnClick"/>
+		<item name="Space_3" caption="-"/>
+		<item name="More_Contrast" caption="More Contrast" onClick="More_ContrastOnClick"/>
+		<item name="Menu_Item_1" caption="Date/Time Setting" core="Date_Time" onClick="!ShowSetting"/>
+		<item name="Space_4" caption="-"/>
+		<item name="Use_Wallpaper" caption="Wallpaper" onClick="Use_WallpaperOnClick"/>
+		<item name="Bring_To_Center" caption="Bring To Center" onClick="Bring_To_CenterOnClick"/>
+		<item name="Set_Position" caption="Set Position" visible="false" enabled="false">
+			<item name="Set_Position_Top_Left" caption="Top Left" onClick="Set_Position_Top_LeftOnClick"/>
+			<item name="Set_Position_Middle_Left" caption="Left" onClick="Set_Position_Middle_LeftOnClick"/>
+			<item name="Set_Position_Bottom_Left" caption="Bottom Left" onClick="Set_Position_Bottom_LeftOnClick"/>
+			<item name="Set_Position_Space_1" caption="-"/>
+			<item name="Set_Position_Top_Middle" caption="Top" onClick="Set_Position_Top_MiddleOnClick"/>
+			<item name="Set_Position_Middle_Middle" caption="Center" onClick="Set_Position_Middle_MiddleOnClick"/>
+			<item name="Set_Position_Bottom_Middle" caption="Bottom" onClick="Set_Position_Bottom_MiddleOnClick"/>
+			<item name="Set_Position_Space_2" caption="-"/>
+			<item name="Set_Position_Top_Right" caption="Top Right" onClick="Set_Position_Top_RightOnClick"/>
+			<item name="Set_Position_Middle_Right" caption="Right" onClick="Set_Position_Middle_RightOnClick"/>
+			<item name="Set_Position_Bottom_Right" caption="Bottom Right" onClick="Set_Position_Bottom_RightOnClick"/>
+			<item name="Set_Position_Space_3" caption="-"/>
+			<item name="Set_Position_Custom" caption="Custom / Free (Automatic)" enabled="false"/>
+			<item name="Set_Position_Coordinate" caption="XY" enabled="false"/>
+		</item>
+	</menu>
+	<cores>
+		<dateTimeCore name="Date_Time" onUpdate="Date_TimeOnUpdate" enabled="false"/>
+		<dateTimeCore name="Check" onUpdate="CheckOnUpdate"/>
+	</cores>
+	<hotspots/>
+</xul>

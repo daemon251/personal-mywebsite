@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>  
+    <head>
+        <!-- Text that appears in the browser tab -->
+        <title>williamianbrooks-website-misc</title>
+        <link rel="stylesheet" type="text/css" href="styles.css">
+        <link rel="icon" type="image/x-icon" href="data/img/icon.jpg">
+    </head>
+    <body>
+        <noscript>
+            <div class="alert">
+                This site requires javascript enabled to function properly. Sorry!
+            </div>
+        </noscript>
+        <canvas id="backgroundCanvas" width="100" height="100"></canvas>
+        <script type="text/javascript" src='backgroundCanvasController.js'></script> 
+        <div class="maincontainer">
+            <div class="topbar">
+                <div class="signature">
+                    <p class="text-styled" style="position: absolute; bottom: 0; margin-bottom: 4px">William Brooks / daemon47 - <span id=".site-titleDate"></span></p>
+                </div>
+                <div class="buttonholder">
+                    <div class="button">
+                        <a href="index.html" target="_self" style="justify-content:center;padding: 5px;">General</a>
+                    </div>
+                    <div class="button">
+                        <a href="myStuffPage.html" target="_self" style="justify-content:center;padding: 5px;">My Stuff</a>
+                    </div>
+                    <div class="button">
+                        <a href="stuffILike.html" target="_self" style="justify-content:center;padding: 5px;">Cool Stuff</a>
+                    </div>
+                    <div class="button">
+                        <a href="contactPage.html" target="_self" style="justify-content:center;padding: 5px;">Contact</a>
+                    </div>
+                    <div class="button" style="border-color:var(--color1a)">
+                        <a href="miscPage.html" target="_self" style="color:var(--color1a);justify-content:center;padding: 5px;">Settings</a>
+                    </div>
+                </div>
+            </div>
+            <div class="genericcontainer">
+                <div class="aligner">
+                    <h1 class="text-styled">Settings</h1>
+
+                    <p style="font-family: 'VCROSDMONO';">
+                        Settings are stored in your cache. 
+                        <br>You can click a slider and press ← or → for precise input.
+
+                        <!--<div class="slidecontainer">
+                            <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+                        </div>-->
+
+                        <div class="row" style="align-items: center;">
+                            <p style="margin: 0px; margin-bottom: 2px; font-family: 'VCROSDMONO';">Background Color:&nbsp;&nbsp;&nbsp;R: </p>
+                            <div class="slidecontainer">
+                                <input type="range" min="0" max="1" value="0" class="slider" id=".bgc-r">
+                            </div>
+                            <p style="margin: 0px; margin-bottom: 2px; margin-left: 10px; font-family: 'VCROSDMONO';">G: </p>
+                            <div class="slidecontainer">
+                                <input type="range" min="0" max="1" value="0" class="slider" id=".bgc-g">
+                            </div>
+                            <p style="margin: 0px; margin-bottom: 2px; margin-left: 10px; font-family: 'VCROSDMONO';">B: </p>
+                            <div class="slidecontainer">
+                                <input type="range" min="0" max="1" value="0" class="slider" id=".bgc-b">
+                            </div>
+                            <p style="margin: 0px; margin-bottom: 2px;margin-left: 10px;font-family: VCROSDMONO" id = ".bgc-text"> ... </p>
+                        </div>
+                        <div class="row" style="align-items: center;">
+                            <p style="margin: 0px; margin-bottom: 2px; font-family: 'VCROSDMONO';">Menu Color:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;R: </p>
+                            <div class="slidecontainer">
+                                <input type="range" min="0" max="1" value="0" class="slider" id=".men-r">
+                            </div>
+                            <p style="margin: 0px; margin-bottom: 2px; margin-left: 10px; font-family: 'VCROSDMONO';">G: </p>
+                            <div class="slidecontainer">
+                                <input type="range" min="0" max="1" value="0" class="slider" id=".men-g">
+                            </div>
+                            <p style="margin: 0px; margin-bottom: 2px; margin-left: 10px; font-family: 'VCROSDMONO';">B: </p>
+                            <div class="slidecontainer">
+                                <input type="range" min="0" max="1" value="0" class="slider" id=".men-b">
+                            </div>
+                            <p style="margin: 0px; margin-bottom: 2px;margin-left: 10px;font-family: VCROSDMONO" id = ".men-text"> ... </p>
+                        </div>
+                        <div class="row" style="align-items: center;">
+                            <p style="margin: 0px; margin-bottom: 2px; font-family: 'VCROSDMONO';">Main Color:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;R: </p>
+                            <div class="slidecontainer">
+                                <input type="range" min="0" max="1" value="1" class="slider" id=".mc-r">
+                            </div>
+                            <p style="margin: 0px; margin-bottom: 2px; margin-left: 10px; font-family: 'VCROSDMONO';">G: </p>
+                            <div class="slidecontainer">
+                                <input type="range" min="0" max="1" value="1" class="slider" id=".mc-g">
+                            </div>
+                            <p style="margin: 0px; margin-bottom: 2px; margin-left: 10px; font-family: 'VCROSDMONO';">B: </p>
+                            <div class="slidecontainer">
+                                <input type="range" min="0" max="1" value="1" class="slider" id=".mc-b">
+                            </div>
+                            <p style="margin: 0px; margin-bottom: 2px;margin-left: 10px;font-family: VCROSDMONO" id = ".mc-text"> ... </p>
+                        </div>
+                        <!--<div class="row" style="align-items: center;">
+                            <p style="margin: 0px; margin-bottom: 2px; font-family: 'VCROSDMONO';">Dark Main Color:&ensp;&ensp;&ensp;&ensp;&ensp;R: </p>
+                            <div class="slidecontainer">
+                                <input type="range" min="0" max="1" value="0.8" class="slider" id=".dmc-r">
+                            </div>
+                            <p style="margin: 0px; margin-bottom: 2px; margin-left: 10px; font-family: 'VCROSDMONO';">G: </p>
+                            <div class="slidecontainer">
+                                <input type="range" min="0" max="1" value="0.8" class="slider" id=".dmc-g">
+                            </div>
+                            <p style="margin: 0px; margin-bottom: 2px; margin-left: 10px; font-family: 'VCROSDMONO';">B: </p>
+                            <div class="slidecontainer">
+                                <input type="range" min="0" max="1" value="0.8" class="slider" id=".dmc-b">
+                            </div>
+                            <p style="margin: 0px; margin-bottom: 2px; margin-left: 10px;font-family: VCROSDMONO" id = ".dmc-text"> ... </p>
+                        </div>-->
+                        <div class="row" style="align-items: center;">
+                            <p style="margin: 0px; margin-bottom: 2px; font-family: 'VCROSDMONO';">Star Color:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;R: </p>
+                            <div class="slidecontainer">
+                                <input type="range" min="0" max="1" value="1" class="slider" id=".star-r">
+                            </div>
+                            <p style="margin: 0px; margin-bottom: 2px; margin-left: 10px; font-family: 'VCROSDMONO';">G: </p>
+                            <div class="slidecontainer">
+                                <input type="range" min="0" max="1" value="1" class="slider" id=".star-g">
+                            </div>
+                            <p style="margin: 0px; margin-bottom: 2px; margin-left: 10px; font-family: 'VCROSDMONO';">B: </p>
+                            <div class="slidecontainer">
+                                <input type="range" min="0" max="1" value="1" class="slider" id=".star-b">
+                            </div>
+                            <p style="margin: 0px; margin-bottom: 2px;margin-left: 10px;font-family: VCROSDMONO" id = ".star-text"> ... </p>
+                        </div>
+
+                        <div class="row" style="align-items: center;">
+                            <p style="margin: 0px; margin-bottom: 2px; font-family: 'VCROSDMONO';">Menu Opacity: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A: </p>
+                            <div class="slidecontainer">
+                                <input type="range" min="0" max="1" value="0.75" class="slider" id=".global-opacity">
+                            </div>
+                            <p style="margin: 0px; margin-bottom: 2px;margin-left: 10px;font-family: VCROSDMONO" id = ".global-opacity-text"> ... </p>
+                        </div>
+
+                        <p style="color: var(--color1); font-family: 'VCROSDMONO'; display: inline;">Enable background stars</p> <input type="checkbox" class=".checkbox" id=".global-star" value="on"><br>
+                        <p style="color: var(--color1); font-family: 'VCROSDMONO'; display: inline;">Enable chromatic aberration on scroll</p> <input type="checkbox" class=".checkbox" id=".global-chro" value="on"><br>
+                        <p style="color: var(--color1); font-family: 'VCROSDMONO'; display: inline;">Enable nixie tube flickering</p> <input type="checkbox" class=".checkbox"  id=".global-nixie" value="on"><br>
+                        
+                        <div class="row" style="align-items: center;">
+                            <p style="margin: 0px; margin-bottom: 2px; font-family: 'VCROSDMONO';">Secondary Color:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Hue Rotate: </p>
+                            <div class="slidecontainer">
+                                <input type="range" min="0" max="1" value="0" class="slider" id=".sc-hue">
+                            </div>
+                            <p style="margin: 0px; margin-bottom: 2px; margin-left: 10px; font-family: 'VCROSDMONO';">Brightness: </p>
+                            <div class="slidecontainer">
+                                <input type="range" min="0" max="1" value="1" class="slider" id=".sc-value">
+                            </div>
+                            <p style="margin: 0px; margin-bottom: 2px;margin-left: 10px;font-family: VCROSDMONO" id = ".sc-text"> ... </p>
+                            <!--<p style="margin: 0px; margin-bottom: 2px; margin-left: 10px; font-family: 'VCROSDMONO';">B: </p>
+                            <div class="slidecontainer">
+                                <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+                            </div>-->
+                        </div>
+
+                        <div class="row">
+                            <p style="font-family: VCROSDMONO">Sample Nixies: </p>
+                            <div class="nixie-array">
+                                <div class="nixie" style="background-image: url('data/img/nixie-tube/1.png');"></div>
+                                <div class="nixie" style="background-image: url('data/img/nixie-tube/2.png');"></div>
+                                <div class="nixie" style="background-image: url('data/img/nixie-tube/3.png');"></div>
+                                <div class="nixie" style="background-image: url('data/img/nixie-tube/4.png');"></div>
+                                <div class="nixie" style="background-image: url('data/img/nixie-tube/5.png');"></div>
+                                <div class="nixie" style="background-image: url('data/img/nixie-tube/6.png');"></div>
+                                <div class="nixie" style="background-image: url('data/img/nixie-tube/7.png');"></div>
+                                <div class="nixie" style="background-image: url('data/img/nixie-tube/8.png');"></div>
+                                <div class="nixie" style="background-image: url('data/img/nixie-tube/9.png');"></div>
+                                <div class="nixie" style="background-image: url('data/img/nixie-tube/0.png');"></div>
+                            </div>
+                        </div>
+
+                        <button type="button" onclick="resetConfigSettings()" style="font-family:VCROSDMONO">Reset Settings</button><br>
+                    </p>
+                </div>
+            </div>
+            <div class="largeemptybar"> </div>
+        </div>
+        <script type="text/javascript" src='main.js'></script>
+        <script type="text/javascript" src='textEffects.js'></script>
+        <script type="text/javascript" src='config.js'></script>
+    </body>
+</html>
