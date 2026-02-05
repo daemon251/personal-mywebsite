@@ -25,7 +25,7 @@ var scrollChangeTick = 0; //probably depends on framerate? this is bad.
 var chromaticAberrationAmount = 0;
 var pixelsScrolledAccumulator = 0;
 
-var chromaticAberrationEnabled = true;
+var chromaticAberrationEnabled = "true";
 
 //basically exponential decay
 setInterval(function()

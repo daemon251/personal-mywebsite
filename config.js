@@ -56,30 +56,33 @@ function convertRGBToHex(r, g, b, a)
 setConfigChanges(); //run on start as well
 function setConfigChanges()
 {
-    var color1 = convertRGBToHex(localStorage.getItem(".mc-r"), localStorage.getItem(".mc-g"), localStorage.getItem(".mc-b"), 1);
-    document.documentElement.style.setProperty('--color1', color1);
+    if(localStorage.getItem(".mc-r") != null) 
+    {
+        var color1 = convertRGBToHex(localStorage.getItem(".mc-r"), localStorage.getItem(".mc-g"), localStorage.getItem(".mc-b"), 1);
+        document.documentElement.style.setProperty('--color1', color1);
 
-    var color1a = convertRGBToHex(localStorage.getItem(".mc-r"), localStorage.getItem(".mc-g"), localStorage.getItem(".mc-b"), 0.75);
-    document.documentElement.style.setProperty('--color1a', color1a);
+        var color1a = convertRGBToHex(localStorage.getItem(".mc-r"), localStorage.getItem(".mc-g"), localStorage.getItem(".mc-b"), 0.75);
+        document.documentElement.style.setProperty('--color1a', color1a);
 
-    var color2 = convertRGBToHex(localStorage.getItem(".men-r"), localStorage.getItem(".men-g"), localStorage.getItem(".men-b"), localStorage.getItem(".global-opacity"));
-    document.documentElement.style.setProperty('--color2', color2);
+        var color2 = convertRGBToHex(localStorage.getItem(".men-r"), localStorage.getItem(".men-g"), localStorage.getItem(".men-b"), localStorage.getItem(".global-opacity"));
+        document.documentElement.style.setProperty('--color2', color2);
 
-    var color2a = convertRGBToHex(localStorage.getItem(".men-r"), localStorage.getItem(".men-g"), localStorage.getItem(".men-b"), 1);
-    document.documentElement.style.setProperty('--color2a', color2a);
+        var color2a = convertRGBToHex(localStorage.getItem(".men-r"), localStorage.getItem(".men-g"), localStorage.getItem(".men-b"), 1);
+        document.documentElement.style.setProperty('--color2a', color2a);
 
-    var colorbg = convertRGBToHex(localStorage.getItem(".bgc-r"), localStorage.getItem(".bgc-g"), localStorage.getItem(".bgc-b"), 1);
-    document.documentElement.style.setProperty('--color-bg', colorbg);
+        var colorbg = convertRGBToHex(localStorage.getItem(".bgc-r"), localStorage.getItem(".bgc-g"), localStorage.getItem(".bgc-b"), 1);
+        document.documentElement.style.setProperty('--color-bg', colorbg);
 
-    document.documentElement.style.setProperty('--value', localStorage.getItem(".sc-value"));
-    document.documentElement.style.setProperty('--hue-rotate', localStorage.getItem(".sc-hue") * 360 + "deg");
+        document.documentElement.style.setProperty('--value', localStorage.getItem(".sc-value"));
+        document.documentElement.style.setProperty('--hue-rotate', localStorage.getItem(".sc-hue") * 360 + "deg");
 
-    colorStars = "#" + radixToHex(localStorage.getItem(".star-r")) + radixToHex(localStorage.getItem(".star-g")) + radixToHex(localStorage.getItem(".star-b"))
-    colorBackground = "#" + radixToHex(localStorage.getItem(".bgc-r")) + radixToHex(localStorage.getItem(".bgc-g")) + radixToHex(localStorage.getItem(".bgc-b"))
+        colorStars = "#" + radixToHex(localStorage.getItem(".star-r")) + radixToHex(localStorage.getItem(".star-g")) + radixToHex(localStorage.getItem(".star-b"))
+        colorBackground = "#" + radixToHex(localStorage.getItem(".bgc-r")) + radixToHex(localStorage.getItem(".bgc-g")) + radixToHex(localStorage.getItem(".bgc-b"))
 
-    nixieFlickering = localStorage.getItem(".global-nixie");
-    chromaticAberrationEnabled = localStorage.getItem(".global-chro");
-    starsEnabled = localStorage.getItem(".global-star");
+        nixieFlickering = localStorage.getItem(".global-nixie");
+        chromaticAberrationEnabled = localStorage.getItem(".global-chro");
+        starsEnabled = localStorage.getItem(".global-star");
+    }
 }
 
 if(document.title == "williamianbrooks-website-misc")

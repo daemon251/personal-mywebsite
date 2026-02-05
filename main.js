@@ -280,7 +280,7 @@ window.onresize = function(event)
 };
 
 var nixies = document.querySelectorAll(".nixie");
-var nixieFlickering = true;
+var nixieFlickering = "true";
 setInterval(function() //flickering
 {
     if(nixieFlickering == "true")
@@ -518,25 +518,25 @@ function setStringIDMap(realData)
     else //kind of annoying that this is hardcoded... whatever
     {
         stringIDMap.set(".uk-reviews", "...");
-        stringIDMap.set(".uk-lastUpdate", "...");
+        stringIDMap.set(".uk-players", "...");
 
         stringIDMap.set(".otd-reviews", "...");
-        stringIDMap.set(".otd-lastUpdate", "...");
+        stringIDMap.set(".otd-players", "...");
 
         stringIDMap.set(".kz-reviews", "...");
-        stringIDMap.set(".kz-lastUpdate", "...");
+        stringIDMap.set(".kz-players", "...");
 
         stringIDMap.set(".bal-reviews", "...");
-        stringIDMap.set(".bal-lastUpdate", "...");
+        stringIDMap.set(".bal-players", "...");
 
         stringIDMap.set(".ftl-reviews", "...");
-        stringIDMap.set(".ftl-lastUpdate", "...");
+        stringIDMap.set(".ftl-players", "...");
 
         stringIDMap.set(".po2-reviews", "...");
-        stringIDMap.set(".po2-lastUpdate", "...");
+        stringIDMap.set(".po2-players", "...");
 
         stringIDMap.set(".tf2-reviews", "...");
-        stringIDMap.set(".tf2-lastUpdate", "...");
+        stringIDMap.set(".tf2-players", "...");
 
         //stringIDMap.set(".cbb-reviews", "abc");
         //stringIDMap.set(".fri-reviews", "abc");
@@ -601,6 +601,8 @@ function setIDStrings()
 setStringIDMap(false);
 setIDStrings(); 
 
+
+//this is done for all pages, though perhaps not wise.
 var data = {};
 var dataIn = fetch('https://williamianbrooks.com/data/values/data.json')
     .then(response => 

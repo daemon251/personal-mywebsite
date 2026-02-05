@@ -284,7 +284,7 @@ function drawStars()
     }
 }
 
-var starsEnabled = true;
+var starsEnabled = "true";
 
 function mainFunction()
 {

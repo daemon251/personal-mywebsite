@@ -3,6 +3,7 @@
     <head>
         <!-- Text that appears in the browser tab -->
         <title>williamianbrooks-website-misc</title>
+        <meta name="description" content="This is my personal website. This section is the settings page.">   
         <link rel="stylesheet" type="text/css" href="styles.css">
         <link rel="icon" type="image/x-icon" href="data/img/icon.jpg">
     </head>
@@ -43,7 +44,7 @@
 
                     <p style="font-family: 'VCROSDMONO';">
                         Settings are stored in your cache. 
-                        <br>You can click a slider and press ← or → for precise input.
+                        <br>You can click a slider and press left or right arrow key for precise input.
 
                         <!--<div class="slidecontainer">
                             <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
@@ -128,14 +129,14 @@
                         <div class="row" style="align-items: center;">
                             <p style="margin: 0px; margin-bottom: 2px; font-family: 'VCROSDMONO';">Menu Opacity: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A: </p>
                             <div class="slidecontainer">
-                                <input type="range" min="0" max="1" value="0.75" class="slider" id=".global-opacity">
+                                <input type="range" min="0" max="1" step="0.001" value="0.75" class="slider" id=".global-opacity">
                             </div>
                             <p style="margin: 0px; margin-bottom: 2px;margin-left: 10px;font-family: VCROSDMONO" id = ".global-opacity-text"> ... </p>
                         </div>
 
-                        <p style="color: var(--color1); font-family: 'VCROSDMONO'; display: inline;">Enable background stars</p> <input type="checkbox" class=".checkbox" id=".global-star" value="on"><br>
-                        <p style="color: var(--color1); font-family: 'VCROSDMONO'; display: inline;">Enable chromatic aberration on scroll</p> <input type="checkbox" class=".checkbox" id=".global-chro" value="on"><br>
-                        <p style="color: var(--color1); font-family: 'VCROSDMONO'; display: inline;">Enable nixie tube flickering</p> <input type="checkbox" class=".checkbox"  id=".global-nixie" value="on"><br>
+                        <p style="color: var(--color1); font-family: 'VCROSDMONO'; display: inline;">Enable background stars</p> <input type="checkbox" class=".checkbox" id=".global-star" checked><br>
+                        <p style="color: var(--color1); font-family: 'VCROSDMONO'; display: inline;">Enable chromatic aberration on scroll</p> <input type="checkbox" class=".checkbox" id=".global-chro" checked><br>
+                        <p style="color: var(--color1); font-family: 'VCROSDMONO'; display: inline;">Enable nixie tube flickering</p> <input type="checkbox" class=".checkbox"  id=".global-nixie" checked><br>
                         
                         <div class="row" style="align-items: center;">
                             <p style="margin: 0px; margin-bottom: 2px; font-family: 'VCROSDMONO';">Secondary Color:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Hue Rotate: </p>
