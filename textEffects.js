@@ -78,9 +78,14 @@ function determineChromaticAberationAmount()
 
 function determineElementShadows()
 {
-    var stringOut = chromaticAberrationAmount  + "px " + chromaticAberrationAmount           + "px " + 0             + "px " + "rgba(0, 128, 0, 1)," +
-                    0              + "px " + (-chromaticAberrationAmount * 1.41) + "px " + 0 + "px " + "rgba(0, 0, 255, 1)," +
-                    -chromaticAberrationAmount + "px " + chromaticAberrationAmount           + "px " + 0             + "px " + "rgba(255, 0, 0, 1)," +
+    var color = document.documentElement.style.getPropertyValue('--color1');
+    var rDepth = parseInt(color.substring(1, 3), 16) / 256.0; 
+    var gDepth = parseInt(color.substring(3, 5), 16) / 256.0;
+    var bDepth = parseInt(color.substring(5, 7), 16) / 256.0;
+
+    var stringOut = chromaticAberrationAmount  + "px " + chromaticAberrationAmount           + "px " + 0             + "px " + "rgba(0, 128, 0, " + rDepth + ")," +
+                    0              + "px " + (-chromaticAberrationAmount * 1.41) + "px " + 0 + "px " + "rgba(0, 0, 255, " + gDepth + ")," +
+                    -chromaticAberrationAmount + "px " + chromaticAberrationAmount           + "px " + 0             + "px " + "rgba(255, 0, 0, " + bDepth + ")," +
                     defaultShadowWithoutColor;
     for(var i = 0; i < allTextElements.length; i++)
     {

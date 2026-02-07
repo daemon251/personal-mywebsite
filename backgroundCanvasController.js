@@ -75,17 +75,21 @@ var mouseYRaw;
 var mouseYAdjusted;
 
 var linearMultScale;
-function init()
+function initCanvas()
 {
     num = 0;
     canvas = document.getElementById("backgroundCanvas");
     ctx = canvas.getContext("2d"); 
     
+    var zoomLevel = ((window.outerWidth - 10) / window.innerWidth) * 100; //lower is more zoomed out
+    //console.log(`Zoom level: ${zoomLevel.toFixed(2)}%`);
+
     canvas.width = document.body.clientWidth; //document.width is obsolete
     canvas.height = document.body.clientHeight; //document.height is obsolete
 
     xMax = canvas.clientWidth;
     yMax = canvas.clientHeight;
+
     linearMultScale = Math.sqrt(xMax * yMax / 1171350); //should be 1 for 720p fullscreen on general page (at least once upon a time it was)
     
     initted = true;
@@ -156,6 +160,7 @@ function moveStars()
         {
             var index = getRandomInt(starArr.length)
             var star = starArr[index];
+            //console.log(index + "    " + star)
             star.xVel = -speedCap + Math.random() * speedCap * 2;// * linearMultScale;
             star.yVel = -speedCap + Math.random() * speedCap * 2;// * linearMultScale;
         }
@@ -186,6 +191,13 @@ var colorBackground = "#000000";
 
 function drawStars()
 {
+    var color = colorStars;
+    var rDepth = radixToHex(parseInt(color.substring(1, 3), 16) / 256.0); 
+    var gDepth = radixToHex(parseInt(color.substring(3, 5), 16) / 256.0);
+    var bDepth = radixToHex(parseInt(color.substring(5, 7), 16) / 256.0);
+
+    console.log(bDepth);
+
     for(var i = 0; i < starArr.length; i++) //draw lines
     {
         var star = starArr[i];
@@ -193,6 +205,7 @@ function drawStars()
         var dist_iCursor = Math.sqrt(Math.pow(mouseXRaw - star.x, 2) + Math.pow(mouseYAdjusted - star.getY(true), 2));
 
         var constellationDist = 175;// * linearMultScale;
+
         if(dist_iCursor < constellationDist) 
         {
             for(var j = 0; j < starArr.length; j++)
@@ -211,19 +224,19 @@ function drawStars()
                             //red - -x +y
                             //green - +x +y
                             //blue - -y
-                            ctx.strokeStyle = "#FF000080"; 
+                            ctx.strokeStyle = "#FF0000" + rDepth; 
                             ctx.beginPath();
                             ctx.moveTo(star.x - chromaticAberrationAmount, star.getY(true) + chromaticAberrationAmount);
                             ctx.lineTo(newStar.x - chromaticAberrationAmount, newStar.getY(true) + chromaticAberrationAmount);
                             ctx.stroke();
 
-                            ctx.strokeStyle = "#00FF0080"; 
+                            ctx.strokeStyle = "#00FF00" + gDepth; 
                             ctx.beginPath();
                             ctx.moveTo(star.x + chromaticAberrationAmount, star.getY(true) + chromaticAberrationAmount);
                             ctx.lineTo(newStar.x + chromaticAberrationAmount, newStar.getY(true) + chromaticAberrationAmount);
                             ctx.stroke();
 
-                            ctx.strokeStyle = "#0000FF80"; 
+                            ctx.strokeStyle = "#0000FF" + bDepth; 
                             ctx.beginPath();
                             ctx.moveTo(star.x, star.getY(true) - chromaticAberrationAmount * 1.41);
                             ctx.lineTo(newStar.x, newStar.getY(true) - chromaticAberrationAmount * 1.41);
@@ -267,13 +280,13 @@ function drawStars()
         //blue - -y
         if(chromaticAberrationAmount > 0)
         {
-            ctx.fillStyle = "#FF000080"; 
+            ctx.fillStyle = "#FF0000" + rDepth; 
             ctx.fillRect(star.x - starSize / 2 - chromaticAberrationAmount, star.getY(true) - starSize / 2 + chromaticAberrationAmount, starSize, starSize);
 
-            ctx.fillStyle = "#00FF0080"; 
+            ctx.fillStyle = "#00FF00" + gDepth; 
             ctx.fillRect(star.x - starSize / 2 + chromaticAberrationAmount, star.getY(true) - starSize / 2 + chromaticAberrationAmount, starSize, starSize);
 
-            ctx.fillStyle = "#0000FF80"; 
+            ctx.fillStyle = "#0000FF" + bDepth; 
             ctx.fillRect(star.x - starSize / 2, star.getY(true) - starSize / 2 - chromaticAberrationAmount * 1.41, starSize, starSize);
         }
 
@@ -290,7 +303,7 @@ function mainFunction()
 {
     if(initted == false)
     {
-        init();
+        initCanvas();
     }
 
     ctx.fillStyle = colorBackground;

@@ -25,11 +25,13 @@
 
     --hue-rotate: 0deg;
     --value: 1;
+    --saturate: 100%;
 }
 
 html {
     /* nice color: #0b0e12 */
     background-color: var(--color-bg);
+    /*cursor: url('data/img/cursor/idc_arrow_gradient.png'), default;*/
 }
 
 body {
@@ -207,7 +209,7 @@ a:hover {
     color: #ff5500ff;
     text-decoration: underline;
     text-shadow: 0px 0px 8px #ff5500ff;
-    filter: hue-rotate(var(--hue-rotate)) brightness(var(--value));
+    filter: hue-rotate(var(--hue-rotate)) brightness(var(--value)) saturate(var(--saturate));
 }
 
 .button {
@@ -225,6 +227,7 @@ a:hover {
 
     /*make buttons not have annoying text highlighting when you click on them*/
     user-select: none;
+    cursor: pointer;
 }
 
 
@@ -243,6 +246,7 @@ a:hover {
 
     /*make buttons not have annoying text highlighting when you click on them*/
     user-select: none;
+    cursor: pointer;
 }
 
 .smallsegment {
@@ -371,7 +375,7 @@ a:hover {
 
 .text-styled {
     background: url('data/img/text/patternGif.gif'); 
-    filter: hue-rotate(var(--hue-rotate)) brightness(var(--value));
+    filter: hue-rotate(var(--hue-rotate)) brightness(var(--value)) saturate(var(--saturate));
     /*background-size: cover;*/
     background-position: center;
     /*-webkit-background-clip: text;*/
@@ -389,7 +393,7 @@ a:hover {
 
 .a-styled {
     background: url('data/img/text/patternGifMedium.gif');
-    filter: hue-rotate(var(--hue-rotate)) brightness(var(--value));
+    filter: hue-rotate(var(--hue-rotate)) brightness(var(--value)) saturate(var(--saturate));
     /*background-size: cover;*/
     background-position: center;
     /*-webkit-background-clip: text;*/
@@ -410,7 +414,7 @@ a:hover {
     color: #ff5500ff;
     text-decoration: underline;
     text-shadow: 0px 0px 8px #ff5500ff;
-    filter: hue-rotate(var(--hue-rotate)) brightness(var(--value));
+    filter: hue-rotate(var(--hue-rotate)) brightness(var(--value)) saturate(var(--saturate));
 }
 
 .nixie-array {
@@ -431,7 +435,8 @@ a:hover {
     background-position: center;
     background-repeat: no-repeat;
     box-shadow: 0px 0px 25px #ff550038;
-    filter: hue-rotate(var(--hue-rotate)) brightness(var(--value));
+    filter: hue-rotate(var(--hue-rotate)) brightness(var(--value)) saturate(var(--saturate));
+    /*image-rendering: pixelated;*/
 }
 
 .slider {
@@ -473,14 +478,25 @@ button {
     background-color: var(--color2);
     color: var(--color1);
     height: 36px;
+    cursor: pointer;
 }
 
 button:hover {
     color: #ff5500ff;
     border: 2px solid #ff5500ff;
-    filter: hue-rotate(var(--hue-rotate)) brightness(var(--value));
+    filter: hue-rotate(var(--hue-rotate)) brightness(var(--value)) saturate(var(--saturate));
 }
 
 .checkbox {
     color: var(--color1);
+}
+
+.button-darkselector {
+    position: fixed; 
+    left: 0px;
+    filter: hue-rotate(var(--hue-rotate)) saturate(var(--saturate));
+}
+
+.button-darkselector:hover {
+    filter: saturate(0%); /*maybe selector iamge is better */
 }

@@ -45,8 +45,8 @@ function addListenersToAnchor(anchor)
         //this sucks but works
         if(anchor.parentNode.className == "button")
         {
-            anchor.parentNode.style.filter = "hue-rotate(var(--hue-rotate)) brightness(var(--value))";
-            if((document.title == "williamianbrooks-website-stuffILike" && anchor.textContent == "Cool Stuff") || (document.title == "williamianbrooks-website-general" && anchor.textContent == "General") || (document.title == "williamianbrooks-website-myStuff" && anchor.textContent == "My Stuff") || (document.title == "williamianbrooks-website-misc" && anchor.textContent == "Settings") || (document.title == "williamianbrooks-website-contact" && anchor.textContent == "Contact"))
+            anchor.parentNode.style.filter = "hue-rotate(var(--hue-rotate)) brightness(var(--value)) saturate(var(--saturate)";
+            if((document.title == "williamianbrooks-stuffILike" && anchor.textContent == "Cool Stuff") || (document.title == "williamianbrooks-general" && anchor.textContent == "General") || (document.title == "williamianbrooks-myStuff" && anchor.textContent == "My Stuff") || (document.title == "williamianbrooks-misc" && anchor.textContent == "Settings") || (document.title == "williamianbrooks-contact" && anchor.textContent == "Contact"))
             {
                 anchor.style.filter = "none"; //it already gets applied from button
                 anchor.style.color = '#ff5500aa';
@@ -67,7 +67,7 @@ function addListenersToAnchor(anchor)
         if(anchor.parentNode.className == "button")
         {
             anchor.parentNode.style.filter = "";
-            if((document.title == "williamianbrooks-website-stuffILike" && anchor.textContent == "Cool Stuff") || (document.title == "williamianbrooks-website-general" && anchor.textContent == "General") || (document.title == "williamianbrooks-website-myStuff" && anchor.textContent == "My Stuff") || (document.title == "williamianbrooks-website-misc" && anchor.textContent == "Settings") || (document.title == "williamianbrooks-website-contact" && anchor.textContent == "Contact"))
+            if((document.title == "williamianbrooks-stuffILike" && anchor.textContent == "Cool Stuff") || (document.title == "williamianbrooks-general" && anchor.textContent == "General") || (document.title == "williamianbrooks-myStuff" && anchor.textContent == "My Stuff") || (document.title == "williamianbrooks-misc" && anchor.textContent == "Settings") || (document.title == "williamianbrooks-contact" && anchor.textContent == "Contact"))
             {
                 anchor.style.color = getComputedStyle(document.documentElement).getPropertyValue('--color1a');
                 anchor.parentNode.style.borderColor = getComputedStyle(document.documentElement).getPropertyValue('--color1a');
@@ -274,9 +274,66 @@ function setContentGridsSettings()
     }
 }
 
+function scaleStars(xMaxOld, yMaxOld)
+{
+    for(var i = 0; i < starArr.length; i++)
+    {
+        var star = starArr[i];
+        star.x *= xMax / xMaxOld
+        star.y *= yMax / yMaxOld
+    }
+
+    //now remove or add to keep constant density
+    linearMultScale = Math.sqrt(xMax * yMax / 1171350);
+    numberStars = 120 * linearMultScale * linearMultScale;
+
+    numberStarsAdd = Math.round(numberStars - starArr.length); //theoretically scaling back and forth might cause discrepancies over time... whatever
+
+    if(numberStarsAdd < 0)
+    {
+        starArrNew = []
+        for(var i = 0; i < starArr.length + numberStarsAdd; i++)
+        {
+            var star = starArr[i];
+            starArrNew[i] = new Star(star.x, star.y, star.xVel, star.yVel);
+        }
+        starArr = starArrNew;
+    }
+    else if(numberStarsAdd > 0)
+    {
+        starArrNew = []
+        for(var i = 0; i < starArr.length; i++)
+        {
+            var star = starArr[i];
+            starArrNew[i] = new Star(star.x, star.y, star.xVel, star.yVel);
+        }
+        for(var i = starArr.length; i < starArr.length + numberStarsAdd; i++)
+        {
+            starArrNew[i] = new Star(Math.random() * xMax, Math.random() * yMax, -speedCap + Math.random() * speedCap * 2, -speedCap + Math.random() * speedCap * 2);
+        }
+        starArr = starArrNew;
+    }
+}
+
 window.onresize = function(event) 
 {
     setContentGridsSettings();
+    canvas = document.getElementById("backgroundCanvas");
+    ctx = canvas.getContext("2d"); 
+    
+    var zoomLevel = ((window.outerWidth - 10) / window.innerWidth) * 100; //lower is more zoomed out
+    //console.log(`Zoom level: ${zoomLevel.toFixed(2)}%`);
+
+    canvas.width = document.body.clientWidth; //document.width is obsolete
+    canvas.height = document.body.clientHeight; //document.height is obsolete
+
+    var xMaxOld = xMax;
+    var yMaxOld = yMax;
+
+    xMax = canvas.clientWidth; // / (zoomLevel / 100);
+    yMax = canvas.clientHeight; // / (zoomLevel / 100);
+
+    scaleStars(xMaxOld, yMaxOld);
 };
 
 var nixies = document.querySelectorAll(".nixie");
@@ -296,7 +353,7 @@ setInterval(function() //flickering
 
             var brightnessValue = getComputedStyle(document.documentElement).getPropertyValue('--value') * brightMult;
 
-            nixie.style.filter = "hue-rotate(var(--hue-rotate)) brightness(" + brightnessValue + "%)";
+            nixie.style.filter = "hue-rotate(var(--hue-rotate)) brightness(" + brightnessValue + "%) saturate(var(--saturate)";
         }
     }
 }, 80); 
@@ -580,7 +637,7 @@ function setStringIDMap(realData)
 
         stringIDMap.set(".rgb21-ver", "...");
         stringIDMap.set(".rgb21-lastUpdated", "...");
-        stringIDMap.set(".rgb21-originalLink", "...");
+        //stringIDMap.set(".rgb21-originalLink", "...");
 
         stringIDMap.set(".site-titleDate", "...");
     }
@@ -626,3 +683,77 @@ var dataIn = fetch('https://williamianbrooks.com/data/values/data.json')
         console.error('There was a problem with the fetch operation:', error);
     });
 
+function determineIfDarkMode()
+{
+    //run on start
+
+    /*take into account user settings*/
+    //rudimentary
+    var value = parseFloat(localStorage.getItem(".mc-r")) + parseFloat(localStorage.getItem(".mc-g")) + parseFloat(localStorage.getItem(".mc-b"));
+    if(value < 0.55 * 3)
+    {
+        return true;
+    }
+    return false;
+}
+
+if(determineIfDarkMode() == true)
+{
+    //on page start
+    var button = document.getElementById("darkmodeButton")
+    button.src = "data/img/ui/darkModeDark.png"
+}
+
+function darkModeButtonClick()
+{
+    var button = document.getElementById("darkmodeButton")
+    //resetConfigSettings();
+    if(determineIfDarkMode() == true)
+    {
+        localStorage.setItem(".mc-r", 1);
+        localStorage.setItem(".mc-g", 1);
+        localStorage.setItem(".mc-b", 1);
+
+        localStorage.setItem(".star-r", 1);
+        localStorage.setItem(".star-g", 1);
+        localStorage.setItem(".star-b", 1);
+
+        localStorage.setItem(".sc-hue", 0);
+        localStorage.setItem(".sc-saturation", 1);
+        localStorage.setItem(".sc-value", 1);
+
+        button.src = "data/img/ui/darkModeBright.png"
+    }
+    else
+    {
+        localStorage.setItem(".mc-r", 0.5);
+        localStorage.setItem(".mc-g", 0.5);
+        localStorage.setItem(".mc-b", 0.5);
+
+        localStorage.setItem(".bgc-r", 0.0);
+        localStorage.setItem(".bgc-g", 0.0);
+        localStorage.setItem(".bgc-b", 0.0);
+
+        localStorage.setItem(".men-r", 0.0);
+        localStorage.setItem(".men-g", 0.0);
+        localStorage.setItem(".men-b", 0.0);
+
+        localStorage.setItem(".star-r", 0);
+        localStorage.setItem(".star-g", 88.0 / 255);
+        localStorage.setItem(".star-b", 191.0 / 225);
+
+        localStorage.setItem(".sc-hue", 203.0 / 360);
+        localStorage.setItem(".sc-saturation", 0.75);
+        localStorage.setItem(".sc-value", 0.75);
+
+        button.src = "data/img/ui/darkModeDark.png"
+    }
+
+    console.log("aaaa");
+
+    if(document.getElementById(".men-text") != undefined)
+    {
+        updateConfigTextDescriptions();
+    }
+    setConfigChanges();
+}

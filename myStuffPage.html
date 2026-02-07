@@ -5,7 +5,7 @@
 <html>  
 
 <head>
-    <title>williamianbrooks-website-myStuff</title>
+    <title>williamianbrooks-myStuff</title>
     <meta name="description" content="This is my personal website. This section is about my stuff.">   
     <link rel="stylesheet" type="text/css" href="styles.css">
     <link rel="icon" type="image/x-icon" href="data/img/icon.jpg">
@@ -29,6 +29,7 @@
     </noscript>
     <canvas id="backgroundCanvas" width="100" height="100"></canvas>
     <script type="text/javascript" src='backgroundCanvasController.js'></script> 
+    <img type="button" id="darkmodeButton" onclick="darkModeButtonClick()" class="button-darkselector" src="data/img/ui/darkModeBright.png"></button>
     <div class="maincontainer">
         <div class="topbar">
             <div class="signature">
@@ -301,7 +302,7 @@
                                         <div class="contentlargesegment" style="width: 69%;">
                                             <div class="aligner" style="padding: 0px 20px 10px 4%; width: calc(92%);">
                                                 <h2 style="font-family: 'VCROSDMONO'; font-size: 18px; margin-bottom: 0px; margin-top: 2%; bottom: 0;">Gmod:Horde Translocationist - <span id=".htr-ver"></span></h2>
-                                                <p style="font-family: 'mainfont'; margin-top: 1.5%; font-size: 12px;">A mod for the horde gamemode that adds the Translocationist subclass. More details in workshop description.</p>
+                                                <p style="font-family: 'mainfont'; margin-top: 1.5%; font-size: 12px;">A mod for the horde gamemode that adds the Translocationist subclass.</p>
                                             </div>
                                             <div class="row" style="position: absolute; bottom: 0; width: 80%">
                                                 <div class="textbox">
@@ -366,7 +367,7 @@
                             <div class="contentgrid">
                                 <div class="contentbar-noimg">
                                     <div class="aligner" style="padding: 0px 20px 10px 4%; width: calc(92%);">
-                                        <h2 style="font-family: 'VCROSDMONO'; font-size: 18px; margin-bottom: 0px; margin-top: 2%; bottom: 0; word-break: break-all">OpenRGB C# Client - netstandard2.1 - <span id=".fdn-totalDownloads"></span></h2>
+                                        <h2 style="font-family: 'VCROSDMONO'; font-size: 18px; margin-bottom: 0px; margin-top: 2%; bottom: 0; word-break: break-all">OpenRGB C# Client - netstandard2.1 - <span id=".rgb21-ver"></span></h2>
                                         <p style="font-family: 'mainfont'; margin-top: 1.5%; font-size: 12px;">A version of the
                                             <a style="font-family: 'mainfont'; display: inline;" href="https://github.com/diogotr7/OpenRGB.NET" target="_blank">OpenRGB C# client</a>
                                             that will work for projects that have to be built in netstandard2.1 (unity games primarily).
@@ -395,12 +396,16 @@
                     <div class="aligner">
                         <h1 class="text-styled" id="blogsection">Blog</h1>
                         <br><br>
+                        <!--<p style="display: inline; font-family: 'mainfont';">
+                            <a class="a-styled" href="blog-blog3.html" target="_self" style="text-decoration: underline;font-family: 'mainfont'; margin-right: 10px; display: inline;">wat</a>- 6 February 2026
+                        </p>
+                        <br>-->
                         <p style="display: inline; font-family: 'mainfont';">
-                            <a class="a-styled" href="blog-blog2.html" target="_self" style="text-decoration: underline;font-family: 'mainfont'; margin-right: 10px; display: inline;">I LOVE NIXIE TUBES!</a>- January 23 2026
+                            <a class="a-styled" href="blog-blog2.html" target="_self" style="text-decoration: underline;font-family: 'mainfont'; margin-right: 10px; display: inline;">I LOVE NIXIE TUBES!</a>- 23 January 2026
                         </p>
                         <br>
                         <p style="display: inline; font-family: 'mainfont';">
-                            <a class="a-styled" href="blog-blog1.html" target="_self" style="text-decoration: underline;font-family: 'mainfont'; margin-right: 10px; display: inline;">Making The Website</a>- January 21 2026
+                            <a class="a-styled" href="blog-blog1.html" target="_self" style="text-decoration: underline;font-family: 'mainfont'; margin-right: 10px; display: inline;">Making The Website</a>- 21 January 2026
                         </p>
                     
                         <div class="emptybar"> </div>
@@ -410,7 +415,7 @@
                 <div class="genericcontainer">
                     <div class="aligner">
                         <h1 class="text-styled">Other</h1>
-                        <p style="font-family: 'mainfont';">nothing here yet</p>
+                        <p style="font-family: 'mainfont';">All dates on this website are in YYYY/MM/DD format (ISO 8601), or potentially in reverse order (DD/MM/YYYY) instead of the American MM/DD/Year format.</p>
                         <!--<p style="font-family: 'mainfont'; margin-right: 10px;">This section contains all of my stuff that isn't a mod for a video game.</p>-->
                     </div>
                 </div>
@@ -584,7 +589,7 @@
                 <div class="emptybar"> </div>
                 <div class="genericcontainer">
                     <div class="aligner" style="display:block">
-                        <p style="font-family: 'mainfont'; animation: glow 1s ease-in-out infinite alternate !important; text-align:center; font-size: 20px">On the internet, nobody knows that <br>you are a cat.</p>
+                        <p style="font-family: 'mainfont'; animation: glow 1s ease-in-out infinite alternate !important; text-align:center; font-size: 20px;">On the internet, nobody knows that <br>you are a cat.</p>
 
                         <img alt="fuuny cate!" width="100%" src="data/img/funnycates/jinxOnComputer.gif" id="cat-image-funny" style="width: calc(100% - 4px); border: 2px solid var(--color1);">
                         <div class="buttonholder" style="margin-left: 0px; padding: 0px; width: 200px;">

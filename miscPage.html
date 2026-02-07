@@ -2,7 +2,7 @@
 <html>  
     <head>
         <!-- Text that appears in the browser tab -->
-        <title>williamianbrooks-website-misc</title>
+        <title>williamianbrooks-misc</title>
         <meta name="description" content="This is my personal website. This section is the settings page.">   
         <link rel="stylesheet" type="text/css" href="styles.css">
         <link rel="icon" type="image/x-icon" href="data/img/icon.jpg">
@@ -15,6 +15,7 @@
         </noscript>
         <canvas id="backgroundCanvas" width="100" height="100"></canvas>
         <script type="text/javascript" src='backgroundCanvasController.js'></script> 
+        <img type="button" id="darkmodeButton" onclick="darkModeButtonClick()" class="button-darkselector" src="data/img/ui/darkModeBright.png"></button>
         <div class="maincontainer">
             <div class="topbar">
                 <div class="signature">
@@ -45,6 +46,7 @@
                     <p style="font-family: 'VCROSDMONO';">
                         Settings are stored in your cache. 
                         <br>You can click a slider and press left or right arrow key for precise input.
+                        <br>Setting dark / light mode will overwrite these settings.
 
                         <!--<div class="slidecontainer">
                             <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
@@ -145,7 +147,11 @@
                             </div>
                             <p style="margin: 0px; margin-bottom: 2px; margin-left: 10px; font-family: 'VCROSDMONO';">Brightness: </p>
                             <div class="slidecontainer">
-                                <input type="range" min="0" max="1" value="1" class="slider" id=".sc-value">
+                                <input type="range" min="0" max="2" value="1" class="slider" id=".sc-value">
+                            </div>
+                            <p style="margin: 0px; margin-bottom: 2px; margin-left: 10px; font-family: 'VCROSDMONO';">Saturation: </p>
+                            <div class="slidecontainer">
+                                <input type="range" min="0" max="2" value="1" class="slider" id=".sc-saturation">
                             </div>
                             <p style="margin: 0px; margin-bottom: 2px;margin-left: 10px;font-family: VCROSDMONO" id = ".sc-text"> ... </p>
                             <!--<p style="margin: 0px; margin-bottom: 2px; margin-left: 10px; font-family: 'VCROSDMONO';">B: </p>

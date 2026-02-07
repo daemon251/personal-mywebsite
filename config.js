@@ -32,7 +32,8 @@ const rangeIDArray =
     ".global-opacity",
 
     ".sc-hue",
-    ".sc-value"
+    ".sc-value",
+    ".sc-saturation"
 ];
 
 //rgba in floats 0 - 1
@@ -58,6 +59,8 @@ function setConfigChanges()
 {
     if(localStorage.getItem(".mc-r") != null) 
     {
+        if(localStorage.getItem(".global-opacity") === null) {localStorage.setItem(".global-opacity", "0.75");}
+
         var color1 = convertRGBToHex(localStorage.getItem(".mc-r"), localStorage.getItem(".mc-g"), localStorage.getItem(".mc-b"), 1);
         document.documentElement.style.setProperty('--color1', color1);
 
@@ -75,9 +78,14 @@ function setConfigChanges()
 
         document.documentElement.style.setProperty('--value', localStorage.getItem(".sc-value"));
         document.documentElement.style.setProperty('--hue-rotate', localStorage.getItem(".sc-hue") * 360 + "deg");
+        document.documentElement.style.setProperty('--saturate', (localStorage.getItem(".sc-saturation") * 100) + "%");
 
         colorStars = "#" + radixToHex(localStorage.getItem(".star-r")) + radixToHex(localStorage.getItem(".star-g")) + radixToHex(localStorage.getItem(".star-b"))
         colorBackground = "#" + radixToHex(localStorage.getItem(".bgc-r")) + radixToHex(localStorage.getItem(".bgc-g")) + radixToHex(localStorage.getItem(".bgc-b"))
+
+        if(localStorage.getItem(".global-nixie") === null) {localStorage.setItem(".global-nixie", "true");}
+        if(localStorage.getItem(".global-chro") === null) {localStorage.setItem(".global-chro", "true");}
+        if(localStorage.getItem(".global-star") === null) {localStorage.setItem(".global-star", "true");}
 
         nixieFlickering = localStorage.getItem(".global-nixie");
         chromaticAberrationEnabled = localStorage.getItem(".global-chro");
@@ -85,7 +93,7 @@ function setConfigChanges()
     }
 }
 
-if(document.title == "williamianbrooks-website-misc")
+if(document.title == "williamianbrooks-misc")
 {
     for(var i = 0; i < rangeIDArray.length; i++)
     {
@@ -135,7 +143,7 @@ function updateConfigTextDescriptions()
     document.getElementById(".mc-text").innerHTML = formatConfigColor(localStorage.getItem(".mc-r"), localStorage.getItem(".mc-g"), localStorage.getItem(".mc-b"));
 
     document.getElementById(".global-opacity-text").innerHTML = "(" + formatConfigFloat(localStorage.getItem(".global-opacity")) + ")";
-    document.getElementById(".sc-text").innerHTML = "(" + formatConfigNumber(Math.round(localStorage.getItem(".sc-hue") * 360)) + ", " + formatConfigNumber(Math.round(localStorage.getItem(".sc-value") * 255)) + ")";
+    document.getElementById(".sc-text").innerHTML = "(" + formatConfigNumber(Math.round(localStorage.getItem(".sc-hue") * 360)) + ", " + formatConfigNumber(Math.round(localStorage.getItem(".sc-value") * 100)) + "%" + ", " + formatConfigNumber(Math.round(localStorage.getItem(".sc-saturation") * 100)) + "%)";
 }
 
 function createCheckboxListeners(ID)
@@ -164,6 +172,7 @@ function createRangeListeners(ID)
 {
     if(ID == ".global-opacity") {document.getElementById(ID).step = 1 / 1000;}
     else if (ID == ".sc-hue") {document.getElementById(ID).step = 1 / 360;}
+    else if(ID == ".sc-value" || ID == ".sc-saturation") {document.getElementById(ID).step = 1 / 200;}
     else {document.getElementById(ID).step = 1 / 256;}
 
     if(localStorage.getItem(ID) == null) {localStorage.setItem(ID, document.getElementById(ID).value)}
@@ -195,7 +204,6 @@ function resetConfigSettings()
 
     for(var i = 0; i < checkboxes.length; i++)
     {
-        console.log(checkboxes[i].checked);
         checkboxes[i].checked = checkboxes[i].defaultValue;
         localStorage.setItem(checkboxes[i].id, checkboxes[i].checked);
     }

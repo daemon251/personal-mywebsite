@@ -2,7 +2,7 @@
 <html>  
     <head>
         <!-- Text that appears in the browser tab -->
-        <title>williamianbrooks-website-general</title>
+        <title>williamianbrooks-general</title>
         <meta name="description" content="This is my personal website. This section is the general overview.">   
         <link rel="stylesheet" type="text/css" href="styles.css">
         <!--<script type="text/javascript" src="data/values/data.json" id=".site-data"></script>-->
@@ -27,6 +27,7 @@
         </noscript>
         <canvas id="backgroundCanvas" width="100" height="100"></canvas>
         <script type="text/javascript" src='backgroundCanvasController.js'></script> 
+        <img type="button" id="darkmodeButton" onclick="darkModeButtonClick()" class="button-darkselector" src="data/img/ui/darkModeBright.png"></button>
         <div class="maincontainer">
             <div class="topbar">
                 <div class="signature">
@@ -76,8 +77,8 @@
                             </p>-->
                             <p style="font-family: 'mainfont'; margin-bottom: 4px; margin-top: 0px;">Some details about <span class="text-styled">myself</span>:</p>
                             <ul style="margin-top: 0px; padding-left: 20px; margin-left: 0px; margin-right: 10px;"> 
-                                <li style="font-family: 'mainfont';"><span style="color: #ff5555">Raspberries</span> and <span style="color: #999999">blackberries</span> are my favorite fruits.</li>
-                                <li style="font-family: 'mainfont';">My main hobbies are: programming, video games, television, cooking.</li>
+                                <li style="font-family: 'mainfont';"><span style="color: #ff5555">Raspberries</span> and <span style="color: #555555">blackberries</span> are my favorite fruits.</li>
+                                <li style="font-family: 'mainfont';">My main hobbies are: programming, video games, television / movies, cooking.</li>
                                 <li style="font-family: 'mainfont';">I use linux on my laptop. I used to use 
                                     <a style="font-family: 'mainfont'; display: inline;" href="https://ubuntu.com/" target="_blank">ubuntu</a>, 
                                     now I'm using 
@@ -111,14 +112,14 @@
                         <div class="aligner" style="margin-bottom: 17px;">
                             <h1 class="text-styled">About The Website</h1>
 
-                            <p style="font-family: 'mainfont';">This site was inspired by all of those personal websites that people used to have
-                                in the 90's and early 2000's (note that I was not around back then). Only partway through development did I discover the wonders of 
+                            <p style="font-family: 'mainfont';">This site was inspired by the personal websites that people used to have
+                                in the 90's and early 2000's (note that I was not around back then, so there's a lot of selection bias there). Only partway through development did I discover the wonders of 
                                 <a href="https://neocities.org/" target="_blank" style="text-decoration: underline;font-family: 'mainfont'; margin-right: 10px; display: inline;">neocities</a>and all 
                                 of the cool sites on there.
                                 Anyways, I think it's a shame that those kinds of personal websites are becoming kind of rare nowadays, so I wanted to do my part and make a website 
-                                that I really like, instead of one that was just serviceable.
+                                for myself that I really like, instead of one that was just serviceable.
 
-                                <br><br>It also serves as a bit of a dev profile, which also helps to fill out some more space on these pages.
+                                <br><br>It also serves as a bit of a dev profile, which also happens to help filling out some more space on these pages.
                             </p>
 
                             <p style="font-family: 'mainfont';margin-right: 10px;">
@@ -147,7 +148,7 @@
                             </p></div>
 
                             <div><p style="font-family: 'mainfont'; margin-bottom: 4px;"><b>Q: What should I do if I encounter an issue with a mod?</b></p></div>
-                            <div style="padding-left: 26px; "><p style="font-family: 'mainfont'; margin-bottom: 0px; margin-top: 0px;">Raising an issue on the
+                            <div style="padding-left: 26px; "><p style="font-family: 'mainfont'; margin-top: 0px;">Raising an issue on the
                                 github page would be preferable. DMing me on discord is also okay, but please send me a message instead of just a friend request so that
                                 I know you are not a scammer or bot.
                             </p></div>
@@ -346,7 +347,7 @@
                     <div class="emptybar"> </div>
                     <div class="genericcontainer">
                         <div class="aligner" style="display:block">
-                            <p style="font-family: 'mainfont'; animation: glow 1s ease-in-out infinite alternate !important; text-align:center; font-size: 20px">On the internet, nobody knows that <br>you are a cat.</p>
+                            <p style="font-family: 'mainfont'; animation: glow 1s ease-in-out infinite alternate !important; text-align:center; font-size: 20px;">On the internet, nobody knows that <br>you are a cat.</p>
 
                             <img alt="fuuny cate!" id="cat-image-funny" width="100%" src="data/img/funnycates/jinxOnComputer.gif" style="width: calc(100% - 4px); border: 2px solid var(--color1);">
                             <div class="buttonholder" style="margin-left: 0px; padding: 0px; width: 200px;">
