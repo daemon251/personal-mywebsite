@@ -23,9 +23,9 @@ function dontClickTheCat()
 	alert("No, you cannot pet this cat.");
 }
 
-if(document.title == "williamianbrooks-website-contact")
+if(document.title == "williamianbrooks - My Contact")
 {
-    var catimg = document.querySelector('img');
+    var catimg = document.getElementById("dontClickTheCat");
     catimg.onclick = dontClickTheCat;
 }
 
@@ -46,7 +46,7 @@ function addListenersToAnchor(anchor)
         if(anchor.parentNode.className == "button")
         {
             anchor.parentNode.style.filter = "hue-rotate(var(--hue-rotate)) brightness(var(--value)) saturate(var(--saturate)";
-            if((document.title == "williamianbrooks-stuffILike" && anchor.textContent == "Cool Stuff") || (document.title == "williamianbrooks-general" && anchor.textContent == "General") || (document.title == "williamianbrooks-myStuff" && anchor.textContent == "My Stuff") || (document.title == "williamianbrooks-misc" && anchor.textContent == "Settings") || (document.title == "williamianbrooks-contact" && anchor.textContent == "Contact"))
+            if((document.title == "williamianbrooks - Main Page" && anchor.textContent == "General") || (document.title == "williamianbrooks - My Work" && anchor.textContent == "My Work") || (document.title == "williamianbrooks - Misc" && anchor.textContent == "Settings") || (document.title == "williamianbrooks - My Contact" && anchor.textContent == "Contact"))
             {
                 anchor.style.filter = "none"; //it already gets applied from button
                 anchor.style.color = '#ff5500aa';
@@ -67,7 +67,7 @@ function addListenersToAnchor(anchor)
         if(anchor.parentNode.className == "button")
         {
             anchor.parentNode.style.filter = "";
-            if((document.title == "williamianbrooks-stuffILike" && anchor.textContent == "Cool Stuff") || (document.title == "williamianbrooks-general" && anchor.textContent == "General") || (document.title == "williamianbrooks-myStuff" && anchor.textContent == "My Stuff") || (document.title == "williamianbrooks-misc" && anchor.textContent == "Settings") || (document.title == "williamianbrooks-contact" && anchor.textContent == "Contact"))
+            if((document.title == "williamianbrooks - Main Page" && anchor.textContent == "General") || (document.title == "williamianbrooks - My Work" && anchor.textContent == "My Work") || (document.title == "williamianbrooks - Misc" && anchor.textContent == "Settings") || (document.title == "williamianbrooks - My Contact" && anchor.textContent == "Contact"))
             {
                 anchor.style.color = getComputedStyle(document.documentElement).getPropertyValue('--color1a');
                 anchor.parentNode.style.borderColor = getComputedStyle(document.documentElement).getPropertyValue('--color1a');
@@ -99,178 +99,107 @@ function setContentGridsSettings()
     for(var i = 0; i < contentgrids.length; i++)
     {
         var cg = contentgrids[i];
-        
-        var doubleLengthGrid = true;
-        if(doubleLengthGrid)//width >= 1210)
+
+        tallContent = false;
+        if(document.title == "williamianbrooks - Stuff I Like") {tallContent = true;}
+        cg.style.gridTemplateColumns = '1fr 1fr';
+
+        /*for(var k = 0; k < cg.children.length; k++)
         {
-            tallContent = false;
-            cg.style.gridTemplateColumns = '1fr 1fr';
-            for(var k = 0; k < cg.children.length; k++)
+            contentBar = cg.children[k];
+            if(contentBar.children.length == 0) {continue;}
+            if(contentBar.className == "contentbar-noimg") {break;}
+            if(contentBar.className == "contentbar-tall")
             {
-                contentBar = cg.children[k];
-                if(contentBar.children.length == 0) {continue;}
-                if(contentBar.className == "contentbar-noimg") {break;}
-                if(contentBar.className == "contentbar-tall")
-                {
-                    tallContent = true;
-                    contentBar.style.height = "calc(420px)"; //"calc(27vw)"
-                }
-                else
-                {
-                    contentBar.style.height = "calc(124px)"; //"calc(9vw)"
-                }
-
-                var row = contentBar.children[0];
-                var largeSegment = row.children[1];
-                var aligner = largeSegment.children[0];
-                var h2 = aligner.children[0];
-                var p = aligner.children[1];
-
-                h2.style.fontSize = "calc(18px)"; //"calc(1.5vw)"
-                p.style.fontSize = "calc(12px)"; //"calc(1vw)"
-
-                largeSegment.style.width = "calc(69%)"; //"calc(8.55vw)"
-                largeSegment.style.flex = "0px 0px 31%";
-
-                var row2 = largeSegment.children[1];
-                if(row2 != null)
-                {
-                    for(var j = 0; j < row2.children.length; j++)
-                    {
-                        if(tallContent == true)
-                        {
-                            row2.style.width = "235px";
-                        }
-                        else
-                        {
-                            row2.style.width = "250px"; //80%
-                            row2.style.padding = "0px 0px 0px 8px";
-                        }
-                        var textbox = row2.children[j];
-                        var p2 = textbox.children[0];
-                        if(textbox.children.length > 1)
-                        {
-                            var a = textbox.children[1];
-                            a.style.fontSize = "calc(9px)"; //"calc(0.75w)"
-                        }
-                        p2.style.fontSize = "calc(9px)"; //"calc(0.75w)"
-                    }
-                }
-
-                var smallSegment = row.children[0];
-                smallSegment.style.width = "calc(31%)"; //"calc(8.55vw)"
-                smallSegment.style.height = "124px";
-                smallSegment.style.alignItems = "center";
-                smallSegment.style.paddingTop = "0px";
-                smallSegment.style.flex = "0px 0px 31%";
-                
-                if(contentBar.className == "contentbar-tall")
-                {
-                    smallSegment.style.width = "calc(160px)"; //"calc(12.825vw)"
-                    var aligner2 = smallSegment.children[1];
-                    for(var j = 0; j < aligner2.children.length; j++)
-                    {
-                        aligner2.children[j].style.fontSize = "calc(10px)"; //"calc(1vw)"
-                    }
-                }
+                tallContent = true;
+                contentBar.style.height = "calc(420px)"; //"calc(27vw)"
+            }
+            else
+            {
+                contentBar.style.height = "calc(124px)"; //"calc(9vw)"
             }
 
-            //add empty contentbar, fixes border. 
-            //spaghetti
-            if(cg.children.length % 2 == 1)
+            var row = contentBar.children[0];
+            var largeSegment = row.children[1];
+            var aligner = largeSegment.children[0];
+            var h2 = aligner.children[0];
+            var p = aligner.children[1];
+
+            h2.style.fontSize = "calc(18px)"; //"calc(1.5vw)"
+            p.style.fontSize = "calc(12px)"; //"calc(1vw)"
+
+            largeSegment.style.width = "calc(69%)"; //"calc(8.55vw)"
+            largeSegment.style.flex = "0px 0px 31%";
+
+            var row2 = largeSegment.children[1];
+            if(row2 != null)
             {
-                var lastContentBar = cg.children[cg.children.length - 1];
-                if(lastContentBar.children.length != 0)
+                for(var j = 0; j < row2.children.length; j++)
                 {
-                    var newDiv = document.createElement("div");
                     if(tallContent == true)
                     {
-                        newDiv.className = "contentbar-tall";
-                        newDiv.style.height = "calc(420px)"; //"calc(27vw)"
+                        row2.style.width = "350px";
                     }
                     else
                     {
-                        newDiv.className = "contentbar";
-                        newDiv.style.height = "calc(124px)"; //"calc(9vw)"
+                        //row2.style.width = "250px"; //80%
+                        //row2.style.padding = "0px 0px 0px 8px";
                     }
-                    var referenceNode = cg.children[cg.children.length - 1];
-                    referenceNode.parentNode.insertBefore(newDiv, referenceNode.nextSibling);
+                    var textbox = row2.children[j];
+                    var p2 = textbox.children[0];
+
+                    var textSize = "9px";
+                    if(document.title == "williamianbrooks-stuffILike") {textSize = "12px"}
+
+                    if(textbox.children.length > 1)
+                    {
+                        var a = textbox.children[1];
+                        a.style.fontSize = textSize; //"calc(0.75w)"
+                    }
+                    p2.style.fontSize = textSize; //"calc(0.75w)"
                 }
             }
-        }
-        else
-        {
-            cg.style.gridTemplateColumns = '1fr';
 
-            //remove last contentbar if it has no children
+            var smallSegment = row.children[0];
+            //smallSegment.style.width = "calc(31%)"; //"calc(8.55vw)"
+            //smallSegment.style.height = "124px";
+            //smallSegment.style.alignItems = "center";
+            //smallSegment.style.paddingTop = "0px";
+            //smallSegment.style.flex = "0px 0px 31%";
+            
+            if(contentBar.className == "contentbar-tall")
+            {
+                smallSegment.style.width = "calc(160px)"; //"calc(12.825vw)"
+                var aligner2 = smallSegment.children[1];
+                for(var j = 0; j < aligner2.children.length; j++)
+                {
+                    aligner2.children[j].style.fontSize = "calc(12px)"; //"calc(1vw)"
+                }
+            }
+        }*/
+
+        //add empty contentbar, fixes border. 
+        //spaghetti
+        if(cg.children.length % 2 == 1)
+        {
             var lastContentBar = cg.children[cg.children.length - 1];
-            if(lastContentBar.children.length == 0)
+            if(lastContentBar.children.length != 0)
             {
-                lastContentBar.remove();
-            }
-
-            for(var contentBar of cg.children)
-            {
-                if(contentBar.className == "contentbar-tall")
+                var newDiv = document.createElement("div");
+                if(tallContent == true)
                 {
-                    tallContent = true;
-                    contentBar.style.height = "calc(54vw)";
+                    newDiv.className = "contentbar-tall";
+                    //newDiv.style.height = "calc(420px)"; //"calc(27vw)"
                 }
                 else
                 {
-                    contentBar.style.height = "calc(16.8vw)";
+                    newDiv.className = "contentbar";
+                    //newDiv.style.height = "calc(124px)"; //"calc(9vw)"
                 }
-
-                var row = contentBar.children[0];
-                var largeSegment = row.children[1];
-                var aligner = largeSegment.children[0];
-                var h2 = aligner.children[0];
-                var p = aligner.children[1];
-
-                h2.style.fontSize = "calc(2.4vw)";
-                p.style.fontSize = "calc(1.6vw)";
-
-                var row2 = largeSegment.children[1];
-                if(row2 != null)
-                {
-                    if(tallContent == true)
-                    {
-                        row2.style.width = "calc(75% - 68px)";
-                    }
-                    else
-                    {
-                        row2.style.width = "calc(77% - 23px)";
-                        row2.style.padding = "0px 0px 0px 2.85%";
-                    }
-                    for(var j = 0; j < row2.children.length; j++)
-                    {
-                        var textbox = row2.children[j];
-                        var p2 = textbox.children[0];
-                        if(textbox.children.length > 1)
-                        {
-                            var a = textbox.children[1];
-                            a.style.fontSize = "calc(1.5vw)";
-                        }
-                        var p2 = textbox.children[0];
-                        p2.style.fontSize = "calc(1.5vw)";
-                    }
-                }
-                var smallSegment = row.children[0];
-                smallSegment.style.width = "calc(14.1vw)";
-                smallSegment.style.alignItems = "top";
-                smallSegment.style.paddingTop = "4px";
-                if(contentBar.className == "contentbar-tall")
-                {
-                    smallSegment.style.width = "calc(25.65vw)";
-                    var aligner2 = smallSegment.children[1];
-                    for(var j = 0; j < aligner2.children.length; j++)
-                    {
-                        aligner2.children[j].style.fontSize = "calc(2vw)";
-                    }
-                }
+                var referenceNode = cg.children[cg.children.length - 1];
+                referenceNode.parentNode.insertBefore(newDiv, referenceNode.nextSibling);
             }
         }
-        
     }
 }
 
@@ -517,10 +446,10 @@ function updateDate()
     nixiesDateElement.children[7].style.backgroundImage = getNixieImageURLFromNumber(date.getFullYear() % 10);
 }
 
-catIndex = 0;
+catIndex = 1;
 funnyCatImages = 
 [
-    "jinxOnComputer.gif",
+    //"jinxOnComputer.gif",    appended manually
     "cat-angry.gif",
     "cat-smile-happy-cat.gif", 
     "crunchycat.gif",
@@ -543,17 +472,160 @@ funnyCatImages =
     "cat-bop-camera.gif"
 ]
 
+funnyCatImagesRandomSorted = [];
+
+function randomSortCats()
+{
+    funnyCatImagesRandomSorted[0] = "jinxOnComputer.gif";
+    for(var i = 1; i < funnyCatImages.length; i++)
+    {
+        var insertIndex = Math.floor(Math.random() * funnyCatImages.length);
+        var quote = funnyCatImages[i]
+        for(var j = 0; j < funnyCatImages.length; j++)
+        {
+            if(funnyCatImagesRandomSorted[insertIndex] == undefined)
+            {
+                funnyCatImagesRandomSorted[insertIndex] = quote;
+                break;
+            }
+            else
+            {
+                insertIndex++;
+                if(insertIndex >= funnyCatImages.length) {insertIndex = 0;}
+            }
+        }
+    }
+}
+
+randomSortCats();
 function rerollCat()
 {
     catImageElement = document.getElementById("cat-image-funny");
 
-    numCats = funnyCatImages.length;
+    var catURL = "data/img/funnycates/" + funnyCatImagesRandomSorted[catIndex];
+    catImageElement.src = catURL;
+
+    catIndex++;
+
+    if(catIndex == funnyCatImagesRandomSorted.length) 
+    {
+        catIndex = 0;
+        //randomSortCats(); //dont re-sort it, just make it loop
+    }
+
+    /*numCats = funnyCatImages.length;
     var random = Math.floor(Math.random() * (numCats - 1));
     if(random >= catIndex) {random++;}
     catIndex = random;
     var catURL = "data/img/funnycates/" + funnyCatImages[catIndex];
     //console.log(catURL);
-    catImageElement.src = catURL;
+    catImageElement.src = catURL;*/
+}
+
+var quoteIndex = 0;
+var quotes = 
+[
+    //{text: "like a bag full of bags, you are full of yourself", author: "Anonymous", date: "2024"},
+    //{text: "purgatory would reject you for being a bad influence", author: "Anonymous", date: "2025"},
+    {text: "Give me a lever long enough and a fulcrum on which to place it, and I shall move the world.", author: "Archimedes", date: null},
+    {text: "A new scientific truth does not triumph by convincing its opponents and making them see the light, but rather because its opponents eventually die, and a new generation grows up that is familiar with it.", author: "Max Planck", date: "~1940s"},
+    {text: "An investment in knowledge pays the best interest.", author: "Benjamin Franklin", date: null},
+    {text: "Engineers like to solve problems. If there are no problems handily available, they will create their own problems.", author: "Scott Adams", date: null},
+    {text: "To the optimist, the glass is half full. To the pessimist, the glass is half empty. To the engineer, the glass is twice as big as it needs to be.", author: "Anonymous", date: null},
+    {text: "If you see a bomb technician running, follow him.", author: "USAF Ammo Troop", date: null},
+    {text: "What does all this mean? I don't \u2665\u2665\u2665\u2665ing remember. The way I code is \"I drink lots of Monster and pass out for eight hours\". It's kind of like alcoholism but less productive.", author: "Michael Reeves", date: "2019"},
+    {text: "Keep It Simple Stupid", author: "Kelly Johnson", date: "~1960"},
+    {text: "Success is a lousy teacher. It seduces smart people into thinking they can't lose.", author: "Bill Gates", date: "1996"},
+    {text: "No amount of experimentation can ever prove me right; a single experiment can prove me wrong.", author: "Albert Einstein", date: "1928?"},
+    {text: "When you want to know how things really work, study them when they're coming apart.", author: "William Gibson", date: null},
+    {text: "Don't measure in millimeters what will be marked with a crayon and cut with an axe.", author: "Proverb", date: null},
+    {text: "One test is worth a thousand expert opinions.", author: "Wernher von Braun", date: null},
+    {text: "Doctors can kill one patient at a time. Engineers can be much more efficient.", author: "Anonymous", date: null},
+    {text: "On two occasions I have been asked, \"Pray, Mr. Babbage, if you put into the machine wrong figures, will the right answers come out?\" ... I am not able rightly to apprehend the kind of confusion of ideas that could provoke such a question.", author: "Charles Babbage", date: "1864"},
+    {text: "The best engineers have the worst handwriting", author: "Unknown", date: null},
+    {text: "Debugging is twice as hard as writing the code in the first place. Therefore, if you write the code as cleverly as possible, you are, by definition, not smart enough to debug it.", author: "Brian Kernighan", date: "~1970s"},
+    {text: "At the source of every error which is blamed on the computer you will find at least two human errors, including the error of blaming it on the computer.", author: "Tom Gibb", date: "2002"},
+    {text: "Engineers are not boring people. We just get excited about boring things.", author: "Unknown", date: null},
+    {text: "A designer knows he has achieved perfection not when there is nothing left to add, but when there is nothing left to take away.", author: "Antoine de Saint-Exupery", date: null},
+    {text: "Every electronic device runs on smoke internally. If the smoke ever escapes, the device stops working.", author: "Unknown", date: null},
+    {text: "Simplicity is the ultimate sophistication.", author: "Leonardo Da Vinci", date: null},
+    {text: "The man who can smile when things go wrong has thought of someone else he can blame it on.", author: "Robert Bloch", date: "late 20th century"},
+    {text: "It's easy to quit smoking - I've done it a thousand times!", author: "Mark Twain", date: null},
+    //{text: "Build a man a fire, and he'll be warm for a day. Set a man on fire, and he'll be warm for the rest of his life.", author: "Terry Pratchett", date: "1997"},
+    {text: "Outside of a dog, a book is man's best friend. Inside of a dog it's too dark to read.", author: "Groucho Marx", date: null},
+    {text: "What do I think of Western civilization? I think it would be a very good idea.", author: "Mahatma Gandhi", date: null},
+    {text: "You'll never know what worse luck your bad luck has saved you from.", author: "Cormac McCarthy", date: null},
+    {text: "A problem properly stated is a problem partly solved.", author: "Henry Hazlitt", date: null},
+    {text: "Arguing with an engineer is like wrestling with a pig in the mud- after a few minutes you realize the pig likes it.", author: "Unknown", date: null},
+    {text: "If you need a machine and don't buy it, you will eventually find that you have paid for the machine and don't have it.", author: "Henry Ford", date: null},
+    {text: "For every four engineers on a team, there must be at least one non-engineer, unless you want a product that only engineers can use.", author: "Unknown", date: null},
+    {text: "Don't try to make it idiot proof. Someone's already working on a better idiot.", author: "Unknown", date: null},
+    {text: "The best way to get the right answer on the Internet is not to ask a question; it's to post the wrong answer.", author: "Ward Cunningham, Cunningham's Law", date: "1980s"},
+    {text: "Never stick your hand/finger anywhere you're not willing to stick your \u2665\u2665\u2665\u2665.", author: "Unknown", date: null},
+    {text: "When a clown moves into a palace, he doesn't become a king. The palace turns into a circus.", author: "Turkish Proverb", date: null},
+    {text: "No balloon and no aeroplane will ever be practically successful.", author: "Lord Kelvin", date: "1902"},
+    {text: "You insist that there is something a machine cannot do. If you tell me precisely what it is a machine cannot do, then I can always make a machine which will do just that.", author: "John von Neumann", date: "1948"},
+    {text: "The reasonable man adapts himself to the world; the unreasonable one persists in trying to adapt the world to himself. Therefore, all progress depends on the unreasonable man. ", author: "George Bernard Shaw", date: null},
+    {text: "People in the West have asked why no diversity in my games but they are wrong, when all my games have included a gay character: you, the player", author: "Hideo Kojima", date: "2023"}
+    //{text: "sample", author: "sample", date: "sample"}
+]
+
+var quotesRandomSorted = [];
+
+if(document.getElementById(".quote") != undefined)
+{
+    randomSortQuotes();
+    rerollQuote();
+}
+
+function randomSortQuotes()
+{
+    for(var i = 0; i < quotes.length; i++)
+    {
+        var insertIndex = Math.floor(Math.random() * quotes.length);
+        var quote = quotes[i]
+        for(var j = 0; j < quotes.length; j++)
+        {
+            if(quotesRandomSorted[insertIndex] == undefined)
+            {
+                quotesRandomSorted[insertIndex] = quote;
+                break;
+            }
+            else
+            {
+                insertIndex++;
+                if(insertIndex >= quotes.length) {insertIndex = 0;}
+            }
+        }
+    }
+}
+
+function rerollQuote()
+{
+    //randomly generate a random order of the quotes to show, generate it every time we go through it
+    quoteElement = document.getElementById(".quote");
+    var quote = quotesRandomSorted[quoteIndex];
+    if(quoteIndex == quotesRandomSorted.length) {quoteIndex = 0; randomSortQuotes();}
+    quote = quotesRandomSorted[quoteIndex];
+
+    quoteIndex++;
+
+    if(quoteIndex == quotesRandomSorted.length) 
+    {
+        quoteElement.innerHTML = "You have gone through the entire list. You can go through it again if you want."
+    }
+    else
+    {
+        if(quote.date == null || quote.date == undefined)
+        {
+            quoteElement.innerHTML = "<i>" + quote.text + "</i>" + "<br><br><b>- " + quote.author + "</b>";
+        }
+        else
+        {
+            quoteElement.innerHTML = "<i>" + quote.text + "</i>" + "<br><br><b>- " + quote.author + ", " + quote.date + "</b>";
+        }
+        
+    }
 }
 
 var stringIDMap = {};

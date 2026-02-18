@@ -54,6 +54,30 @@ function convertRGBToHex(r, g, b, a)
     return "#" + r + g + b + a;
 }
 
+function resetTopButtons()
+{
+    var anchors = document.querySelectorAll("a");
+
+    for(var i = 0; i < anchors.length; i++)
+    {
+        var anchor = anchors[i];
+        if(anchor.parentNode.className == "button")
+        {
+            anchor.parentNode.style.filter = "";
+            if((document.title == "williamianbrooks - Main Page" && anchor.textContent == "General") || (document.title == "williamianbrooks - My Work" && anchor.textContent == "My Work") || (document.title == "williamianbrooks - Misc" && anchor.textContent == "Settings") || (document.title == "williamianbrooks - My Contact" && anchor.textContent == "Contact"))
+            {
+                anchor.style.color = getComputedStyle(document.documentElement).getPropertyValue('--color1a');
+                anchor.parentNode.style.borderColor = getComputedStyle(document.documentElement).getPropertyValue('--color1a');
+            }
+            else
+            {
+                anchor.style.color = getComputedStyle(document.documentElement).getPropertyValue('--color1');
+                anchor.parentNode.style.borderColor = getComputedStyle(document.documentElement).getPropertyValue('--color1');
+            }
+        }
+    }
+}
+
 setConfigChanges(); //run on start as well
 function setConfigChanges()
 {
@@ -90,10 +114,12 @@ function setConfigChanges()
         nixieFlickering = localStorage.getItem(".global-nixie");
         chromaticAberrationEnabled = localStorage.getItem(".global-chro");
         starsEnabled = localStorage.getItem(".global-star");
+
+        resetTopButtons();
     }
 }
 
-if(document.title == "williamianbrooks-misc")
+if(document.title == "williamianbrooks - Misc")
 {
     for(var i = 0; i < rangeIDArray.length; i++)
     {

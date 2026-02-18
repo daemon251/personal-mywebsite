@@ -2,7 +2,7 @@
 <html>  
     <head>
         <!-- Text that appears in the browser tab -->
-        <title>williamianbrooks-blog3</title>
+        <title>Blog - wat</title>
         <link rel="stylesheet" type="text/css" href="styles.css">
         <link rel="icon" type="image/x-icon" href="data/img/icon.jpg">
     </head>
@@ -18,23 +18,20 @@
         <div class="maincontainer">
             <div class="topbar">
                 <div class="signature">
-                    <p class="text-styled" style="position: absolute; bottom: 0; margin-bottom: 4px">William Brooks / daemon47 - <span id=".site-titleDate"></span></p>
+                    <p class="text-styled" style="position: absolute; bottom: 0; margin-bottom: 4px">William Brooks / daemon47 - <span class="text-styled" id=".site-titleDate" style="filter: hue-rotate(0) brightness(100%) saturate(100%);"></span></p>
                 </div>
                 <div class="buttonholder">
                     <div class="button">
-                        <a href="index.html" target="_self" style="justify-content:center;padding: 5px;">General</a>
+                        <a href="index.html" target="_self" style="justify-content:center; width: 100%; height: 100%; align-items: center;">General</a>
                     </div>
                     <div class="button">
-                        <a href="myStuffPage.html" target="_self" style="justify-content:center;padding: 5px;">My Stuff</a>
+                        <a href="myStuffPage.html" target="_self" style="justify-content:center; width: 100%; height: 100%; align-items: center;">My Work</a>
                     </div>
                     <div class="button">
-                        <a href="stuffILike.html" target="_self" style="justify-content:center;padding: 5px;">Cool Stuff</a>
+                        <a href="contactPage.html" target="_self" style="justify-content:center; width: 100%; height: 100%; align-items: center;">Contact</a>
                     </div>
                     <div class="button">
-                        <a href="contactPage.html" target="_self" style="justify-content:center;padding: 5px;">Contact</a>
-                    </div>
-                    <div class="button">
-                        <a href="miscPage.html" target="_self" style="justify-content:center;padding: 5px;">Settings</a>
+                        <a href="miscPage.html" target="_self" style="justify-content:center; width: 100%; height: 100%; align-items: center;">Settings</a>
                     </div>
                 </div>
             </div>
@@ -44,9 +41,9 @@
                         <div class="row" style="justify-content: space-between;">
                             <h1 class="text-styled">wat</h1>
                             <!--<p style="font-family: 'VCROSDMONO';">Date:</p>-->
-                            <div class="nixie-array" id=".site-yapping-nixietubes-date" style="transform: translateY(15px); margin-top: 0px; margin-bottom: 0px; margin-right: 10px;"> 
-                                <div class="nixie" style="background-image: url('data/img/nixie-tube/0.png');"></div>
-                                <div class="nixie" style="background-image: url('data/img/nixie-tube/6.png');"></div>
+                            <div class="nixie-array" id=".site-yapping-nixietubes-date" style="transform: translateY(5px); margin-top: 0px; margin-bottom: 0px; margin-right: 10px;"> 
+                                <div class="nixie" style="background-image: url('data/img/nixie-tube/1.png');"></div>
+                                <div class="nixie" style="background-image: url('data/img/nixie-tube/5.png');"></div>
                                 <div class="nixie" style="margin-left: 8px; background-image: url('data/img/nixie-tube/0.png');"></div>
                                 <div class="nixie" style="background-image: url('data/img/nixie-tube/2.png');"></div>
                                 <div class="nixie" style="margin-left: 8px; background-image: url('data/img/nixie-tube/2.png');"></div>
@@ -55,18 +52,127 @@
                                 <div class="nixie" style="background-image: url('data/img/nixie-tube/6.png');"></div>
                             </div>
                         </div>
+                        <div style="float:left;">
+                            <img src="data/img/wat.PNG" style="height: 200px; margin-top: 10px"/>
+                        </div>
                         <p style="font-family: 'mainfont';">
-                            aaa
+                            I recently rewatched
+                            <a style="font-family: 'mainfont'; display: inline;" href="https://www.destroyallsoftware.com/talks/wat" target="_blank"><u>this talk (wat)</u></a> 
+                            and it is just always funny every time I watch it. It is probably my favorite talk of all time, and I highly recommend watching it yourself if 
+                            you know anything about programming.
+
+                            <br><br>It's made me think about programming languages this last time, though. It pokes a lot of fun at javascript, and it's not really something
+                            I quite understood the gravity of until I started using it for this website. Like, nothing is ever the right ♥♥♥♥♥♥ type in javascript, and it is 
+                            so reluctant to throw you an error, even when it should. That being said, some of the silliness displayed in the talk don't exist anymore 
+                            (object + any object does not return a number anymore, thankfully). Still, I actually kind of dislike javascript despite how much less egregious 
+                            it has become over time.
+
+                            <br><br>I figure that I should take the time to discuss some other languages as well. I hold the belief that most programming languages are 
+                            at least 90% similar, and no programming language has sufficiently challenged this belief for me thus far (besides matlab, which I refuse to acknowledge exists). 
+                            Despite that, I think that some languages do have some notable (for both the worse and the better) characteristics and oddities.
                         </p>
-                        <div class="buttonholder" style="margin-left: 0px; padding: 0px">
-                            <div class="button" style="width: 100px; margin-left: 0px;">
-                                <a href="myStuffPage.html#blogsection" target="_self" style="justify-content:center;padding: 5px; ">Return</a>
+                        <h2 class="text-styled" style="margin-top: 10px; margin-bottom: 0px">Lua</h2>
+                        <p style="font-family: 'mainfont'; margin-top: 4px; margin-bottom: 0px;">
+                            Lua is a bit of a strange language, and you only really see it in certain contexts. It's a language that integrates really well into C applications,
+                            so it's often used for modding in games written in C / C++. It's probably the most unique language that I interact with.
+
+                            <br><br>Some interesting characteristics:
+                        </p>
+                        <ul style="margin-top: 0px; padding-left: 20px; margin-left: 0px; margin-right: 10px; margin-bottom: 0px;"> 
+                            <li style="font-family: 'mainfont';">Comments are written with two dashes, "--". Multiple line comments are done with "--[[" and "]]--". I don't think there's another language that does comments exactly like this.</li>
+                            <li style="font-family: 'mainfont';">Starting and closing functions and if statements is done with "then" & "end" rather than "{" & "}". Parantheses aren't required in if, while, or for statements. Lua is similar to bash in this way. </li>
+                            <li style="font-family: 'mainfont';">There is no 'continue' keyword, though 'goto' still exists so this isn't super impactful.</li>
+                            <li style="font-family: 'mainfont';">Arrays are 1-indexed. I think that this is bad at least because it is conflictory with C arrays, which are 0-indexed.</li>
+                            <li style="font-family: 'mainfont';">Anonymous functions are completely hassle-free. To illustrate:</li>
+                        </ul>
+                        <p style="font-family:VCROSDMONO; margin-left: 40px">
+                            function doSomething(a, b)<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;--some code<br>
+                            end<br>
+                            <br>
+                            Variable1 = doSomething --no parantheses used assigns the function<br>
+                            Variable1(0, 4) --uses the function with (a, b) = (0, 4)<br>
+                            <br>
+                            Variable2 = function() print("abc") end --inline anonymous function 
+                        </p>
+                        <ul style="margin-top: 0px; padding-left: 20px; margin-left: 0px; margin-right: 10px; margin-bottom: 0px;"> 
+                            <li style="font-family: 'mainfont';">Arrays are actually called tables, which are basically Object -> Object maps instead, but without the hassle associated with them in other languages. 
+                            They can of course act as arrays.</li>
+                            <li style="font-family: 'mainfont';">Concatenating strings has its own operator, "..". This is such a good idea and I think this should be standard in more languages,
+                                as it avoids issues with the arithmetic + operator. PHP also kind of has this. </li>
+                            <li style="font-family: 'mainfont';">Variables can be assigned as arbitrary objects, basically. What I mean is that you can do this:</li>
+                        </ul>
+                        <p style="font-family:VCROSDMONO; margin-left: 40px">
+                            Variable1 = {x = -1, y = -1, z = 4}<br>
+                            print(Variable1.x) --prints -1
+                        </p>
+                        <!--<ul style="margin-top: 0px; padding-left: 20px; margin-left: 0px; margin-right: 10px; margin-bottom: 0px;"> 
+                            <li style="font-family: 'mainfont';">aaa.</li>
+
+                        </ul>-->
+                        <p style="font-family:mainfont;">
+                            All in all, I don't really like dynamically typed languages, but I think that Lua at least takes full advantage of it. 
+                            Tables and objects are convenient in the language <i>because</i> it is dynamically typed, so it's not something you could have in a C derivative or Java or whatever.
+                            
+                            <br><br>Relatedly, I've seen a naming convention for dynamically typed variables that prefixes the variable name with its type 
+                            identifier and an underscore, i.e., an integer variable orginally named "num" -> "i_num". Maybe this is common practice but it seems like a good idea.
+                        </p>
+                        <h2 class="text-styled" style="margin-top: 0px; margin-top: 10px; margin-bottom: 0px">Bend</h2>
+                        <p style="font-family: 'mainfont'; margin-top: 4px">
+                            Bend is a language that is fundamentally designed to support multi-threaded code execution. It lets you run the same code on a single CPU core, on multiple CPU cores,
+                            or on the GPU. It's a really unique idea. This exists in other languages, but you don't have to deal with the specifics in Bend (ofc you still have to write code that is
+                            parallelizable to begin with).
+                            Last time I used it, it was not very performant which I think was probably the result of a primitive compiler with few optimizations, but I don't know.
+                            I don't have much else to say about this language though besides that it is a really cool idea.
+                        </p>
+                        <h2 class="text-styled" style="margin-top: 0px; margin-top: 10px; margin-bottom: 0px">C#</h2>
+                        <p style="font-family: 'mainfont'; margin-top: 4px; margin-bottom: 0px;">
+                            C# is very similar to Java in a lot of ways. The language was actually <i>designed</i> to mimic Java (it was a copycat created by Microsoft after losing 
+                            a lawsuit to Sun about altering the Java specification). Supposedly a converter for Java -> C# code existed back in the day, though this probably 
+                            is not much of a realistic option anymore. When I read about all of this the first time, it really explained a lot because the languages always felt 
+                            very similar to me.
+
+                            <br><br>C# is also a bit strange to me because of how common a multitude of its versions are. For instance, both netstandard2.0 and netstandard2.1 exist
+                            and are used, and so are net(x.y) versions (two categories + their respective versioning). I've had the displeasure of integrating C# libraries that are <i>not</i> built for the (older) version 
+                            that my main project used, which, in my case at least, required untangling some really unholy object oriented shenanigans. 
+
+                            <br><br>I suppose Java is similar in this way too, with lots of Java stuff still using Java 8.0, which is more than a decade old at this point. 
+
+                            <br><br>Alright, unstructured list now:
+                        </p>
+                        <ul style="margin-top: 0px; padding-left: 20px; margin-left: 0px; margin-right: 10px; margin-top: 0px; margin-bottom: 0px;"> 
+                            <li style="font-family: 'mainfont';">Goto keyword actually exists unlike Java. I don't think goto is that bad if used sparingly, so this is nice.</li>
+                            <li style="font-family: 'mainfont';">Package management in this language has been a pain in the ♥♥♥ in my experience, though perhaps this is just me.</li>
+                            <li style="font-family: 'mainfont';">It retains some lower-level stuff from C, I guess. It is sometimes useful. Only time I've ever used this feature is to 
+                            directly compare equality of floats bit-by-bit (done by interpeting float data as int then comparing).</li>
+                        </ul>
+                        <h2 class="text-styled" style="margin-top: 0px; padding-left: 1px; margin-top: 10px; margin-bottom: 0px">Languages with Custom Operators</h2>
+                        <p style="font-family: 'mainfont'; margin-top: 4px;">
+                            In theme with the javascript shenanigans that the wat talk discusses, I find the idea of custom operators to be interesting because it would
+                            allow us to meaningfully define stuff instead of just using hidden generic toString() casts when you don't know what else to do. 
+                            For instance, you could actually define object[] + object[] to just append the two arrays together.
+
+                            <br><br>Since I haven't ever meaningfully used a language that actually supports this feature, I thought that I might've been onto something.
+                            But no, it exists already. Supposedly, Swift, Haskell, Ada, and more support this feature.
+                        </p>
+                        <h2 class="text-styled" style="padding-left: 1px; margin-top: 10px; margin-bottom: 0px">Closing Thoughts</h2>
+                        <p style="font-family: 'mainfont'; margin-top: 4px">
+                            I remember a time where I told another programmer that my main languages were: Lua, C# and Java, and then subsequently got a weird look.
+                            Not that it is that crazy (none of those languages are unpopular), but I never really thought about how my perspective on programming is somewhat different
+                            to some people my age.
+
+                            <br><br>Anyways, <span class="text-styled">♥♥♥♥</span> javascript. You can choose to interpret the hearts as a sign of love, or as a censor for an expletive.
+                        </p>
+
+                        <div class="buttonholder" style="margin-left: 0px; padding: 0px; margin-top: 10px;">
+                            <div class="button" style="width: 100px; margin-left: 0px; height: 32px;">
+                                <a href="index.html#blogsection" target="_self" style="justify-content:center; width: 100%; height: 100%; align-items: center;">Return</a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="largeemptybar"> </div>
+            <div class="emptybar"> </div>
         </div>
         <script type="text/javascript" src='main.js'></script>
         <script type="text/javascript" src='textEffects.js'></script>

@@ -11,6 +11,7 @@ var starArr;
 var scrollY = 0;
 
 var index = 0;
+chromaticAberrationAmount = 0; //from another file, set it here as well I guess or errors can happen
 
 //pointless for now but implemented
 /*const depthInfo = { FirstLayer: {Size: 1, SpeedMult: 1, ScrollRatio: 0}, 
@@ -169,8 +170,8 @@ function moveStars()
 
 function getHexcode(brightness)
 {
-    var num = Math.floor(brightness * 256.0);
-    var str = num.toString(16);
+    var number = Math.floor(brightness * 256.0);
+    var str = number.toString(16);
     if(str.length == 1){str = "0" + str;} //gives unexpected (bad) behavior when this is removed even though it wont error
     if(str.length > 2){str = "FF";}
     str = "#" + str + str + str;
@@ -179,7 +180,7 @@ function getHexcode(brightness)
 
 function radixToHex(num)
 {
-    var num = Math.floor(num * 256.0);
+    num = Math.floor(num * 256.0);
     var str = num.toString(16);
     if(str.length == 1){str = "0" + str;} //gives unexpected (bad) behavior when this is removed even though it wont error
     if(str.length > 2){str = "FF";}
@@ -195,8 +196,6 @@ function drawStars()
     var rDepth = radixToHex(parseInt(color.substring(1, 3), 16) / 256.0); 
     var gDepth = radixToHex(parseInt(color.substring(3, 5), 16) / 256.0);
     var bDepth = radixToHex(parseInt(color.substring(5, 7), 16) / 256.0);
-
-    console.log(bDepth);
 
     for(var i = 0; i < starArr.length; i++) //draw lines
     {

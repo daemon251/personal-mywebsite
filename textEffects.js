@@ -2,7 +2,7 @@
 
 //setInterval(mainFunction, interval); 
 
-var allTextElements = document.querySelectorAll("p, h1, h2, a, li");
+var allTextElements = document.querySelectorAll("p, h1, h2, a, li, span");
 var allBoxElements = document.querySelectorAll(".genericcontainer, .button, .contentcontainer, .button-nolink");
 var defaultShadowWithoutColor = "0px 0px 3px ";
 
@@ -76,45 +76,78 @@ function determineChromaticAberationAmount()
     //chromaticAberrationAmount = 2;
 }
 
+function convertHTMLColorToDepths(color)
+{
+    var arrOut = [0, 0, 0];
+
+    if(color.indexOf("#") != -1)
+    {
+        //never gets called, its here I guess
+        arrOut[0] = parseInt(color.substring(1, 3), 16) / 256.0; 
+        arrOut[1] = parseInt(color.substring(3, 5), 16) / 256.0;
+        arrOut[2] = parseInt(color.substring(5, 7), 16) / 256.0;
+    }
+    else if(color == null || color == undefined || color == "")
+    {
+        var colorDefault = document.documentElement.style.getPropertyValue('--color1');
+        //only works for hex data in... color1 is hex so this is okay
+        arrOut[0] = parseInt(colorDefault.substring(1, 3), 16) / 256.0; 
+        arrOut[1] = parseInt(colorDefault.substring(3, 5), 16) / 256.0;
+        arrOut[2] = parseInt(colorDefault.substring(5, 7), 16) / 256.0;
+    }
+    else
+    {
+        var numbers = color.match(/\d+\.?\d*/g)?.map(Number) || []; //wtf magic
+        var opacityMult = 1;
+        if(numbers[3] != undefined) {opacityMult = numbers[3];}
+        arrOut[0] = numbers[0] * opacityMult / 256.0;
+        arrOut[1] = numbers[1] * opacityMult / 256.0;
+        arrOut[2] = numbers[2] * opacityMult / 256.0;
+    }
+
+    return arrOut;
+}
+
 function determineElementShadows()
 {
-    var color = document.documentElement.style.getPropertyValue('--color1');
-    var rDepth = parseInt(color.substring(1, 3), 16) / 256.0; 
-    var gDepth = parseInt(color.substring(3, 5), 16) / 256.0;
-    var bDepth = parseInt(color.substring(5, 7), 16) / 256.0;
+    var colorDefault = document.documentElement.style.getPropertyValue('--color1');
+    var rDepth = parseInt(colorDefault.substring(1, 3), 16) / 256.0; 
+    var gDepth = parseInt(colorDefault.substring(3, 5), 16) / 256.0;
+    var bDepth = parseInt(colorDefault.substring(5, 7), 16) / 256.0;
 
-    var stringOut = chromaticAberrationAmount  + "px " + chromaticAberrationAmount           + "px " + 0             + "px " + "rgba(0, 128, 0, " + rDepth + ")," +
-                    0              + "px " + (-chromaticAberrationAmount * 1.41) + "px " + 0 + "px " + "rgba(0, 0, 255, " + gDepth + ")," +
-                    -chromaticAberrationAmount + "px " + chromaticAberrationAmount           + "px " + 0             + "px " + "rgba(255, 0, 0, " + bDepth + ")," +
-                    defaultShadowWithoutColor;
+    var stringOutDefault = chromaticAberrationAmount  + "px " + chromaticAberrationAmount           + "px " + 0             + "px " + "rgba(0, 255, 0, " + (gDepth / 2) + ")," +
+                           0              + "px " + (-chromaticAberrationAmount * 1.41) + "px " + 0 + "px " + "rgba(0, 0, 255, " + bDepth + ")," +
+                           -chromaticAberrationAmount + "px " + chromaticAberrationAmount           + "px " + 0             + "px " + "rgba(255, 0, 0, " + rDepth + ")," +
+                           defaultShadowWithoutColor;
     for(var i = 0; i < allTextElements.length; i++)
     {
         textElement = allTextElements[i];
-        /*var color = textElement.style.color;
-        var colorComps = color.substring(4, color.length-1).replace(/ /g, '').split(',');
-        if(colorComps.length != 3) {colorComps = ['255', '255', '255']};
-        colorComps[0] = colorComps[0] / 255;
-        colorComps[1] = colorComps[1] / 255;
-        colorComps[2] = colorComps[2] / 255;
+        var stringOut = stringOutDefault;
 
-        console.log(colorComps[1])
-
-        redString = "rgba(255, 0, 0, " + colorComps[0] + "),";
-        greenString = "rgba(0, 128, 0, " + colorComps[1] + "),";
-        blueString = "rgba(0, 0, 255, " + colorComps[2] + "),";
-
-        var stringOut = chromaticAberationAmount  + "px " + chromaticAberationAmount           + "px " + 0             + "px " + greenString +
-                    0              + "px " + (-chromaticAberationAmount * 1.41) + "px " + 0 + "px " + blueString +
-                    -chromaticAberationAmount + "px " + chromaticAberationAmount           + "px " + 0             + "px " + redString +
-                    defaultShadowWithoutColor;*/
-
-        if(chromaticAberrationAmount > 0)
+        if(colorDefault != textElement.style.color)
         {
-            textElement.style.textShadow = stringOut + textElement.style.color; //"2px 2px 0px red, 0px -2px 0px green, -2px 2px 0px blue";
+            var color = textElement.style.color;
+            data = convertHTMLColorToDepths(color);
+            var rDepth = data[0];
+            var gDepth = data[1];
+            var bDepth = data[2];
+
+            stringOut = chromaticAberrationAmount  + "px " + chromaticAberrationAmount           + "px " + 0             + "px " + "rgba(0, 255, 0, " + (gDepth / 2) + ")," +
+                            0              + "px " + (-chromaticAberrationAmount * 1.41) + "px " + 0 + "px " + "rgba(0, 0, 255, " + bDepth + ")," +
+                            -chromaticAberrationAmount + "px " + chromaticAberrationAmount           + "px " + 0             + "px " + "rgba(255, 0, 0, " + rDepth + ")," +
+                            defaultShadowWithoutColor;
         }
-        else
+
+        if(textElement.className != "text-styled" && textElement.className != "a-styled" && textElement.id.indexOf("no-alter") < 0) //doesnt have any visual effect (shadows end up transparent), but prevents unnecessary assignments
         {
-            textElement.style.textShadow = defaultShadowWithoutColor + textElement.style.color;
+            if(chromaticAberrationAmount > 0)
+            {
+                textElement.style.textShadow = stringOut + textElement.style.color; //"2px 2px 0px red, 0px -2px 0px green, -2px 2px 0px blue";
+            }
+            else
+            {
+                textElement.style.textShadow = defaultShadowWithoutColor + textElement.style.color;
+            }
         }
     }
     for(var i = 0; i < allBoxElements.length; i++)
@@ -122,7 +155,7 @@ function determineElementShadows()
         boxElement = allBoxElements[i];
         if(chromaticAberrationAmount > 0)
         {
-            boxElement.style.boxShadow = stringOut + boxElement.style.color; //"2px 2px 0px red, 0px -2px 0px green, -2px 2px 0px blue";
+            boxElement.style.boxShadow = stringOutDefault + boxElement.style.color; //"2px 2px 0px red, 0px -2px 0px green, -2px 2px 0px blue";
         }
         else
         {

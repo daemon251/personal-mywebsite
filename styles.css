@@ -35,6 +35,7 @@ html {
 }
 
 body {
+    min-width:1200px;
     width: calc(100% - 0);
     background-color: rgb(0, 0, 0);
     border: 0px solid var(--color3);
@@ -51,12 +52,14 @@ h1 {
     color: var(--color1);
     font-size: 36px;
     font-family: 'VCROSDMONO';
+    margin-top: 14px;
 }
 
 h2 {
     color: var(--color1);
     font-size: 24px;
     font-family: 'VCROSDMONO';
+    margin-top: 16px;
 }
 
 p {
@@ -64,6 +67,8 @@ p {
     font-size: calc(16px);
     /*text-shadow: 2px 2px 0px red, 0px -2px 0px green, -2px 2px 0px blue;*/
     line-height: 1;
+    margin-top: 0px;
+    margin-bottom: 0px;
 }
 
 li {
@@ -79,7 +84,7 @@ img {
 
 .maincontainer {
     margin-top: 25px;
-    padding: 0px 10px 0px 0px;
+    padding: 0px 10px 0px 10px;
     /*flex: 0 0 min(1080px, 90%);
     width: min(1080px, 90%);*/
     flex: 0 0 1080px;
@@ -123,7 +128,7 @@ img {
 }
 
 .aligner {
-    padding: 0px 20px 10px 20px;
+    padding: 0px 20px 16px 20px;
     width: calc(100% - 40px);
 }
 
@@ -185,6 +190,7 @@ canvas {
     display: flex;
     width: 50%;
     color: var(--color1);
+    transform: translateX(1px); /*adjust for text-styled*/
 }
 
 .buttonholder {
@@ -203,6 +209,29 @@ a {
     text-decoration: underline;
     display: flex;
     justify-content: left;
+}
+
+.a-fulldata {
+    display: block;
+    width: auto;
+    color: var(--color1);
+    text-decoration: underline;
+    display: flex;
+    justify-content: left;
+}
+
+.a-fulldata:visited {
+    color: #ffAA88ff;
+    text-decoration: underline;
+    text-shadow: 0px 0px 8px #ffAA88ff;
+    filter: hue-rotate(var(--hue-rotate)) brightness(var(--value)) saturate(var(--saturate));
+}
+
+.a-fulldata:hover {
+    color: #ff5500ff;
+    text-decoration: underline;
+    text-shadow: 0px 0px 8px #ff5500ff;
+    filter: hue-rotate(var(--hue-rotate)) brightness(var(--value)) saturate(var(--saturate));
 }
 
 a:hover {
@@ -289,7 +318,7 @@ a:hover {
 
 .contentbar {
     width: calc(100% - 4px);
-    height: calc(9vw);
+    height: 124px;
     margin-bottom: 0px;
     border: 2px solid var(--color1) !important; /*border shifts things to side */
     position: relative;
@@ -307,7 +336,7 @@ a:hover {
 
 .contentbar-tall {
     width: calc(100% - 4px);
-    height: calc(27vw);
+    height: 420px;
     border: 2px solid var(--color1) !important; /*border shifts things to side */
     position: relative;
     display: flex;
@@ -345,8 +374,7 @@ a:hover {
     text-align: center;
     margin: 0px;
     line-height: 1;
-    font-size: calc(8px); /*compat*/
-    font-size: calc(2px + 0.9vw);
+    font-size: calc(9px);
 }
 
 .contentgrid {
@@ -380,13 +408,13 @@ a:hover {
     background-position: center;
     /*-webkit-background-clip: text;*/
     background-clip: text;
-    color: transparent;
+    color: rgba(0, 0, 0, 0);
     /*font-weight: bold;*/
     /*STILL BAD FIX TIHS */
-    padding-left: 2px; /*for some reason, required so that stuff doesnt get cut off*/
+    padding-left: 0px; /*for some reason, required so that stuff doesnt get cut off was: 2*/
     padding-right: 2px; /*for consistency I guess*/
     display:inline-block; /*makes transform work properly*/
-    transform: translate(-0px, 0px); /*undoes padding*/
+    transform: translate(-1px, 0px); /*undoes padding was:0*/
     text-shadow: 0px 0px 8px #ff5500ff !important;
     margin-bottom: 0px;
 }
