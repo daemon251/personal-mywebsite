@@ -8,6 +8,9 @@ var defaultShadowWithoutColor = "0px 0px 3px ";
 
 var scrollYLastTick = (window.pageYOffset || (document.documentElement || document.body.parentNode || document.body).scrollTop);
 
+var chromaticAberrationMultConfig = 1.0;
+var chromaticAberrationDecayConfig = 1.0;
+
 window.addEventListener('scroll', function() 
 {
     //determineChromaticAberationAmount();
@@ -35,7 +38,7 @@ setInterval(function()
 
     var a = 0.32; //matters more for big scrolls. higher value is shorter time
     var b = 3.8; //matters more for small scrolls. higher value is shorter time
-    var difAmount = Math.abs(pixelsScrolledAccumulator * a) + b;
+    var difAmount = (Math.abs(pixelsScrolledAccumulator * a) + b) * chromaticAberrationDecayConfig;
     if(bPositive == true)
     {
         difAmount = -difAmount;
@@ -66,8 +69,8 @@ function determineChromaticAberationAmount()
         pixelsScrolledAccumulator += scrollChangeTick;
 
         //chromaticAberationAmount = Math.round(1.5 * Math.sqrt(Math.abs(scrollChangeTick))) - 1;
-        chromaticAberrationAmount = Math.round(Math.sqrt(Math.abs(pixelsScrolledAccumulator / 12)));
-        if(chromaticAberrationAmount > 6) {chromaticAberrationAmount = 6;}
+        chromaticAberrationAmount = Math.round(Math.sqrt(Math.abs(pixelsScrolledAccumulator / 12)) * chromaticAberrationMultConfig);
+        if(chromaticAberrationAmount > Math.round(6 * chromaticAberrationMultConfig)) {chromaticAberrationAmount = Math.round(6 * chromaticAberrationMultConfig);}
     }
     else
     {
@@ -111,6 +114,12 @@ function convertHTMLColorToDepths(color)
 function determineElementShadows()
 {
     var colorDefault = document.documentElement.style.getPropertyValue('--color1');
+
+    if(colorDefault == "") //dunno what causes this, happens on very initial first load
+    {
+        colorDefault = "#ffffffff"
+    }
+
     var rDepth = parseInt(colorDefault.substring(1, 3), 16) / 256.0; 
     var gDepth = parseInt(colorDefault.substring(3, 5), 16) / 256.0;
     var bDepth = parseInt(colorDefault.substring(5, 7), 16) / 256.0;
@@ -119,18 +128,19 @@ function determineElementShadows()
                            0              + "px " + (-chromaticAberrationAmount * 1.41) + "px " + 0 + "px " + "rgba(0, 0, 255, " + bDepth + ")," +
                            -chromaticAberrationAmount + "px " + chromaticAberrationAmount           + "px " + 0             + "px " + "rgba(255, 0, 0, " + rDepth + ")," +
                            defaultShadowWithoutColor;
+    
     for(var i = 0; i < allTextElements.length; i++)
     {
         textElement = allTextElements[i];
         var stringOut = stringOutDefault;
 
-        if(colorDefault != textElement.style.color)
+        if(colorDefault != textElement.style.color && textElement.style.color != "var(--color1a)")
         {
             var color = textElement.style.color;
             data = convertHTMLColorToDepths(color);
-            var rDepth = data[0];
-            var gDepth = data[1];
-            var bDepth = data[2];
+            rDepth = data[0];
+            gDepth = data[1];
+            bDepth = data[2];
 
             stringOut = chromaticAberrationAmount  + "px " + chromaticAberrationAmount           + "px " + 0             + "px " + "rgba(0, 255, 0, " + (gDepth / 2) + ")," +
                             0              + "px " + (-chromaticAberrationAmount * 1.41) + "px " + 0 + "px " + "rgba(0, 0, 255, " + bDepth + ")," +
@@ -138,7 +148,7 @@ function determineElementShadows()
                             defaultShadowWithoutColor;
         }
 
-        if(textElement.className != "text-styled" && textElement.className != "a-styled" && textElement.id.indexOf("no-alter") < 0) //doesnt have any visual effect (shadows end up transparent), but prevents unnecessary assignments
+        if(textElement.className != "text-styled" && textElement.className != "a-styled" && textElement.className != "text-rainbow" && textElement.id.indexOf("no-alter") < 0) //doesnt have any visual effect (shadows end up transparent), but prevents unnecessary assignments
         {
             if(chromaticAberrationAmount > 0)
             {

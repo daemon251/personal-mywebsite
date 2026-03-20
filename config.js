@@ -33,7 +33,10 @@ const rangeIDArray =
 
     ".sc-hue",
     ".sc-value",
-    ".sc-saturation"
+    ".sc-saturation",
+
+    ".global-chro-decay",
+    ".global-chro-intensity"
 ];
 
 //rgba in floats 0 - 1
@@ -115,7 +118,25 @@ function setConfigChanges()
         chromaticAberrationEnabled = localStorage.getItem(".global-chro");
         starsEnabled = localStorage.getItem(".global-star");
 
+        if(localStorage.getItem(".global-chro-intensity") === null) {localStorage.setItem(".global-chro-intensity", 1);}
+        if(localStorage.getItem(".global-chro-decay") === null) {localStorage.setItem(".global-chro-decay", 1);}
+
+        chromaticAberrationMultConfig = localStorage.getItem(".global-chro-intensity");
+        chromaticAberrationDecayConfig = localStorage.getItem(".global-chro-decay");
+
         resetTopButtons();
+
+        var button = document.getElementById("darkmodeButton")
+        if(button != null && determineIfDarkMode() == true)
+        {
+            //localStorage.setItem(".sc-hue", 203.0 / 360);
+            //localStorage.setItem(".sc-saturation", 0.75);
+            button.src = "data/img/ui/darkModeDark.png"
+        }
+        else
+        {
+            button.src = "data/img/ui/darkModeBright.png"
+        }
     }
 }
 
@@ -170,6 +191,10 @@ function updateConfigTextDescriptions()
 
     document.getElementById(".global-opacity-text").innerHTML = "(" + formatConfigFloat(localStorage.getItem(".global-opacity")) + ")";
     document.getElementById(".sc-text").innerHTML = "(" + formatConfigNumber(Math.round(localStorage.getItem(".sc-hue") * 360)) + ", " + formatConfigNumber(Math.round(localStorage.getItem(".sc-value") * 100)) + "%" + ", " + formatConfigNumber(Math.round(localStorage.getItem(".sc-saturation") * 100)) + "%)";
+
+    document.getElementById(".global-chro-intensity-text").innerHTML = formatConfigFloat(localStorage.getItem(".global-chro-intensity"));
+    document.getElementById(".global-chro-decay-text").innerHTML = formatConfigFloat(localStorage.getItem(".global-chro-decay"));
+
 }
 
 function createCheckboxListeners(ID)
@@ -199,7 +224,12 @@ function createRangeListeners(ID)
     if(ID == ".global-opacity") {document.getElementById(ID).step = 1 / 1000;}
     else if (ID == ".sc-hue") {document.getElementById(ID).step = 1 / 360;}
     else if(ID == ".sc-value" || ID == ".sc-saturation") {document.getElementById(ID).step = 1 / 200;}
-    else {document.getElementById(ID).step = 1 / 256;}
+    else if(ID == ".global-chro-intensity" || ID == ".global-chro-decay") 
+    {
+        localStorage.setItem(ID, "1"); //why tf is this required... its 1.25 by default otherwise
+        document.getElementById(ID).step = 1 / 256;
+    }
+    else {document.getElementById(ID).step = 1 / 375;}
 
     if(localStorage.getItem(ID) == null) {localStorage.setItem(ID, document.getElementById(ID).value)}
     document.getElementById(ID).value = localStorage.getItem(ID);

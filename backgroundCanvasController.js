@@ -48,7 +48,7 @@ class Star
         this.yVel = yVel;
     }
 
-    getY(scrollAccounted)
+    /*getY(scrollAccounted)
     {
         if(scrollAccounted)
         {
@@ -59,7 +59,7 @@ class Star
         {
             return this.y
         }
-    }
+    }*/
 }
 
 var initted = false;
@@ -120,7 +120,7 @@ function initCanvas()
     }
 }
 
-window.onresize = function(event) 
+/*window.onresize = function(event) 
 {
     canvas.width = document.body.clientWidth; //document.width is obsolete
     canvas.height = document.body.clientHeight; //document.height is obsolete
@@ -130,11 +130,12 @@ window.onresize = function(event)
 
     linearMultScale = Math.sqrt(xMax * yMax / 1171350); //should be 1 for 720p fullscreen on general page (at least once upon a time it was)
     numberStars = 120 * linearMultScale * linearMultScale;
+            console.log("aaaa");
     for(var i = 0; i < numberStars; i++)
     {
         starArr[i] = new Star(Math.random() * xMax, Math.random() * yMax, -speedCap + Math.random() * speedCap * 2, -speedCap + Math.random() * speedCap * 2);
     }
-};
+};*/
 
 function getRandomInt(max) 
 {
@@ -190,6 +191,68 @@ function radixToHex(num)
 var colorStars = "#ffffff";
 var colorBackground = "#000000";
 
+function scaleStars(xMaxOld, yMaxOld)
+{
+    for(var i = 0; i < starArr.length; i++)
+    {
+        var star = starArr[i];
+        star.x *= xMax / xMaxOld
+        star.y *= yMax / yMaxOld
+    }
+
+    //now remove or add to keep constant density
+    linearMultScale = Math.sqrt(xMax * yMax / 1171350);
+    numberStars = 120 * linearMultScale * linearMultScale;
+
+    numberStarsAdd = Math.round(numberStars - starArr.length); //theoretically scaling back and forth might cause discrepancies over time... whatever
+
+    if(numberStarsAdd < 0)
+    {
+        starArrNew = []
+        for(var i = 0; i < starArr.length + numberStarsAdd; i++)
+        {
+            var star = starArr[i];
+            starArrNew[i] = new Star(star.x, star.y, star.xVel, star.yVel);
+        }
+        starArr = starArrNew;
+    }
+    else if(numberStarsAdd > 0)
+    {
+        starArrNew = []
+        for(var i = 0; i < starArr.length; i++)
+        {
+            var star = starArr[i];
+            starArrNew[i] = new Star(star.x, star.y, star.xVel, star.yVel);
+        }
+        for(var i = starArr.length; i < starArr.length + numberStarsAdd; i++)
+        {
+            starArrNew[i] = new Star(Math.random() * xMax, Math.random() * yMax, -speedCap + Math.random() * speedCap * 2, -speedCap + Math.random() * speedCap * 2);
+        }
+        starArr = starArrNew;
+    }
+}
+
+window.onresize = function(event) 
+{
+    setContentGridsSettings();
+    canvas = document.getElementById("backgroundCanvas");
+    ctx = canvas.getContext("2d"); 
+    
+    var zoomLevel = ((window.outerWidth - 10) / window.innerWidth) * 100; //lower is more zoomed out
+    //console.log(`Zoom level: ${zoomLevel.toFixed(2)}%`);
+
+    canvas.width = document.body.clientWidth; //document.width is obsolete
+    canvas.height = document.body.clientHeight; //document.height is obsolete
+
+    var xMaxOld = xMax;
+    var yMaxOld = yMax;
+
+    xMax = canvas.clientWidth; // / (zoomLevel / 100);
+    yMax = canvas.clientHeight; // / (zoomLevel / 100);
+
+    scaleStars(xMaxOld, yMaxOld);
+};
+
 function drawStars()
 {
     var color = colorStars;
@@ -197,25 +260,29 @@ function drawStars()
     var gDepth = radixToHex(parseInt(color.substring(3, 5), 16) / 256.0);
     var bDepth = radixToHex(parseInt(color.substring(5, 7), 16) / 256.0);
 
+    var randomBrightnessArr = [];
+    for(var i = 0; i < 16; i++) //cheaper to do it this way
+    {
+        randomBrightnessArr[i] = Math.random();
+    }
+
+    //var timeStart = performance.now() * 1000;
     for(var i = 0; i < starArr.length; i++) //draw lines
     {
         var star = starArr[i];
-
-        var dist_iCursor = Math.sqrt(Math.pow(mouseXRaw - star.x, 2) + Math.pow(mouseYAdjusted - star.getY(true), 2));
-
+        var dist_iCursor = Math.sqrt(Math.pow(mouseXRaw - star.x, 2) + Math.pow(mouseYAdjusted - star.y, 2));
         var constellationDist = 175;// * linearMultScale;
 
         if(dist_iCursor < constellationDist) 
         {
-            for(var j = 0; j < starArr.length; j++)
+            for(var j = i + 1; j < starArr.length; j++) //only render it one time
             {
-                if(i == j) {j++; continue;}
                 var newStar = starArr[j];
-                var dist_ij = Math.sqrt(Math.pow(newStar.x - star.x, 2) + Math.pow(newStar.getY(true) - star.getY(true), 2));
-                var dist_jCursor = Math.sqrt(Math.pow(newStar.x - mouseXRaw, 2) + Math.pow(newStar.getY(true) - mouseYAdjusted, 2));
-                if(dist_jCursor < constellationDist && i > j) //only render it one time
+                //var dist_ij = Math.sqrt(Math.pow(newStar.x - star.x, 2) + Math.pow(newStar.y - star.y, 2));
+                var dist_jCursor = Math.sqrt(Math.pow(newStar.x - mouseXRaw, 2) + Math.pow(newStar.y - mouseYAdjusted, 2));
+                if(dist_jCursor < constellationDist) 
                 {
-                    var amt = 1 - dist_jCursor / constellationDist - dist_iCursor / constellationDist
+                    var amt = 1 - (dist_jCursor + dist_iCursor) / constellationDist;
                     if(amt > 0) 
                     {
                         if(chromaticAberrationAmount > 0)
@@ -225,20 +292,20 @@ function drawStars()
                             //blue - -y
                             ctx.strokeStyle = "#FF0000" + rDepth; 
                             ctx.beginPath();
-                            ctx.moveTo(star.x - chromaticAberrationAmount, star.getY(true) + chromaticAberrationAmount);
-                            ctx.lineTo(newStar.x - chromaticAberrationAmount, newStar.getY(true) + chromaticAberrationAmount);
+                            ctx.moveTo(star.x - chromaticAberrationAmount, star.y + chromaticAberrationAmount);
+                            ctx.lineTo(newStar.x - chromaticAberrationAmount, newStar.y + chromaticAberrationAmount);
                             ctx.stroke();
 
                             ctx.strokeStyle = "#00FF00" + gDepth; 
                             ctx.beginPath();
-                            ctx.moveTo(star.x + chromaticAberrationAmount, star.getY(true) + chromaticAberrationAmount);
-                            ctx.lineTo(newStar.x + chromaticAberrationAmount, newStar.getY(true) + chromaticAberrationAmount);
+                            ctx.moveTo(star.x + chromaticAberrationAmount, star.y + chromaticAberrationAmount);
+                            ctx.lineTo(newStar.x + chromaticAberrationAmount, newStar.y + chromaticAberrationAmount);
                             ctx.stroke();
 
                             ctx.strokeStyle = "#0000FF" + bDepth; 
                             ctx.beginPath();
-                            ctx.moveTo(star.x, star.getY(true) - chromaticAberrationAmount * 1.41);
-                            ctx.lineTo(newStar.x, newStar.getY(true) - chromaticAberrationAmount * 1.41);
+                            ctx.moveTo(star.x, star.y - chromaticAberrationAmount * 1.41);
+                            ctx.lineTo(newStar.x, newStar.y - chromaticAberrationAmount * 1.41);
                             ctx.stroke();
                         }
 
@@ -252,8 +319,8 @@ function drawStars()
 
                         ctx.strokeStyle = colorStars + opacity;
                         ctx.beginPath();
-                        ctx.moveTo(star.x, star.getY(true));
-                        ctx.lineTo(newStar.x, newStar.getY(true));
+                        ctx.moveTo(star.x, star.y);
+                        ctx.lineTo(newStar.x, newStar.y);
                         ctx.stroke();
                     }
                 }
@@ -264,15 +331,13 @@ function drawStars()
     {
         var star = starArr[i];
 
-        var dist_iCursor = Math.sqrt(Math.pow(mouseXRaw - star.x, 2) + Math.pow(mouseYAdjusted - star.getY(true), 2));
+        var dist_iCursor = Math.sqrt(Math.pow(mouseXRaw - star.x, 2) + Math.pow(mouseYAdjusted - star.y, 2));
         var highlightDist = 120;// * linearMultScale;
-        var bonus = 0.4 * (highlightDist - dist_iCursor) / highlightDist;
+
+        var bonus = 3 * (highlightDist - dist_iCursor) / highlightDist;
         if(bonus < 0) {bonus = 0;}
 
-        var bonus = 3 * (highlightDist - dist_iCursor) / highlightDist
-        if(bonus < 0) {bonus = 0;}
-
-        var starSize = (4 + bonus) * star.layerInfo.Size;
+        var starSize = (4 + bonus); //* star.layerInfo.Size;
 
         //red - -x +y
         //green - +x +y
@@ -280,20 +345,22 @@ function drawStars()
         if(chromaticAberrationAmount > 0)
         {
             ctx.fillStyle = "#FF0000" + rDepth; 
-            ctx.fillRect(star.x - starSize / 2 - chromaticAberrationAmount, star.getY(true) - starSize / 2 + chromaticAberrationAmount, starSize, starSize);
+            ctx.fillRect(star.x - starSize / 2 - chromaticAberrationAmount, star.y - starSize / 2 + chromaticAberrationAmount, starSize, starSize);
 
             ctx.fillStyle = "#00FF00" + gDepth; 
-            ctx.fillRect(star.x - starSize / 2 + chromaticAberrationAmount, star.getY(true) - starSize / 2 + chromaticAberrationAmount, starSize, starSize);
+            ctx.fillRect(star.x - starSize / 2 + chromaticAberrationAmount, star.y - starSize / 2 + chromaticAberrationAmount, starSize, starSize);
 
             ctx.fillStyle = "#0000FF" + bDepth; 
-            ctx.fillRect(star.x - starSize / 2, star.getY(true) - starSize / 2 - chromaticAberrationAmount * 1.41, starSize, starSize);
+            ctx.fillRect(star.x - starSize / 2, star.y - starSize / 2 - chromaticAberrationAmount * 1.41, starSize, starSize);
         }
 
-        var brightness = 0.75 + bonus + Math.random() * 0.25; //make better flickering system
+        var brightness = 0.75 + bonus + randomBrightnessArr[i % 16] * 0.25; 
         str = radixToHex(brightness);
-        ctx.fillStyle = colorStars + str;//str; 
-        ctx.fillRect(star.x - starSize / 2, star.getY(true) - starSize / 2, starSize, starSize);
+        ctx.fillStyle = colorStars + str;
+        ctx.fillRect(star.x - starSize / 2, star.y - starSize / 2, starSize, starSize);
     }
+    //var timeEnd = performance.now() * 1000;
+    //console.log(Math.round(timeEnd - timeStart));
 }
 
 var starsEnabled = "true";

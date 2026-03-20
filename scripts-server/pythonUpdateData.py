@@ -5,7 +5,7 @@ current_dir = os.path.dirname(os.path.abspath(__file__))
 parent_dir = os.path.dirname(current_dir)
 parent_dir2 = os.path.dirname(parent_dir)
 
-file = open(parent_dir2 + "\\CREDENTIALS-DO-NOT-SHARE\\steamwebapi.txt") #folder for credentials appears in same level as website root (public_html)
+file = open(parent_dir2 + "/CREDENTIALS-DO-NOT-SHARE/steamwebapi.txt") #folder for credentials appears in same level as website root (public_html)
 key = file.readline()
 file.close()
 

@@ -1,5 +1,4 @@
-//to-do: increase text size above certain res
-//alignment of box seems incorrect
+//to-do: this is coded like shit. fix later.
 
 function openGeneralPage() 
 {
@@ -30,6 +29,30 @@ if(document.title == "williamianbrooks - My Contact")
 }
 
 var anchors = document.querySelectorAll("a");
+
+checkForUnsupportedCSS();
+function checkForUnsupportedCSS()
+{
+    //its probably better for the page to load with borderRadius = 7px by default rather than zero. It only matters we do it this way for the combination of people that 
+    //use browsers that dont support this (firefox mainly), and only really matters that much if js is disabled
+    //if theres a clever CSS trick for this, that would be nice.
+    if(CSS.supports("corner-shape: bevel"))
+    {
+        //yippee!!!
+    }
+    else
+    {
+        console.log("This browser doesn't support the corner-shape CSS attribute! Oh well.");
+
+        var containers = document.querySelectorAll(".genericcontainer");
+        for(var i = 0; i < containers.length; i++)
+        {
+            var container = containers[i];
+            container.style.borderRadius = "0px"; //better square than rounded edges
+        }
+    }
+
+}
 
 for(var i = 0; i < anchors.length; i++)
 {
@@ -203,68 +226,6 @@ function setContentGridsSettings()
     }
 }
 
-function scaleStars(xMaxOld, yMaxOld)
-{
-    for(var i = 0; i < starArr.length; i++)
-    {
-        var star = starArr[i];
-        star.x *= xMax / xMaxOld
-        star.y *= yMax / yMaxOld
-    }
-
-    //now remove or add to keep constant density
-    linearMultScale = Math.sqrt(xMax * yMax / 1171350);
-    numberStars = 120 * linearMultScale * linearMultScale;
-
-    numberStarsAdd = Math.round(numberStars - starArr.length); //theoretically scaling back and forth might cause discrepancies over time... whatever
-
-    if(numberStarsAdd < 0)
-    {
-        starArrNew = []
-        for(var i = 0; i < starArr.length + numberStarsAdd; i++)
-        {
-            var star = starArr[i];
-            starArrNew[i] = new Star(star.x, star.y, star.xVel, star.yVel);
-        }
-        starArr = starArrNew;
-    }
-    else if(numberStarsAdd > 0)
-    {
-        starArrNew = []
-        for(var i = 0; i < starArr.length; i++)
-        {
-            var star = starArr[i];
-            starArrNew[i] = new Star(star.x, star.y, star.xVel, star.yVel);
-        }
-        for(var i = starArr.length; i < starArr.length + numberStarsAdd; i++)
-        {
-            starArrNew[i] = new Star(Math.random() * xMax, Math.random() * yMax, -speedCap + Math.random() * speedCap * 2, -speedCap + Math.random() * speedCap * 2);
-        }
-        starArr = starArrNew;
-    }
-}
-
-window.onresize = function(event) 
-{
-    setContentGridsSettings();
-    canvas = document.getElementById("backgroundCanvas");
-    ctx = canvas.getContext("2d"); 
-    
-    var zoomLevel = ((window.outerWidth - 10) / window.innerWidth) * 100; //lower is more zoomed out
-    //console.log(`Zoom level: ${zoomLevel.toFixed(2)}%`);
-
-    canvas.width = document.body.clientWidth; //document.width is obsolete
-    canvas.height = document.body.clientHeight; //document.height is obsolete
-
-    var xMaxOld = xMax;
-    var yMaxOld = yMax;
-
-    xMax = canvas.clientWidth; // / (zoomLevel / 100);
-    yMax = canvas.clientHeight; // / (zoomLevel / 100);
-
-    scaleStars(xMaxOld, yMaxOld);
-};
-
 var nixies = document.querySelectorAll(".nixie");
 var nixieFlickering = "true";
 setInterval(function() //flickering
@@ -305,7 +266,7 @@ function getNixieImageURLFromNumber(num)
 
 const nixiesFPSElement = document.getElementById(".site-FPS"); 
 const nixiesVisitsElement = document.getElementById(".site-visits"); 
-const nixiesUniqueVisitsElement = document.getElementById(".site-uniqueVisits"); 
+const nixiesUniqueVisitsElement = document.getElementById(".site-uniqueVisitors"); 
 const nixiesCurrentVisitsElement = document.getElementById(".site-currentVisitors"); 
 
 var frame = 0;
@@ -328,13 +289,6 @@ function tick()
     window.requestAnimationFrame(tick);
 }
 tick();
-
-/*var errorCount = 0;
-
-window.onerror = function(message, source, lineno, colno, error) {
-    errorCount++;
-    //console.log(`Error ${errorCount}: ${message} at ${source}:${lineno}:${colno}`);
-};*/
 
 const nixiesDateElement = document.getElementById(".site-nixiesDate");
 const nixiesTimeElement = document.getElementById(".site-nixiesTime"); 
@@ -362,19 +316,25 @@ setInterval(function()
 
         nixiesFPSElement.children[6].style.backgroundImage = getNixieImageURLFromNumber(fps % 10);
     }
-    if(nixiesVisitsElement != null)
+    if(nixiesUniqueVisitsElement != null)
     {
-        nixiesVisitsElement.children[0].style.backgroundImage = getNixieImageURLFromNumber(Math.floor(numVisits / 1000000) % 10);
-        nixiesVisitsElement.children[1].style.backgroundImage = getNixieImageURLFromNumber(Math.floor(numVisits / 100000) % 10);
+        //doesnt need to be on tick
+        nixiesUniqueVisitsElement.children[0].style.backgroundImage = getNixieImageURLFromNumber(Math.floor(uniqueVisits / 1000000) % 10);
+        nixiesUniqueVisitsElement.children[1].style.backgroundImage = getNixieImageURLFromNumber(Math.floor(uniqueVisits / 100000) % 10);
 
-        nixiesVisitsElement.children[2].style.backgroundImage = getNixieImageURLFromNumber(Math.floor(numVisits / 10000) % 10);
-        nixiesVisitsElement.children[3].style.backgroundImage = getNixieImageURLFromNumber(Math.floor(numVisits / 1000) % 10);
+        nixiesUniqueVisitsElement.children[2].style.backgroundImage = getNixieImageURLFromNumber(Math.floor(uniqueVisits / 10000) % 10);
+        nixiesUniqueVisitsElement.children[3].style.backgroundImage = getNixieImageURLFromNumber(Math.floor(uniqueVisits / 1000) % 10);
 
-        nixiesVisitsElement.children[4].style.backgroundImage = getNixieImageURLFromNumber(Math.floor(numVisits / 100) % 10);
-        nixiesVisitsElement.children[5].style.backgroundImage = getNixieImageURLFromNumber(Math.floor(numVisits / 10) % 10);
+        nixiesUniqueVisitsElement.children[4].style.backgroundImage = getNixieImageURLFromNumber(Math.floor(uniqueVisits / 100) % 10);
+        nixiesUniqueVisitsElement.children[5].style.backgroundImage = getNixieImageURLFromNumber(Math.floor(uniqueVisits / 10) % 10);
 
-        nixiesVisitsElement.children[6].style.backgroundImage = getNixieImageURLFromNumber(numVisits % 10);
+        nixiesUniqueVisitsElement.children[6].style.backgroundImage = getNixieImageURLFromNumber(uniqueVisits % 10);
     }
+}, 25) //100 is theoretically best, but for reasons probably related to float precision, skipping of digits in deci-seconds occurs after some time. Set to a lower value than 100ms to mitigate this issue
+
+updateStaticNixies();
+function updateStaticNixies()
+{
     if(nixiesCurrentVisitsElement != null)
     {
         nixiesCurrentVisitsElement.children[0].style.backgroundImage = getNixieImageURLFromNumber(Math.floor(currentUserVisits / 1000000) % 10);
@@ -388,33 +348,53 @@ setInterval(function()
 
         nixiesCurrentVisitsElement.children[6].style.backgroundImage = getNixieImageURLFromNumber(currentUserVisits % 10);
     }
-    if(nixiesUniqueVisitsElement != null)
+    if(nixiesVisitsElement != null)
     {
-        nixiesCurrentVisitsElement.children[0].style.backgroundImage = getNixieImageURLFromNumber(Math.floor(uniqueVisits / 1000000) % 10);
-        nixiesCurrentVisitsElement.children[1].style.backgroundImage = getNixieImageURLFromNumber(Math.floor(uniqueVisits / 100000) % 10);
+        //doesnt need to be on tick
+        nixiesVisitsElement.children[0].style.backgroundImage = getNixieImageURLFromNumber(Math.floor(numVisits / 1000000) % 10);
+        nixiesVisitsElement.children[1].style.backgroundImage = getNixieImageURLFromNumber(Math.floor(numVisits / 100000) % 10);
 
-        nixiesCurrentVisitsElement.children[2].style.backgroundImage = getNixieImageURLFromNumber(Math.floor(uniqueVisits / 10000) % 10);
-        nixiesCurrentVisitsElement.children[3].style.backgroundImage = getNixieImageURLFromNumber(Math.floor(uniqueVisits / 1000) % 10);
+        nixiesVisitsElement.children[2].style.backgroundImage = getNixieImageURLFromNumber(Math.floor(numVisits / 10000) % 10);
+        nixiesVisitsElement.children[3].style.backgroundImage = getNixieImageURLFromNumber(Math.floor(numVisits / 1000) % 10);
 
-        nixiesCurrentVisitsElement.children[4].style.backgroundImage = getNixieImageURLFromNumber(Math.floor(uniqueVisits / 100) % 10);
-        nixiesCurrentVisitsElement.children[5].style.backgroundImage = getNixieImageURLFromNumber(Math.floor(uniqueVisits / 10) % 10);
+        nixiesVisitsElement.children[4].style.backgroundImage = getNixieImageURLFromNumber(Math.floor(numVisits / 100) % 10);
+        nixiesVisitsElement.children[5].style.backgroundImage = getNixieImageURLFromNumber(Math.floor(numVisits / 10) % 10);
 
-        nixiesCurrentVisitsElement.children[6].style.backgroundImage = getNixieImageURLFromNumber(uniqueVisits % 10);
+        nixiesVisitsElement.children[6].style.backgroundImage = getNixieImageURLFromNumber(numVisits % 10);
     }
-}, 100)
+}
 
 function updateTime()
 {
     const date = new Date();
 
-    var utcStr = date.toUTCString();
-    var index = utcStr.indexOf(":");
-    const hours = (parseInt(utcStr.substring(index - 2, index), 10) + 18) % 24; //modulus of negative number is strange so just use a positive one
+    //note: this method doesnt work because of daylight savings...
+    //var utcStr = date.toUTCString();
+    //console.log(utcStr);
+    //var index = utcStr.indexOf(":");
+    //const hours = (parseInt(utcStr.substring(index - 2, index), 10) + 18) % 24; //modulus of negative number is strange so just use a positive one
 
-    //bad to fetch image from place, store it in memory instead
-    //same for any timezone
-    const minutes = date.getMinutes();
-    const seconds = date.getSeconds();
+    const options = 
+    {
+        timeZone: 'America/Chicago',
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: false
+    };
+
+    var cstTime = new Intl.DateTimeFormat('en-US', options).format(new Date());
+
+    const month = cstTime.substring(0, 2);
+    const day = cstTime.substring(3, 5);
+    const year = cstTime.substring(6, 10);
+    const hours = cstTime.substring(12, 14);
+
+    const minutes = cstTime.substring(15, 17);
+    const seconds = cstTime.substring(18, 20);
     const millis = date.getMilliseconds();
 
     nixiesTimeElement.children[0].style.backgroundImage = getNixieImageURLFromNumber(Math.floor(hours / 10));
@@ -427,23 +407,21 @@ function updateTime()
     nixiesTimeElement.children[5].style.backgroundImage = getNixieImageURLFromNumber(seconds % 10);
 
     nixiesTimeElement.children[7].style.backgroundImage = getNixieImageURLFromNumber(Math.floor(millis / 100));
-}
 
-if(nixiesDateElement != null) {updateDate();}
-function updateDate()
-{
-    const date = new Date();
 
-    nixiesDateElement.children[0].style.backgroundImage = getNixieImageURLFromNumber(Math.floor(date.getDate() / 10));
-    nixiesDateElement.children[1].style.backgroundImage = getNixieImageURLFromNumber(date.getDate() % 10);
 
-    nixiesDateElement.children[2].style.backgroundImage = getNixieImageURLFromNumber(Math.floor((date.getMonth() + 1) / 10));
-    nixiesDateElement.children[3].style.backgroundImage = getNixieImageURLFromNumber((date.getMonth() + 1) % 10);
 
-    nixiesDateElement.children[4].style.backgroundImage = getNixieImageURLFromNumber(Math.floor((date.getFullYear() / 1000)));
-    nixiesDateElement.children[5].style.backgroundImage = getNixieImageURLFromNumber(Math.floor((date.getFullYear() / 100)) % 10);
-    nixiesDateElement.children[6].style.backgroundImage = getNixieImageURLFromNumber(Math.floor((date.getFullYear() / 10) % 10));
-    nixiesDateElement.children[7].style.backgroundImage = getNixieImageURLFromNumber(date.getFullYear() % 10);
+
+    nixiesDateElement.children[0].style.backgroundImage = getNixieImageURLFromNumber(Math.floor(day / 10));
+    nixiesDateElement.children[1].style.backgroundImage = getNixieImageURLFromNumber(day % 10);
+
+    nixiesDateElement.children[2].style.backgroundImage = getNixieImageURLFromNumber(Math.floor(month / 10));
+    nixiesDateElement.children[3].style.backgroundImage = getNixieImageURLFromNumber(month % 10);
+
+    nixiesDateElement.children[4].style.backgroundImage = getNixieImageURLFromNumber(Math.floor((year / 1000)));
+    nixiesDateElement.children[5].style.backgroundImage = getNixieImageURLFromNumber(Math.floor((year / 100)) % 10);
+    nixiesDateElement.children[6].style.backgroundImage = getNixieImageURLFromNumber(Math.floor((year / 10) % 10));
+    nixiesDateElement.children[7].style.backgroundImage = getNixieImageURLFromNumber(year % 10);
 }
 
 catIndex = 1;
@@ -469,7 +447,12 @@ funnyCatImages =
     "kitten-meow.gif",
     "sad-cat.gif",
     "catskating.gif",
-    "cat-bop-camera.gif"
+    "cat-bop-camera.gif",
+    "he-cant-drink-it.gif",
+    "drinking-funny.gif",
+    "send-this-peasant-to-the-dungeons-cat.gif",
+    "orange-cat-cat-hitting-cat.gif",
+    "black-cat-walking.gif",
 ]
 
 funnyCatImagesRandomSorted = [];
@@ -542,7 +525,7 @@ var quotes =
     {text: "One test is worth a thousand expert opinions.", author: "Wernher von Braun", date: null},
     {text: "Doctors can kill one patient at a time. Engineers can be much more efficient.", author: "Anonymous", date: null},
     {text: "On two occasions I have been asked, \"Pray, Mr. Babbage, if you put into the machine wrong figures, will the right answers come out?\" ... I am not able rightly to apprehend the kind of confusion of ideas that could provoke such a question.", author: "Charles Babbage", date: "1864"},
-    {text: "The best engineers have the worst handwriting", author: "Unknown", date: null},
+    {text: "The best engineers have the worst handwriting.", author: "Unknown", date: null},
     {text: "Debugging is twice as hard as writing the code in the first place. Therefore, if you write the code as cleverly as possible, you are, by definition, not smart enough to debug it.", author: "Brian Kernighan", date: "~1970s"},
     {text: "At the source of every error which is blamed on the computer you will find at least two human errors, including the error of blaming it on the computer.", author: "Tom Gibb", date: "2002"},
     {text: "Engineers are not boring people. We just get excited about boring things.", author: "Unknown", date: null},
@@ -551,7 +534,6 @@ var quotes =
     {text: "Simplicity is the ultimate sophistication.", author: "Leonardo Da Vinci", date: null},
     {text: "The man who can smile when things go wrong has thought of someone else he can blame it on.", author: "Robert Bloch", date: "late 20th century"},
     {text: "It's easy to quit smoking - I've done it a thousand times!", author: "Mark Twain", date: null},
-    //{text: "Build a man a fire, and he'll be warm for a day. Set a man on fire, and he'll be warm for the rest of his life.", author: "Terry Pratchett", date: "1997"},
     {text: "Outside of a dog, a book is man's best friend. Inside of a dog it's too dark to read.", author: "Groucho Marx", date: null},
     {text: "What do I think of Western civilization? I think it would be a very good idea.", author: "Mahatma Gandhi", date: null},
     {text: "You'll never know what worse luck your bad luck has saved you from.", author: "Cormac McCarthy", date: null},
@@ -560,13 +542,15 @@ var quotes =
     {text: "If you need a machine and don't buy it, you will eventually find that you have paid for the machine and don't have it.", author: "Henry Ford", date: null},
     {text: "For every four engineers on a team, there must be at least one non-engineer, unless you want a product that only engineers can use.", author: "Unknown", date: null},
     {text: "Don't try to make it idiot proof. Someone's already working on a better idiot.", author: "Unknown", date: null},
-    {text: "The best way to get the right answer on the Internet is not to ask a question; it's to post the wrong answer.", author: "Ward Cunningham, Cunningham's Law", date: "1980s"},
+    {text: "The best way to get the right answer on the Internet is not to ask a question; it's to post the wrong answer.", author: "Cunningham's Law", date: "1980s"},
     {text: "Never stick your hand/finger anywhere you're not willing to stick your \u2665\u2665\u2665\u2665.", author: "Unknown", date: null},
     {text: "When a clown moves into a palace, he doesn't become a king. The palace turns into a circus.", author: "Turkish Proverb", date: null},
     {text: "No balloon and no aeroplane will ever be practically successful.", author: "Lord Kelvin", date: "1902"},
     {text: "You insist that there is something a machine cannot do. If you tell me precisely what it is a machine cannot do, then I can always make a machine which will do just that.", author: "John von Neumann", date: "1948"},
     {text: "The reasonable man adapts himself to the world; the unreasonable one persists in trying to adapt the world to himself. Therefore, all progress depends on the unreasonable man. ", author: "George Bernard Shaw", date: null},
-    {text: "People in the West have asked why no diversity in my games but they are wrong, when all my games have included a gay character: you, the player", author: "Hideo Kojima", date: "2023"}
+    {text: "People in the West have asked why no diversity in my games but they are wrong, when all my games have included a gay character: you, the player", author: "Hideo Kojima", date: "2023"},
+    {text: "A computer can never be held responsible, therefore a computer must never make a management decision.", author: "IBM Training Manual", date: "1979"},
+    {text: "By denying scientific principles, one may maintain any paradox.", author: "Galileo Galilei", date: null}
     //{text: "sample", author: "sample", date: "sample"}
 ]
 
@@ -712,6 +696,9 @@ function setStringIDMap(realData)
         //stringIDMap.set(".rgb21-originalLink", "...");
 
         stringIDMap.set(".site-titleDate", "...");
+
+        stringIDMap.set(".site-uniqueHits", "...");
+        stringIDMap.set(".site-totalHits", "...");
     }
 }
 
@@ -725,6 +712,8 @@ function setIDStrings()
             span.innerHTML = stringIDMap.get(key);
         }
     }
+    uniqueVisits = stringIDMap.get(".site-uniqueHits");
+    numVisits = stringIDMap.get(".site-totalHits");
 }
 
 setStringIDMap(false);
@@ -734,26 +723,26 @@ setIDStrings();
 //this is done for all pages, though perhaps not wise.
 var data = {};
 var dataIn = fetch('https://williamianbrooks.com/data/values/data.json')
-    .then(response => 
+.then(response => 
+{
+    if(!response.ok) 
     {
-        if(!response.ok) 
-        {
-            throw new Error('Network response was not ok ' + response.statusText);
-        }
-        return response.json();
-    })
-    .then(dataIn => 
-    {
-        //console.log(Object.keys(dataIn))
-        //console.log(dataIn["key"]); // Access the parsed JSON data here
-        data = dataIn;
-        setStringIDMap(true); //does not instantly work because it is a web request
-        setIDStrings();
-    })
-    .catch(error => 
-    {
-        console.error('There was a problem with the fetch operation:', error);
-    });
+        throw new Error('Network response was not ok ' + response.statusText);
+    }
+    return response.json();
+})
+.then(dataIn => 
+{
+    //console.log(Object.keys(dataIn))
+    //console.log(dataIn["key"]); // Access the parsed JSON data here
+    data = dataIn;
+    setStringIDMap(true); //does not instantly work because it is a web request
+    setIDStrings();
+})
+.catch(error => 
+{
+    console.error('There was a problem with the fetch operation:', error);
+});
 
 function determineIfDarkMode()
 {
@@ -778,54 +767,51 @@ if(determineIfDarkMode() == true)
 
 function darkModeButtonClick()
 {
-    var button = document.getElementById("darkmodeButton")
-    //resetConfigSettings();
-    if(determineIfDarkMode() == true)
-    {
-        localStorage.setItem(".mc-r", 1);
-        localStorage.setItem(".mc-g", 1);
-        localStorage.setItem(".mc-b", 1);
+    //if(confirm("This will override settings you have."))
+    //{
+        //resetConfigSettings();
+        if(determineIfDarkMode() == true)
+        {
+            localStorage.setItem(".mc-r", 1);
+            localStorage.setItem(".mc-g", 1);
+            localStorage.setItem(".mc-b", 1);
 
-        localStorage.setItem(".star-r", 1);
-        localStorage.setItem(".star-g", 1);
-        localStorage.setItem(".star-b", 1);
+            localStorage.setItem(".star-r", 1);
+            localStorage.setItem(".star-g", 1);
+            localStorage.setItem(".star-b", 1);
 
-        localStorage.setItem(".sc-hue", 0);
-        localStorage.setItem(".sc-saturation", 1);
-        localStorage.setItem(".sc-value", 1);
+            localStorage.setItem(".sc-hue", 0);
+            localStorage.setItem(".sc-saturation", 1);
+            localStorage.setItem(".sc-value", 1);
+        }
+        else
+        {
+            localStorage.setItem(".mc-r", 0.5);
+            localStorage.setItem(".mc-g", 0.5);
+            localStorage.setItem(".mc-b", 0.5);
 
-        button.src = "data/img/ui/darkModeBright.png"
-    }
-    else
-    {
-        localStorage.setItem(".mc-r", 0.5);
-        localStorage.setItem(".mc-g", 0.5);
-        localStorage.setItem(".mc-b", 0.5);
+            localStorage.setItem(".bgc-r", 0.0);
+            localStorage.setItem(".bgc-g", 0.0);
+            localStorage.setItem(".bgc-b", 0.0);
 
-        localStorage.setItem(".bgc-r", 0.0);
-        localStorage.setItem(".bgc-g", 0.0);
-        localStorage.setItem(".bgc-b", 0.0);
+            localStorage.setItem(".men-r", 0.0);
+            localStorage.setItem(".men-g", 0.0);
+            localStorage.setItem(".men-b", 0.0);
 
-        localStorage.setItem(".men-r", 0.0);
-        localStorage.setItem(".men-g", 0.0);
-        localStorage.setItem(".men-b", 0.0);
+            localStorage.setItem(".star-r", 0);
+            localStorage.setItem(".star-g", 88.0 / 255);
+            localStorage.setItem(".star-b", 191.0 / 225);
 
-        localStorage.setItem(".star-r", 0);
-        localStorage.setItem(".star-g", 88.0 / 255);
-        localStorage.setItem(".star-b", 191.0 / 225);
+            localStorage.setItem(".sc-hue", 203.0 / 360);
+            localStorage.setItem(".sc-saturation", 0.75);
+            localStorage.setItem(".sc-value", 0.75);
+        }
 
-        localStorage.setItem(".sc-hue", 203.0 / 360);
-        localStorage.setItem(".sc-saturation", 0.75);
-        localStorage.setItem(".sc-value", 0.75);
+        if(document.getElementById(".men-text") != undefined)
+        {
+            updateConfigTextDescriptions();
+        }
+        setConfigChanges();
+    //}
 
-        button.src = "data/img/ui/darkModeDark.png"
-    }
-
-    console.log("aaaa");
-
-    if(document.getElementById(".men-text") != undefined)
-    {
-        updateConfigTextDescriptions();
-    }
-    setConfigChanges();
 }

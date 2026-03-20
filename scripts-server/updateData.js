@@ -3,6 +3,7 @@
 const jsonfile = require('jsonfile');
 const path = require('path');
 const {spawn} = require('child_process');
+const fs = require('fs');
 //const fetch = require("node-fetch");
 var outputDataMap = new Map();
 
@@ -152,11 +153,30 @@ linksGithub.set("rgb21", "https://api.github.com/repos/daemon251/OpenRGB.NET-net
 var phase = 0;
 initLogic();
 
+function visitorDataLogic()
+{
+    var ipFilePath = path.resolve(path.resolve(__dirname, '..'), '..') + "/hitIPList.txt";
+    var ipData = fs.readFileSync(ipFilePath, 'utf8');
+
+    var index = ipData.indexOf("\n");
+    var hitCounter = parseInt(ipData.substring(0, index), 10); //number of times the main site page is accessed
+    ipData = ipData.substring(index + 1);
+
+    var index = ipData.indexOf("\n");
+    var uniqueHitCounter = parseInt(ipData.substring(0, index), 10); //number of times the main site page is accessed
+    ipData = ipData.substring(index + 1);
+
+    writeToOutputMap("none", "none", ".site-uniqueHits", uniqueHitCounter);
+    writeToOutputMap("none", "none", ".site-totalHits", hitCounter);
+}
+
 function initLogic()
 {
-    writeToOutputMap("none", "none", ".site-titleDate", "2026/02/01") //this should be hardcoded and not current date. I need to change this value every time I update this site
-    writeToOutputMap("none", "none", ".emp-totalDownloads", "N/A")
-    thunderstoreLogic(); //phase 0
+    writeToOutputMap("none", "none", ".site-titleDate", "2026/03/17"); //this should be hardcoded and not current date. I need to change this value every time I update this site
+    writeToOutputMap("none", "none", ".emp-totalDownloads", "N/A");
+    visitorDataLogic();
+
+    thunderstoreLogic(); //phase 0 - starts everything
 }
 
 function thunderstoreLogic()
@@ -187,7 +207,10 @@ function thunderstoreLogicPhase2()
 
 function steamWorkshopLogic()
 {
-    console.log("Phase " + phase + ` - Starting python child process...`);
+    //IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT
+    //IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT
+    //IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT
+    console.log("Phase " + phase + ` - Starting python child process for steam workshop data...`);
     const pythonProcess = spawn('python', ['pythonUpdateData.py']); //for use on my machine
     //const pythonProcess = spawn('/home/williami/virtualenv/randomDirectory/3.10/bin/python', ['/home/williami/public_html/scripts-server/pythonUpdateData.py']); //for server
 
