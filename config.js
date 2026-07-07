@@ -1,5 +1,24 @@
 //set defualt values in here
 
+function configStart()
+{
+    setConfigChanges(); //run on start as well
+
+    if(document.title == "williamianbrooks - Misc")
+    {
+        for(var i = 0; i < rangeIDArray.length; i++)
+        {
+            createRangeListeners(rangeIDArray[i])
+        }
+
+        for(var i = 0; i < checkboxIDArray.length; i++)
+        {
+            createCheckboxListeners(checkboxIDArray[i])
+        }
+        updateConfigTextDescriptions();
+    }
+}
+
 const checkboxIDArray =
 [
     ".global-star",
@@ -81,7 +100,6 @@ function resetTopButtons()
     }
 }
 
-setConfigChanges(); //run on start as well
 function setConfigChanges()
 {
     if(localStorage.getItem(".mc-r") != null) 
@@ -111,7 +129,7 @@ function setConfigChanges()
         colorBackground = "#" + radixToHex(localStorage.getItem(".bgc-r")) + radixToHex(localStorage.getItem(".bgc-g")) + radixToHex(localStorage.getItem(".bgc-b"))
 
         if(localStorage.getItem(".global-nixie") === null) {localStorage.setItem(".global-nixie", "true");}
-        if(localStorage.getItem(".global-chro") === null) {localStorage.setItem(".global-chro", "true");}
+        if(localStorage.getItem(".global-chro") === null) {localStorage.setItem(".global-chro", "false");}
         if(localStorage.getItem(".global-star") === null) {localStorage.setItem(".global-star", "true");}
 
         nixieFlickering = localStorage.getItem(".global-nixie");
@@ -138,20 +156,6 @@ function setConfigChanges()
             button.src = "data/img/ui/darkModeBright.png"
         }
     }
-}
-
-if(document.title == "williamianbrooks - Misc")
-{
-    for(var i = 0; i < rangeIDArray.length; i++)
-    {
-        createRangeListeners(rangeIDArray[i])
-    }
-
-    for(var i = 0; i < checkboxIDArray.length; i++)
-    {
-        createCheckboxListeners(checkboxIDArray[i])
-    }
-    updateConfigTextDescriptions();
 }
 
 function formatConfigColor(r, g, b)
@@ -266,3 +270,8 @@ function resetConfigSettings()
     updateConfigTextDescriptions();
     setConfigChanges();
 }
+
+//////////////////////
+//////////////////////
+//////////////////////
+configStart();

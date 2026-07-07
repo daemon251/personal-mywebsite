@@ -172,9 +172,9 @@ function visitorDataLogic()
 
 function initLogic()
 {
-    writeToOutputMap("none", "none", ".site-titleDate", "2026/03/17"); //this should be hardcoded and not current date. I need to change this value every time I update this site
+    writeToOutputMap("none", "none", ".site-titleDate", "2026/07/06"); //this should be hardcoded and not current date. I need to change this value every time I update this site
     writeToOutputMap("none", "none", ".emp-totalDownloads", "N/A");
-    visitorDataLogic();
+    //visitorDataLogic();
 
     thunderstoreLogic(); //phase 0 - starts everything
 }
@@ -211,8 +211,8 @@ function steamWorkshopLogic()
     //IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT
     //IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT
     console.log("Phase " + phase + ` - Starting python child process for steam workshop data...`);
-    const pythonProcess = spawn('python', ['pythonUpdateData.py']); //for use on my machine
-    //const pythonProcess = spawn('/home/williami/virtualenv/randomDirectory/3.10/bin/python', ['/home/williami/public_html/scripts-server/pythonUpdateData.py']); //for server
+    //const pythonProcess = spawn('python', ['pythonUpdateData.py']); //for use on my machine
+    const pythonProcess = spawn('/home/williami/virtualenv/randomDirectory/3.10/bin/python', ['/home/williami/public_html/scripts-server/pythonUpdateData.py']); //for server
 
     pythonProcess.stdout.on('data', (data) => 
     {

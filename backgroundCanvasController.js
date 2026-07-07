@@ -4,6 +4,31 @@
 //zoom breaks
 //resizing weird
 
+function backgroundStart()
+{
+    setInterval(mainBackgroundLogic, interval); 
+    window.onresize = function(event) 
+    {
+        setContentGridsSettings();
+        canvas = document.getElementById("backgroundCanvas");
+        ctx = canvas.getContext("2d"); 
+        
+        var zoomLevel = ((window.outerWidth - 10) / window.innerWidth) * 100; //lower is more zoomed out
+        //console.log(`Zoom level: ${zoomLevel.toFixed(2)}%`);
+
+        canvas.width = document.body.clientWidth; //document.width is obsolete
+        canvas.height = document.body.clientHeight; //document.height is obsolete
+
+        var xMaxOld = xMax;
+        var yMaxOld = yMax;
+
+        xMax = canvas.clientWidth; // / (zoomLevel / 100);
+        yMax = canvas.clientHeight; // / (zoomLevel / 100);
+
+        scaleStars(xMaxOld, yMaxOld);
+    };
+}
+
 var canvas;
 var ctx;
 var num;
@@ -22,7 +47,6 @@ const depthInfo = { FirstLayer: {Size: 1, SpeedMult: 1, ScrollRatio: 0},
                     ThirdLayer: {Size: 1, SpeedMult: 1, ScrollRatio: 0}};
 
 const interval = 30;
-setInterval(mainFunction, interval); 
 
 class Star
 {
@@ -46,24 +70,12 @@ class Star
         this.y = y;
         this.xVel = xVel;
         this.yVel = yVel;
-    }
 
-    /*getY(scrollAccounted)
-    {
-        if(scrollAccounted)
-        {
-            return this.y; //scrollY is not super good for this... I don't know how to go about this
-            //return this.y + scrollY * this.layerInfo.ScrollRatio;
-        }
-        else
-        {
-            return this.y
-        }
-    }*/
+        this.lastTouchTime = 0;
+    }
 }
 
 var initted = false;
-
 
 const speedCap = 30.0; //per x and y direction.
 var numberStars;
@@ -88,6 +100,10 @@ function initCanvas()
     canvas.width = document.body.clientWidth; //document.width is obsolete
     canvas.height = document.body.clientHeight; //document.height is obsolete
 
+    canvas.addEventListener('contextmenu', (e) => {
+        e.preventDefault(); //moving stars wont cause a popup cuz of this
+    });
+
     xMax = canvas.clientWidth;
     yMax = canvas.clientHeight;
 
@@ -106,6 +122,8 @@ function initCanvas()
         mouseYAdjusted = mouseYRaw + scrollY;
     });
 
+    scrollY = window.pageYOffset || (document.documentElement || document.body.parentNode || document.body).scrollTop;
+    mouseYAdjusted = mouseYRaw + scrollY;
     window.addEventListener('scroll', function() 
     {
         scrollY = window.pageYOffset || (document.documentElement || document.body.parentNode || document.body).scrollTop;
@@ -118,6 +136,14 @@ function initCanvas()
     {
         starArr[i] = new Star(Math.random() * xMax, Math.random() * yMax, -speedCap + Math.random() * speedCap * 2, -speedCap + Math.random() * speedCap * 2);
     }
+
+    document.addEventListener('mousedown', function(event) {
+        mouseState = event.button;
+    });
+
+    document.addEventListener('mouseup', function() {
+        mouseState = -1;
+    });
 }
 
 /*window.onresize = function(event) 
@@ -130,7 +156,6 @@ function initCanvas()
 
     linearMultScale = Math.sqrt(xMax * yMax / 1171350); //should be 1 for 720p fullscreen on general page (at least once upon a time it was)
     numberStars = 120 * linearMultScale * linearMultScale;
-            console.log("aaaa");
     for(var i = 0; i < numberStars; i++)
     {
         starArr[i] = new Star(Math.random() * xMax, Math.random() * yMax, -speedCap + Math.random() * speedCap * 2, -speedCap + Math.random() * speedCap * 2);
@@ -141,6 +166,8 @@ function getRandomInt(max)
 {
     return Math.floor(Math.random() * max);
 }
+
+var mouseState = -1;
 
 const starOOBLeniency = 100; //oob means out-of-bounds
 function moveStars()
@@ -154,6 +181,67 @@ function moveStars()
         if(star.y > yMax + starOOBLeniency) {star.y = -starOOBLeniency}
         if(star.x < 0 - starOOBLeniency) {star.x = xMax + starOOBLeniency;}
         if(star.y < 0 - starOOBLeniency) {star.y = yMax + starOOBLeniency;}
+
+        const resistance = 40;
+        if(star.xVel > speedCap)
+        {
+            star.xVel = star.xVel - interval / resistance;
+        }
+        else if(star.xVel < -speedCap)
+        {
+            star.xVel = star.xVel + interval / resistance;
+        }
+
+        if(star.yVel > speedCap)
+        {
+            star.yVel = star.yVel - interval / resistance;
+        }
+        else if(star.yVel < -speedCap)
+        {
+            star.yVel = star.yVel + interval / resistance;
+        }
+
+
+
+
+        const pushDist = 120;// * linearMultScale;
+
+        const pushScale = 200;
+        const pushExp = 1;
+
+        var forceState = 0; //1 is push, -1 is pull
+        if(mouseState == 0) {forceState = 1;}
+        else if(mouseState == 2) {forceState = -1;}
+        else {forceState = 0;}
+
+        if(forceState != 0)
+        {
+            var xDif = mouseXRaw - star.x;
+            var yDif = mouseYAdjusted - star.y;
+            var dist_iCursor = Math.sqrt(Math.pow(xDif, 2) + Math.pow(yDif, 2));
+
+            var scale = Math.min(pushScale / dist_iCursor, pushScale / 10);
+            var angle = Math.atan2(yDif, xDif)
+
+
+            var xForce = -scale * Math.cos(angle) * forceState;
+            var yForce = -scale * Math.sin(angle) * forceState;
+
+            if(dist_iCursor < pushDist) 
+            {
+                star.xVel = star.xVel + xForce;
+                star.yVel = star.yVel + yForce;
+
+                star.lastTouchTime = performance.now();
+
+                //force vector
+                /*ctx.strokeStyle = "#FF0000"; 
+                ctx.beginPath();
+                ctx.moveTo(star.x, star.y);
+                ctx.lineTo(star.x + xForce * 5, star.y + yForce * 5);
+                ctx.stroke();*/
+            }
+        }
     }
 
     for(var i = 0; i < 2; i++) //change velocity of one lucky star, up to ten times a second depending on interval, twice, cumulative 20 a second. 
@@ -162,9 +250,12 @@ function moveStars()
         {
             var index = getRandomInt(starArr.length)
             var star = starArr[index];
-            //console.log(index + "    " + star)
-            star.xVel = -speedCap + Math.random() * speedCap * 2;// * linearMultScale;
-            star.yVel = -speedCap + Math.random() * speedCap * 2;// * linearMultScale;
+            if(star.lastTouchTime + 2000 < performance.now()) //dont deal with stars that have been recently touched
+            {
+                //console.log(index + "    " + star)
+                star.xVel = -speedCap + Math.random() * speedCap * 2;// * linearMultScale;
+                star.yVel = -speedCap + Math.random() * speedCap * 2;// * linearMultScale;
+            }
         }
     }
 }
@@ -193,6 +284,7 @@ var colorBackground = "#000000";
 
 function scaleStars(xMaxOld, yMaxOld)
 {
+    if(starArr === undefined) {return;}
     for(var i = 0; i < starArr.length; i++)
     {
         var star = starArr[i];
@@ -231,27 +323,6 @@ function scaleStars(xMaxOld, yMaxOld)
         starArr = starArrNew;
     }
 }
-
-window.onresize = function(event) 
-{
-    setContentGridsSettings();
-    canvas = document.getElementById("backgroundCanvas");
-    ctx = canvas.getContext("2d"); 
-    
-    var zoomLevel = ((window.outerWidth - 10) / window.innerWidth) * 100; //lower is more zoomed out
-    //console.log(`Zoom level: ${zoomLevel.toFixed(2)}%`);
-
-    canvas.width = document.body.clientWidth; //document.width is obsolete
-    canvas.height = document.body.clientHeight; //document.height is obsolete
-
-    var xMaxOld = xMax;
-    var yMaxOld = yMax;
-
-    xMax = canvas.clientWidth; // / (zoomLevel / 100);
-    yMax = canvas.clientHeight; // / (zoomLevel / 100);
-
-    scaleStars(xMaxOld, yMaxOld);
-};
 
 function drawStars()
 {
@@ -365,7 +436,7 @@ function drawStars()
 
 var starsEnabled = "true";
 
-function mainFunction()
+function mainBackgroundLogic()
 {
     if(initted == false)
     {
@@ -381,3 +452,8 @@ function mainFunction()
         drawStars();
     }
 }
+
+///////////////////
+///////////////////
+///////////////////
+backgroundStart();

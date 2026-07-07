@@ -1,5 +1,122 @@
 //to-do: this is coded like shit. fix later.
 
+function mainStart() //runs once at the end of this file.
+{
+    if(document.title == "williamianbrooks - My Contact")
+    {
+        var catimg = document.getElementById("dontClickTheCat");
+        catimg.onclick = dontClickTheCat;
+    }
+    checkForUnsupportedCSS();
+    for(var i = 0; i < anchors.length; i++)
+    {
+        var anchor = anchors[i];
+        addListenersToAnchor(anchor);
+    }
+    document.addEventListener('mousemove', function(event) 
+    {
+        mouseXRaw = event.clientX;
+        mouseYRaw = event.clientY;
+        mouseYAdjusted = mouseYRaw + scrollY;
+        //console.log('Mouse X:', event.clientX, 'Mouse Y:', event.clientY);
+    });
+    tick(); //for fps
+    setInterval(function() //flickering
+    {
+        if(nixieFlickering == "true")
+        {
+            for(var i = 0; i < nixies.length; i++)
+            {
+                var nixie = nixies[i];
+                var brightnessRand = Math.random();
+                var glowSize = 22.5 + 4 * brightnessRand;
+                nixie.style.boxShadow = "0px 0px " + glowSize + "px #ff550038";
+                var brightMult = 96 + 8 * brightnessRand;
+                nixie.style.filter = "brightness(" + brightMult + "%) ";
+
+                var brightnessValue = getComputedStyle(document.documentElement).getPropertyValue('--value') * brightMult;
+
+                nixie.style.filter = "hue-rotate(var(--hue-rotate)) brightness(" + brightnessValue + "%) saturate(var(--saturate)";
+            }
+        }
+    }, 100); 
+    if(nixiesTimeElement != null)
+    {
+        updateTime();
+    }
+    setInterval(function()
+    { //update nixie times
+        if(nixiesTimeElement != null)
+        {
+            updateTime();
+        }
+        if(nixiesFPSElement != null)
+        {
+            nixiesFPSElement.children[0].style.backgroundImage = getNixieImageURLFromNumber(Math.floor(fps / 1000000) % 10);
+            nixiesFPSElement.children[1].style.backgroundImage = getNixieImageURLFromNumber(Math.floor(fps / 100000) % 10);
+
+            nixiesFPSElement.children[2].style.backgroundImage = getNixieImageURLFromNumber(Math.floor(fps / 10000) % 10);
+            nixiesFPSElement.children[3].style.backgroundImage = getNixieImageURLFromNumber(Math.floor(fps / 1000) % 10);
+
+            nixiesFPSElement.children[4].style.backgroundImage = getNixieImageURLFromNumber(Math.floor(fps / 100) % 10);
+            nixiesFPSElement.children[5].style.backgroundImage = getNixieImageURLFromNumber(Math.floor(fps / 10) % 10);
+
+            nixiesFPSElement.children[6].style.backgroundImage = getNixieImageURLFromNumber(fps % 10);
+        }
+        if(nixiesUniqueVisitsElement != null)
+        {
+            //doesnt need to be on tick
+            nixiesUniqueVisitsElement.children[0].style.backgroundImage = getNixieImageURLFromNumber(Math.floor(uniqueVisits / 1000000) % 10);
+            nixiesUniqueVisitsElement.children[1].style.backgroundImage = getNixieImageURLFromNumber(Math.floor(uniqueVisits / 100000) % 10);
+
+            nixiesUniqueVisitsElement.children[2].style.backgroundImage = getNixieImageURLFromNumber(Math.floor(uniqueVisits / 10000) % 10);
+            nixiesUniqueVisitsElement.children[3].style.backgroundImage = getNixieImageURLFromNumber(Math.floor(uniqueVisits / 1000) % 10);
+
+            nixiesUniqueVisitsElement.children[4].style.backgroundImage = getNixieImageURLFromNumber(Math.floor(uniqueVisits / 100) % 10);
+            nixiesUniqueVisitsElement.children[5].style.backgroundImage = getNixieImageURLFromNumber(Math.floor(uniqueVisits / 10) % 10);
+
+            nixiesUniqueVisitsElement.children[6].style.backgroundImage = getNixieImageURLFromNumber(uniqueVisits % 10);
+        }
+    }, 25) //100 is theoretically best, but for reasons probably related to float precision, skipping of digits in deci-seconds occurs after some time. Set to a lower value than 100ms to mitigate this issue
+    updateStaticNixies();
+    randomSortCats();
+    if(document.getElementById(".quote") != undefined)
+    {
+        randomSortQuotes();
+        rerollQuote();
+    }
+    setStringIDMap(false);
+    setIDStrings(); 
+    dataIn = fetch('https://williamianbrooks.com/data/values/data.json')
+    .then(response => 
+    {
+        if(!response.ok) 
+        {
+            throw new Error('Network response was not ok ' + response.statusText);
+        }
+        return response.json();
+    })
+    .then(dataIn => 
+    {
+        //console.log(Object.keys(dataIn))
+        //console.log(dataIn["key"]); // Access the parsed JSON data here
+        data = dataIn;
+        setStringIDMap(true); //does not instantly work because it is a web request
+        setIDStrings();
+    })
+    .catch(error => 
+    {
+        console.error('There was a problem with the fetch operation:', error);
+    });
+    if(determineIfDarkMode() == true)
+    {
+        //on page start
+        var button = document.getElementById("darkmodeButton")
+        button.src = "data/img/ui/darkModeDark.png"
+    }
+
+}
+
 function openGeneralPage() 
 {
 	window.open("file:///C:/Users/willb/Downloads/website/generalPage.html", "_blank");
@@ -22,15 +139,8 @@ function dontClickTheCat()
 	alert("No, you cannot pet this cat.");
 }
 
-if(document.title == "williamianbrooks - My Contact")
-{
-    var catimg = document.getElementById("dontClickTheCat");
-    catimg.onclick = dontClickTheCat;
-}
-
 var anchors = document.querySelectorAll("a");
 
-checkForUnsupportedCSS();
 function checkForUnsupportedCSS()
 {
     //its probably better for the page to load with borderRadius = 7px by default rather than zero. It only matters we do it this way for the combination of people that 
@@ -52,12 +162,6 @@ function checkForUnsupportedCSS()
         }
     }
 
-}
-
-for(var i = 0; i < anchors.length; i++)
-{
-    var anchor = anchors[i];
-    addListenersToAnchor(anchor);
 }
 
 function addListenersToAnchor(anchor)
@@ -103,14 +207,6 @@ function addListenersToAnchor(anchor)
         }
     })
 }
-
-document.addEventListener('mousemove', function(event) 
-{
-    mouseXRaw = event.clientX;
-    mouseYRaw = event.clientY;
-    mouseYAdjusted = mouseYRaw + scrollY;
-    //console.log('Mouse X:', event.clientX, 'Mouse Y:', event.clientY);
-});
 
 var contentgrids = document.querySelectorAll(".contentgrid");
 setContentGridsSettings();
@@ -228,25 +324,6 @@ function setContentGridsSettings()
 
 var nixies = document.querySelectorAll(".nixie");
 var nixieFlickering = "true";
-setInterval(function() //flickering
-{
-    if(nixieFlickering == "true")
-    {
-        for(var i = 0; i < nixies.length; i++)
-        {
-            var nixie = nixies[i];
-            var brightnessRand = Math.random();
-            var glowSize = 22.5 + 5 * brightnessRand;
-            nixie.style.boxShadow = "0px 0px " + glowSize + "px #ff550038";
-            var brightMult = 96 + 8 * brightnessRand;
-            nixie.style.filter = "brightness(" + brightMult + "%) ";
-
-            var brightnessValue = getComputedStyle(document.documentElement).getPropertyValue('--value') * brightMult;
-
-            nixie.style.filter = "hue-rotate(var(--hue-rotate)) brightness(" + brightnessValue + "%) saturate(var(--saturate)";
-        }
-    }
-}, 80); 
 
 function getNixieImageURLFromNumber(num)
 {
@@ -288,51 +365,10 @@ function tick()
     }
     window.requestAnimationFrame(tick);
 }
-tick();
 
 const nixiesDateElement = document.getElementById(".site-nixiesDate");
 const nixiesTimeElement = document.getElementById(".site-nixiesTime"); 
 
-if(nixiesTimeElement != null)
-{
-    updateTime();
-}
-setInterval(function()
-{ //update nixie times
-    if(nixiesTimeElement != null)
-    {
-        updateTime();
-    }
-    if(nixiesFPSElement != null)
-    {
-        nixiesFPSElement.children[0].style.backgroundImage = getNixieImageURLFromNumber(Math.floor(fps / 1000000) % 10);
-        nixiesFPSElement.children[1].style.backgroundImage = getNixieImageURLFromNumber(Math.floor(fps / 100000) % 10);
-
-        nixiesFPSElement.children[2].style.backgroundImage = getNixieImageURLFromNumber(Math.floor(fps / 10000) % 10);
-        nixiesFPSElement.children[3].style.backgroundImage = getNixieImageURLFromNumber(Math.floor(fps / 1000) % 10);
-
-        nixiesFPSElement.children[4].style.backgroundImage = getNixieImageURLFromNumber(Math.floor(fps / 100) % 10);
-        nixiesFPSElement.children[5].style.backgroundImage = getNixieImageURLFromNumber(Math.floor(fps / 10) % 10);
-
-        nixiesFPSElement.children[6].style.backgroundImage = getNixieImageURLFromNumber(fps % 10);
-    }
-    if(nixiesUniqueVisitsElement != null)
-    {
-        //doesnt need to be on tick
-        nixiesUniqueVisitsElement.children[0].style.backgroundImage = getNixieImageURLFromNumber(Math.floor(uniqueVisits / 1000000) % 10);
-        nixiesUniqueVisitsElement.children[1].style.backgroundImage = getNixieImageURLFromNumber(Math.floor(uniqueVisits / 100000) % 10);
-
-        nixiesUniqueVisitsElement.children[2].style.backgroundImage = getNixieImageURLFromNumber(Math.floor(uniqueVisits / 10000) % 10);
-        nixiesUniqueVisitsElement.children[3].style.backgroundImage = getNixieImageURLFromNumber(Math.floor(uniqueVisits / 1000) % 10);
-
-        nixiesUniqueVisitsElement.children[4].style.backgroundImage = getNixieImageURLFromNumber(Math.floor(uniqueVisits / 100) % 10);
-        nixiesUniqueVisitsElement.children[5].style.backgroundImage = getNixieImageURLFromNumber(Math.floor(uniqueVisits / 10) % 10);
-
-        nixiesUniqueVisitsElement.children[6].style.backgroundImage = getNixieImageURLFromNumber(uniqueVisits % 10);
-    }
-}, 25) //100 is theoretically best, but for reasons probably related to float precision, skipping of digits in deci-seconds occurs after some time. Set to a lower value than 100ms to mitigate this issue
-
-updateStaticNixies();
 function updateStaticNixies()
 {
     if(nixiesCurrentVisitsElement != null)
@@ -478,9 +514,10 @@ function randomSortCats()
             }
         }
     }
+    preloadImageVariable.src = "data/img/funnycates/" + funnyCatImagesRandomSorted[catIndex]; //preload the first cat in browser
 }
 
-randomSortCats();
+const preloadImageVariable = new Image(); 
 function rerollCat()
 {
     catImageElement = document.getElementById("cat-image-funny");
@@ -495,6 +532,9 @@ function rerollCat()
         catIndex = 0;
         //randomSortCats(); //dont re-sort it, just make it loop
     }
+
+    //now preload the next image, so that there is not significant delay when the button is pressed 
+    preloadImageVariable.src = "data/img/funnycates/" + funnyCatImagesRandomSorted[catIndex];
 
     /*numCats = funnyCatImages.length;
     var random = Math.floor(Math.random() * (numCats - 1));
@@ -548,19 +588,13 @@ var quotes =
     {text: "No balloon and no aeroplane will ever be practically successful.", author: "Lord Kelvin", date: "1902"},
     {text: "You insist that there is something a machine cannot do. If you tell me precisely what it is a machine cannot do, then I can always make a machine which will do just that.", author: "John von Neumann", date: "1948"},
     {text: "The reasonable man adapts himself to the world; the unreasonable one persists in trying to adapt the world to himself. Therefore, all progress depends on the unreasonable man. ", author: "George Bernard Shaw", date: null},
-    {text: "People in the West have asked why no diversity in my games but they are wrong, when all my games have included a gay character: you, the player", author: "Hideo Kojima", date: "2023"},
+    //{text: "People in the West have asked why no diversity in my games but they are wrong, when all my games have included a gay character: you, the player", author: "Hideo Kojima", date: "2023"},
     {text: "A computer can never be held responsible, therefore a computer must never make a management decision.", author: "IBM Training Manual", date: "1979"},
     {text: "By denying scientific principles, one may maintain any paradox.", author: "Galileo Galilei", date: null}
     //{text: "sample", author: "sample", date: "sample"}
 ]
 
 var quotesRandomSorted = [];
-
-if(document.getElementById(".quote") != undefined)
-{
-    randomSortQuotes();
-    rerollQuote();
-}
 
 function randomSortQuotes()
 {
@@ -716,13 +750,10 @@ function setIDStrings()
     numVisits = stringIDMap.get(".site-totalHits");
 }
 
-setStringIDMap(false);
-setIDStrings(); 
-
 
 //this is done for all pages, though perhaps not wise.
 var data = {};
-var dataIn = fetch('https://williamianbrooks.com/data/values/data.json')
+var dataIn = null;/*fetch('https://williamianbrooks.com/data/values/data.json')
 .then(response => 
 {
     if(!response.ok) 
@@ -742,7 +773,7 @@ var dataIn = fetch('https://williamianbrooks.com/data/values/data.json')
 .catch(error => 
 {
     console.error('There was a problem with the fetch operation:', error);
-});
+});*/
 
 function determineIfDarkMode()
 {
@@ -756,13 +787,6 @@ function determineIfDarkMode()
         return true;
     }
     return false;
-}
-
-if(determineIfDarkMode() == true)
-{
-    //on page start
-    var button = document.getElementById("darkmodeButton")
-    button.src = "data/img/ui/darkModeDark.png"
 }
 
 function darkModeButtonClick()
@@ -815,3 +839,9 @@ function darkModeButtonClick()
     //}
 
 }
+
+
+/////////////////////////
+/////////////////////////
+/////////////////////////
+mainStart(); 

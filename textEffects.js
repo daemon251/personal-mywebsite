@@ -1,5 +1,50 @@
 //fix aberattion for boxes
 
+function textEffectsStart()
+{
+    window.addEventListener('scroll', function() 
+    {
+        //determineChromaticAberationAmount();
+        determineElementShadows();
+    });
+
+    window.addEventListener('scrollend', function() 
+    {
+        scrollChangeTick = 0;
+        //determineChromaticAberationAmount();
+        determineElementShadows()
+    });
+    
+    //basically exponential decay
+    setInterval(function()
+    {
+        var bPositive = true;
+        if(pixelsScrolledAccumulator < 0) {bPositive = false;}
+
+        var a = 0.32; //matters more for big scrolls. higher value is shorter time
+        var b = 3.8; //matters more for small scrolls. higher value is shorter time
+        var difAmount = (Math.abs(pixelsScrolledAccumulator * a) + b) * chromaticAberrationDecayConfig;
+        if(bPositive == true)
+        {
+            difAmount = -difAmount;
+        }
+        if((pixelsScrolledAccumulator + difAmount) / pixelsScrolledAccumulator < 0) //if doing the sum results in a different sign, then
+        {
+            pixelsScrolledAccumulator = 0;
+        }
+        else if(pixelsScrolledAccumulator != 0)
+        {
+            pixelsScrolledAccumulator = pixelsScrolledAccumulator + difAmount;
+        }
+
+        determineChromaticAberationAmount();
+        determineElementShadows();
+    }, 25); 
+
+    determineChromaticAberationAmount();
+    determineElementShadows();
+}
+
 //setInterval(mainFunction, interval); 
 
 var allTextElements = document.querySelectorAll("p, h1, h2, a, li, span");
@@ -11,53 +56,11 @@ var scrollYLastTick = (window.pageYOffset || (document.documentElement || docume
 var chromaticAberrationMultConfig = 1.0;
 var chromaticAberrationDecayConfig = 1.0;
 
-window.addEventListener('scroll', function() 
-{
-    //determineChromaticAberationAmount();
-    determineElementShadows();
-});
-
-window.addEventListener('scrollend', function() 
-{
-    scrollChangeTick = 0;
-    //determineChromaticAberationAmount();
-    determineElementShadows()
-});
-
 var scrollChangeTick = 0; //probably depends on framerate? this is bad.
 var chromaticAberrationAmount = 0;
 var pixelsScrolledAccumulator = 0;
 
-var chromaticAberrationEnabled = "true";
-
-//basically exponential decay
-setInterval(function()
-{
-    var bPositive = true;
-    if(pixelsScrolledAccumulator < 0) {bPositive = false;}
-
-    var a = 0.32; //matters more for big scrolls. higher value is shorter time
-    var b = 3.8; //matters more for small scrolls. higher value is shorter time
-    var difAmount = (Math.abs(pixelsScrolledAccumulator * a) + b) * chromaticAberrationDecayConfig;
-    if(bPositive == true)
-    {
-        difAmount = -difAmount;
-    }
-    if((pixelsScrolledAccumulator + difAmount) / pixelsScrolledAccumulator < 0) //if doing the sum results in a different sign, then
-    {
-        pixelsScrolledAccumulator = 0;
-    }
-    else if(pixelsScrolledAccumulator != 0)
-    {
-        pixelsScrolledAccumulator = pixelsScrolledAccumulator + difAmount;
-    }
-
-    determineChromaticAberationAmount();
-    determineElementShadows();
-}, 25); 
-
-determineChromaticAberationAmount();
-determineElementShadows();
+var chromaticAberrationEnabled = "false";
 
 function determineChromaticAberationAmount()
 {
@@ -173,3 +176,8 @@ function determineElementShadows()
         }
     }
 }
+
+////////////////////////
+////////////////////////
+////////////////////////
+textEffectsStart();
