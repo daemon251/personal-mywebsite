@@ -326,6 +326,7 @@ function scaleStars(xMaxOld, yMaxOld)
 
 function drawStars()
 {
+    //innefficnet perhaps
     var color = colorStars;
     var rDepth = radixToHex(parseInt(color.substring(1, 3), 16) / 256.0); 
     var gDepth = radixToHex(parseInt(color.substring(3, 5), 16) / 256.0);
@@ -356,8 +357,13 @@ function drawStars()
                     var amt = 1 - (dist_jCursor + dist_iCursor) / constellationDist;
                     if(amt > 0) 
                     {
+                        var brightness = Math.sqrt(amt); //sqrt can be applied to make the brightness higher but still ranging from [0, 1]
                         if(chromaticAberrationAmount > 0)
                         {
+                            rDepth = radixToHex(parseInt(color.substring(1, 3), 16) / 256.0 * brightness); 
+                            gDepth = radixToHex(parseInt(color.substring(3, 5), 16) / 256.0 * brightness);
+                            bDepth = radixToHex(parseInt(color.substring(5, 7), 16) / 256.0 * brightness);
+
                             //red - -x +y
                             //green - +x +y
                             //blue - -y
@@ -380,7 +386,6 @@ function drawStars()
                             ctx.stroke();
                         }
 
-                        var brightness = Math.sqrt(amt); //sqrt can be applied to make the brightness higher but still ranging from [0, 1]
                         //ctx.strokeStyle = getHexcode(brightness);
                         var opacity = Math.round(brightness * 256).toString(16);
                         if(opacity.length < 2)
@@ -413,8 +418,13 @@ function drawStars()
         //red - -x +y
         //green - +x +y
         //blue - -y
+        var brightness = 0.80 + bonus + randomBrightnessArr[i % 16] * 0.20; 
         if(chromaticAberrationAmount > 0)
         {
+            rDepth = radixToHex(parseInt(color.substring(1, 3), 16) / 256.0 * brightness); 
+            gDepth = radixToHex(parseInt(color.substring(3, 5), 16) / 256.0 * brightness);
+            bDepth = radixToHex(parseInt(color.substring(5, 7), 16) / 256.0 * brightness);
+
             ctx.fillStyle = "#FF0000" + rDepth; 
             ctx.fillRect(star.x - starSize / 2 - chromaticAberrationAmount, star.y - starSize / 2 + chromaticAberrationAmount, starSize, starSize);
 
@@ -425,7 +435,6 @@ function drawStars()
             ctx.fillRect(star.x - starSize / 2, star.y - starSize / 2 - chromaticAberrationAmount * 1.41, starSize, starSize);
         }
 
-        var brightness = 0.75 + bonus + randomBrightnessArr[i % 16] * 0.25; 
         str = radixToHex(brightness);
         ctx.fillStyle = colorStars + str;
         ctx.fillRect(star.x - starSize / 2, star.y - starSize / 2, starSize, starSize);

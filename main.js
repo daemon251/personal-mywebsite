@@ -489,6 +489,13 @@ funnyCatImages =
     "send-this-peasant-to-the-dungeons-cat.gif",
     "orange-cat-cat-hitting-cat.gif",
     "black-cat-walking.gif",
+    "cat-explodes-with-mind.gif",
+    "heavy-paper.gif",
+    "car-down-stairs.gif",
+    "cat-get-eaten.gif",
+    "cat-fan.gif",
+    "cat-flip-ears.gif",
+    "consequences-cat.gif",
 ]
 
 funnyCatImagesRandomSorted = [];

@@ -177,7 +177,7 @@ canvas {
     flex-direction: row;*/
 
 .topbar {
-    width: calc(100% + 10px);
+    width: calc(100% + 8px);
     height: 40px;
     padding: 0px 10px 0px 0px; 
     display: flex; 
