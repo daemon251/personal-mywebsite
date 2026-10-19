@@ -145,15 +145,19 @@ function setConfigChanges()
         resetTopButtons();
 
         var button = document.getElementById("darkmodeButton")
+
+        var startingString = "";
+        if(document.title.indexOf("Spam Blog") >= 0) {startingString = "../";}
+
         if(button != null && determineIfDarkMode() == true)
         {
             //localStorage.setItem(".sc-hue", 203.0 / 360);
             //localStorage.setItem(".sc-saturation", 0.75);
-            button.src = "data/img/ui/darkModeDark.png"
+            button.src = startingString + "data/img/ui/darkModeDark.png"
         }
         else
         {
-            button.src = "data/img/ui/darkModeBright.png"
+            button.src = startingString + "data/img/ui/darkModeBright.png"
         }
     }
 }

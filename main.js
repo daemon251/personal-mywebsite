@@ -79,7 +79,11 @@ function mainStart() //runs once at the end of this file.
         }
     }, 25) //100 is theoretically best, but for reasons probably related to float precision, skipping of digits in deci-seconds occurs after some time. Set to a lower value than 100ms to mitigate this issue
     updateStaticNixies();
-    randomSortCats();
+    if(document.title == "williamianbrooks - Main Page") //important bc fnf error if not in main working directory, just do it for only page that needs it.
+    {
+        randomSortCats();
+        console.log(funnyCatImagesRandomSorted);
+    }
     if(document.getElementById(".quote") != undefined)
     {
         randomSortQuotes();
@@ -404,12 +408,6 @@ function updateTime()
 {
     const date = new Date();
 
-    //note: this method doesnt work because of daylight savings...
-    //var utcStr = date.toUTCString();
-    //console.log(utcStr);
-    //var index = utcStr.indexOf(":");
-    //const hours = (parseInt(utcStr.substring(index - 2, index), 10) + 18) % 24; //modulus of negative number is strange so just use a positive one
-
     const options = 
     {
         timeZone: 'America/Chicago',
@@ -496,6 +494,8 @@ funnyCatImages =
     "cat-fan.gif",
     "cat-flip-ears.gif",
     "consequences-cat.gif",
+    "blbahlha.gif",
+    "cat-weight-cat-checking-weight.gif",
 ]
 
 funnyCatImagesRandomSorted = [];
