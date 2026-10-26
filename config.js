@@ -147,7 +147,7 @@ function setConfigChanges()
         var button = document.getElementById("darkmodeButton")
 
         var startingString = "";
-        if(document.title.indexOf("Spam Blog") >= 0) {startingString = "../";}
+        if(document.title != "williamianbrooks - Spam Blogs" && document.title.indexOf("Spam Blog") >= 0) {startingString = "../";}
 
         if(button != null && determineIfDarkMode() == true)
         {

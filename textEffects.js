@@ -47,7 +47,18 @@ function textEffectsStart()
 
 //setInterval(mainFunction, interval); 
 
-var allTextElements = document.querySelectorAll("p, h1, h2, a, li, span");
+var allTextElements = Array.from(document.querySelectorAll("p, h1, h2, a, li, span"));
+for(var i = 0; i < allTextElements.length; i++)
+{
+    //console.log(allTextElements[i].id);
+    if(allTextElements[i] && allTextElements[i].id && allTextElements[i].id == ".site-titleDate")
+    {
+        allTextElements.splice(i, 1); i += -1;
+        //allTextElements.remove(i);
+    }
+}
+
+
 var allBoxElements = document.querySelectorAll(".genericcontainer, .button, .contentcontainer, .button-nolink");
 var defaultShadowWithoutColor = "0px 0px 3px ";
 

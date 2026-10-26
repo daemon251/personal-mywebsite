@@ -18,7 +18,6 @@ function mainStart() //runs once at the end of this file.
         mouseXRaw = event.clientX;
         mouseYRaw = event.clientY;
         mouseYAdjusted = mouseYRaw + scrollY;
-        //console.log('Mouse X:', event.clientX, 'Mouse Y:', event.clientY);
     });
     tick(); //for fps
     setInterval(function() //flickering
@@ -27,12 +26,13 @@ function mainStart() //runs once at the end of this file.
         {
             for(var i = 0; i < nixies.length; i++)
             {
+                //3%
                 var nixie = nixies[i];
                 var brightnessRand = Math.random();
                 var glowSize = 22.5 + 4 * brightnessRand;
-                nixie.style.boxShadow = "0px 0px " + glowSize + "px #ff550038";
+                nixie.style.boxShadow = "0px 0px " + glowSize + "px #ff550038"; 
                 var brightMult = 96 + 8 * brightnessRand;
-                nixie.style.filter = "brightness(" + brightMult + "%) ";
+                //nixie.style.filter = "brightness(" + brightMult + "%) ";
 
                 var brightnessValue = getComputedStyle(document.documentElement).getPropertyValue('--value') * brightMult;
 
@@ -82,7 +82,6 @@ function mainStart() //runs once at the end of this file.
     if(document.title == "williamianbrooks - Main Page") //important bc fnf error if not in main working directory, just do it for only page that needs it.
     {
         randomSortCats();
-        console.log(funnyCatImagesRandomSorted);
     }
     if(document.getElementById(".quote") != undefined)
     {
@@ -102,8 +101,6 @@ function mainStart() //runs once at the end of this file.
     })
     .then(dataIn => 
     {
-        //console.log(Object.keys(dataIn))
-        //console.log(dataIn["key"]); // Access the parsed JSON data here
         data = dataIn;
         setStringIDMap(true); //does not instantly work because it is a web request
         setIDStrings();
@@ -115,8 +112,12 @@ function mainStart() //runs once at the end of this file.
     if(determineIfDarkMode() == true)
     {
         //on page start
+
+        var startingString = "";
+        if(document.title != "williamianbrooks - Spam Blogs" && document.title.indexOf("Spam Blog") >= 0) {startingString = "../";} //some browsers give me a 404 trying to do this, fix later
+
         var button = document.getElementById("darkmodeButton")
-        button.src = "data/img/ui/darkModeDark.png"
+        button.src = startingString + "data/img/ui/darkModeDark.png"
     }
 
 }
@@ -226,80 +227,6 @@ function setContentGridsSettings()
         tallContent = false;
         if(document.title == "williamianbrooks - Stuff I Like") {tallContent = true;}
         cg.style.gridTemplateColumns = '1fr 1fr';
-
-        /*for(var k = 0; k < cg.children.length; k++)
-        {
-            contentBar = cg.children[k];
-            if(contentBar.children.length == 0) {continue;}
-            if(contentBar.className == "contentbar-noimg") {break;}
-            if(contentBar.className == "contentbar-tall")
-            {
-                tallContent = true;
-                contentBar.style.height = "calc(420px)"; //"calc(27vw)"
-            }
-            else
-            {
-                contentBar.style.height = "calc(124px)"; //"calc(9vw)"
-            }
-
-            var row = contentBar.children[0];
-            var largeSegment = row.children[1];
-            var aligner = largeSegment.children[0];
-            var h2 = aligner.children[0];
-            var p = aligner.children[1];
-
-            h2.style.fontSize = "calc(18px)"; //"calc(1.5vw)"
-            p.style.fontSize = "calc(12px)"; //"calc(1vw)"
-
-            largeSegment.style.width = "calc(69%)"; //"calc(8.55vw)"
-            largeSegment.style.flex = "0px 0px 31%";
-
-            var row2 = largeSegment.children[1];
-            if(row2 != null)
-            {
-                for(var j = 0; j < row2.children.length; j++)
-                {
-                    if(tallContent == true)
-                    {
-                        row2.style.width = "350px";
-                    }
-                    else
-                    {
-                        //row2.style.width = "250px"; //80%
-                        //row2.style.padding = "0px 0px 0px 8px";
-                    }
-                    var textbox = row2.children[j];
-                    var p2 = textbox.children[0];
-
-                    var textSize = "9px";
-                    if(document.title == "williamianbrooks-stuffILike") {textSize = "12px"}
-
-                    if(textbox.children.length > 1)
-                    {
-                        var a = textbox.children[1];
-                        a.style.fontSize = textSize; //"calc(0.75w)"
-                    }
-                    p2.style.fontSize = textSize; //"calc(0.75w)"
-                }
-            }
-
-            var smallSegment = row.children[0];
-            //smallSegment.style.width = "calc(31%)"; //"calc(8.55vw)"
-            //smallSegment.style.height = "124px";
-            //smallSegment.style.alignItems = "center";
-            //smallSegment.style.paddingTop = "0px";
-            //smallSegment.style.flex = "0px 0px 31%";
-            
-            if(contentBar.className == "contentbar-tall")
-            {
-                smallSegment.style.width = "calc(160px)"; //"calc(12.825vw)"
-                var aligner2 = smallSegment.children[1];
-                for(var j = 0; j < aligner2.children.length; j++)
-                {
-                    aligner2.children[j].style.fontSize = "calc(12px)"; //"calc(1vw)"
-                }
-            }
-        }*/
 
         //add empty contentbar, fixes border. 
         //spaghetti
@@ -542,14 +469,6 @@ function rerollCat()
 
     //now preload the next image, so that there is not significant delay when the button is pressed 
     preloadImageVariable.src = "data/img/funnycates/" + funnyCatImagesRandomSorted[catIndex];
-
-    /*numCats = funnyCatImages.length;
-    var random = Math.floor(Math.random() * (numCats - 1));
-    if(random >= catIndex) {random++;}
-    catIndex = random;
-    var catURL = "data/img/funnycates/" + funnyCatImages[catIndex];
-    //console.log(catURL);
-    catImageElement.src = catURL;*/
 }
 
 var quoteIndex = 0;
@@ -661,12 +580,10 @@ function setStringIDMap(realData)
     if(realData == true)
     {
         var keys = Object.keys(data);
-        //console.log(data);
         for(var i = 0; i < keys.length; i++)
         {
             var key = keys[i];
             stringIDMap.set(key, data[key])
-            //console.log(key + " " + data[key])
         }
     }
     else //kind of annoying that this is hardcoded... whatever
@@ -760,27 +677,7 @@ function setIDStrings()
 
 //this is done for all pages, though perhaps not wise.
 var data = {};
-var dataIn = null;/*fetch('https://williamianbrooks.com/data/values/data.json')
-.then(response => 
-{
-    if(!response.ok) 
-    {
-        throw new Error('Network response was not ok ' + response.statusText);
-    }
-    return response.json();
-})
-.then(dataIn => 
-{
-    //console.log(Object.keys(dataIn))
-    //console.log(dataIn["key"]); // Access the parsed JSON data here
-    data = dataIn;
-    setStringIDMap(true); //does not instantly work because it is a web request
-    setIDStrings();
-})
-.catch(error => 
-{
-    console.error('There was a problem with the fetch operation:', error);
-});*/
+var dataIn = null;
 
 function determineIfDarkMode()
 {

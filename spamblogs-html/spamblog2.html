@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>  
+    <head>
+        <!-- Text that appears in the browser tab -->
+        <title>Spam Blog 2 - &#x2665;&#x2665;&#x2665;&#x2665; Just Works!</title>
+        <link rel="stylesheet" type="text/css" href="../styles.css">
+        <link rel="icon" type="image/x-icon" href="../data/img/icon.jpg">
+    </head>
+    <body>
+        <noscript>
+            <div class="alert">
+                This site requires javascript enabled to function properly. Sorry!
+            </div>
+        </noscript>
+        <canvas id="backgroundCanvas" width="100" height="100"></canvas>
+        <script type="text/javascript" src='../backgroundCanvasController.js'></script> 
+        <img type="button" id="darkmodeButton" onclick="darkModeButtonClick()" class="button-darkselector" src="../data/img/ui/darkModeBright.png"></button>
+        <div class="maincontainer">
+            <div class="topbar">
+                <div class="signature">
+                    <p class="text-styled" style="position: absolute; bottom: 0; margin-bottom: 4px">William Brooks / daemon47 - <span style="display: inline;" id=".site-titleDate"></span></p>
+                </div>
+                <div class="buttonholder">
+                    <div class="button">
+                        <a href="../index.html" target="_self" style="justify-content:center; width: 100%; height: 100%; align-items: center;">General</a>
+                    </div>
+                    <div class="button">
+                        <a href="../myStuffPage.html" target="_self" style="justify-content:center; width: 100%; height: 100%; align-items: center;">My Work</a>
+                    </div>
+                    <div class="button">
+                        <a href="../contactPage.html" target="_self" style="justify-content:center; width: 100%; height: 100%; align-items: center;">Contact</a>
+                    </div>
+                    <div class="button">
+                        <a href="../miscPage.html" target="_self" style="justify-content:center; width: 100%; height: 100%; align-items: center;">Misc.</a>
+                    </div>
+                </div>
+            </div>
+            <div class="genericcontainer">
+                <div class="aligner">
+                    <div class="column">
+                        <div class="row" style="justify-content: space-between;">
+                            <h1 class="text-styled" style="margin-bottom: 10px;">&#x2665;&#x2665;&#x2665;&#x2665; Just Works!</h1>
+                            <!--<p style="font-family: 'VCROSDMONO';">Date:</p>-->
+                            <div class="nixie-array" id=".site-yapping-nixietubes-date" style="transform: translateY(5px); margin-top: 0px; margin-bottom: 0px; margin-right: 10px;"> 
+                                <div class="nixie" style="background-image: url('../data/img/nixie-tube/2.png');"></div>
+                                <div class="nixie" style="background-image: url('../data/img/nixie-tube/6.png');"></div>
+                                <div class="nixie" style="margin-left: 8px; background-image: url('../data/img/nixie-tube/1.png');"></div>
+                                <div class="nixie" style="background-image: url('../data/img/nixie-tube/0.png');"></div>
+                                <div class="nixie" style="margin-left: 8px; background-image: url('../data/img/nixie-tube/2.png');"></div>
+                                <div class="nixie" style="background-image: url('../data/img/nixie-tube/0.png');"></div>
+                                <div class="nixie" style="background-image: url('../data/img/nixie-tube/2.png');"></div>
+                                <div class="nixie" style="background-image: url('../data/img/nixie-tube/6.png');"></div>
+                            </div>
+                        </div>
+                        <p style="font-family: 'mainfont';">
+                            I love it when &#x2665;&#x2665;&#x2665;&#x2665; Just Works (tm)! I don't think there's actually a trademark, but I am compelled to add it regardless.
+                            Below is a list of &#x2665;&#x2665;&#x2665;&#x2665; that Just Works (tm) that I have been dealing with this week.
+						</p>
+						<h2 class="text-styled" style="padding-left: 1px; margin-top: 10px; margin-bottom: 0px">FIGlet & other cool text stuff</h2>
+                        <p style="font-family: 'mainfont';">
+                            <!--this is cursed -->
+                            &nbsp;____ ___ ____ _&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_<br>
+                            |  ___|_ _/ ___| | ___| |_ <br>
+                            | |_&nbsp;&nbsp;| | |&nbsp;&nbsp;_| |/ _ \ __|<br>
+                            |&nbsp;&nbsp;_|  | | |_| | |&nbsp;&nbsp;__/ |_ <br>
+                            |_|&nbsp;&nbsp;|___\____|_|\___|\__|
+                            
+                            <a class="a-styled" href="https://www.figlet.org/" target="_blank">FIGlet</a> is a program that lets you turn text into multi-line row representations of text.
+                            
+                            <br><br>
+                            I've been using it to print funny little blurbs of text at the start of every terminal session. Below is an example output.
+                            <br>
+                            <img src="resources/blog2/figlet-demo.png" style="width: 30%; margin-top: 8px; margin-bottom: 8px;">
+                            <br>
+                            Note that it is colored, which isn't something that FIGlet does. I was surprised that you can actually put any arbitrary color in the terminal, but you can. Anyways, the utility 
+                            I used to do this is <a class="a-styled" href="https://github.com/mazznoer/lolcrab" target="_blank">lolcrab</a>. It's like  <a class="a-styled" href="https://linuxcommandlibrary.com/man/lolcat" target="_blank">lolcat</a>,
+                            but with some extra functionality, including more gradient options.
+                            <br><br>
+                            I made a funny little script in Lua to select a random message, random font, and random color scheme, so that it isn't the same every time. Thank God for Lua not being a piece
+                            of &#x2665;&#x2665;&#x2665;&#x2665; like some other languages-- in the early stages it was all in bash, which was just insufferable. Though, I have been meaning to look at a couple of other
+                            scripting languages to gain more perspective on it all. Regardless, I think that Lua is still a solid choice here since it is very lightweight, 
+                            preventing the terminal from hanging when starting. Of course, C or any compiled language would be faster but I didn't want to do that.
+                            <br><br>
+                            The version of FIGlet that my instance of Linux Mint came with let you apply filters (being a very outdated version). 
+                            This is largely redundant because you can just pipe the output into some other coloring tool (like lolcat / etc.), but I bring it up because one of the filters was 
+                            a rainbow filter, just called "gay". I thought that was funny.
+						</p>
+                        <h2 class="text-styled" style="padding-left: 1px; margin-top: 10px; margin-bottom: 0px">VMs on encrypted volumes</h2>
+                        <p style="font-family: 'mainfont';">
+                            Recently I have been trying out using a virtual machine on an encrypted volume. By this, I mean creating an encrypted archive (done with
+                            <a class="a-styled" href="https://veracrypt.io/en/Downloads.html" target="_blank">Veracrypt</a> or similar), and then sticking the virtual machine files inside. I believe 
+                            <a class="a-styled" href="https://github.com/VirtualBox/virtualbox" target="_blank">VirtualBox</a> (which is what I use) supports some form of encryption
+                            on their disk volumes, but supposedly this has limitations, and just seems less secure. Just putting the VM data inside an encrypted volume 
+                            is a surefire way for no surprises.
+                            <br><br>
+                            There's not much practical reason to do this, by the way. My main practical motivation is just to be able to work with sensitive information (legal documents, SSN, anything embarrasing, etc.)
+                            and not have to worry about traces of that data remaining somewhere on disk. Of course, data can just float around in AppData (in the case of Windows) or in some cache, 
+                            but it can also be potentially left behind sitting in the drive unallocated-- you would
+                            actually be surprised by the depth of random &#x2665;&#x2665;&#x2665;&#x2665;&#x2665;&#x2665;&#x2665;&#x2665; just sitting unallocated on your drive. I ran some 
+                            file recovery software (<a class="a-styled" href="https://github.com/cgsecurity/testdisk" target="_blank">TestDisk</a>) on my main drive, results shown below.
+                            <!--<img src="resources/blog2/Capture.PNG" style="height: 400px; margin-top: 8px; margin-bottom: 8px;">-->
+                        </p>
+                        <table style="width: 500px;">
+                            <tr>
+                                <th>txt</th>
+                                <th>tx?</th>
+                                <th>png</th>
+                                <th>jpg</th>
+                                <th>gz</th>
+                                <th>exe</th>
+                                <th>gif</th>
+                                <th>riff</th>
+                                <th>bmp</th>
+                                <th>tz</th>
+                                <th><i>others</i></th>
+                            </tr>
+                            <tr>
+                                <td>29988</td>
+                                <td>15894</td>
+                                <td>4819</td>
+                                <td>4463</td>
+                                <td>3914</td>
+                                <td>1846</td>
+                                <td>1479</td>
+                                <td>728</td>
+                                <td>385</td>
+                                <td>339</td>
+                                <td>957</td>
+                            </tr>
+                        </table>
+                        <p style="font-family: 'mainfont';">
+                            This amounts to about 64k files with 60GB of data. Unrelatedly, the file type frequency data interestingly did not really follow a Zipfian or similar distribution, as I figured it might.
+                            <br><br>
+                            The first time I made a VM in an encrypted volume, I put it on my HDD to save space on my SSD. Horrible decision. 
+                            Obviously there will be more lag with the encryption rather than just doing it raw,
+                            but it was actually even worse than I thought--
+                            I was pulling maybe ~5 - 10% of the max speed the hard drive normally pulls, about 12MB/s. For example, in downloading anything, my limiting factor would be
+                            the &#x2665;&#x2665;&#x2665;&#x2665;&#x2665;&#x2665;&#x2665; drive, not my network.
+                            <br>
+                            <img src="resources/blog2/pain.png" style="width: 30%; margin-top: 8px;"> 
+                            <br><br>
+                            This &#x2665;&#x2665;&#x2665;&#x2665; was borderline unusable.
+                            <br><br>
+                            I figure this is probably caused by continous blurbs of data on the encrypted volume <i>not</i> 
+                            corresponding to continous blurbs of data on the actual drive, meaning the head of the drive would have to jump around a lot. 
+                            Essentially, it seemed to behave as if the drive was heavily fragmented. Anyways, it was overall very &#x2665;&#x2665;&#x2665;&#x2665;&#x2665;&#x2665;.
+                            <br><br>
+                            Anyway, despite how slow and &#x2665;&#x2665;&#x2665;&#x2665;&#x2665;&#x2665; it was, I was not deterred. That is, until I made the mistake of accidently shutting down my actual 
+                            machine, instead of the virtual machine, while (of course) the VM was running and the encrypted volume was still mounted.
+                            As a result, my virtual machine installation got fried. Curses to those buttons for being so close together and so similar looking!
+                            <br><br>
+                            It had issues booting, and so went through the disk fixing procedure that Windows has. To Microsoft's credit, it eventually got to 
+                            boot despite probably having some really bad corruption. However, the VM would stil crash about a minute after being launched every time, without even a BSOD,
+                            so I eventually had to give up. I couldn't be bothered to fix that.
+                            <br><br>
+                            Anyway, I set up the VM again, and this time I put the VM on my SSD. It is... actually very useable. I can even download something, 
+                            and get rate limited by my network of 80Mbps down instead of the &#x2665;&#x2665;&#x2665;&#x2665;&#x2665;&#x2665;&#x2665; drive! 
+                            <br><br>
+                            Anyways, I think it's really cool that 
+                            you can do this at all, and that with little hassle, It Just Works (tm).
+						</p>
+                        <h2 class="text-styled" style="padding-left: 1px; margin-top: 10px; margin-bottom: 0px">Baking tortilla chips</h2>
+						<p style="font-family: 'mainfont';">
+                            I used to live in an area where I could easily buy fresh tortilla chips (which trust me,
+                            are way better than packaged ones). That's not the case anymore, and I just can't return to getting packaged ones after being enlightened.
+                            <br><br>
+                            So I thought about it, and looked up a recipe for making them in case they were easy. Turns out, they ARE easy. Literally all you do is take some corn tortillas,
+                            oil them up a little bit, cut them up, stick them in the oven for ~15 minutes at 375 degrees, then add salt if you want, and that is it. It Just Works (tm).
+                            It's a small enough amount of required effort that I don't mind doing it. Anyways, here's a picture of some that I made.
+                            <img src="resources/blog2/IMG_20261013_015100_772.jpg" style="width: 30%; margin-top: 8px; margin-bottom: 8px;">
+                        </p>
+                        <h2 class="text-styled" style="padding-left: 1px; margin-top: 10px; margin-bottom: 0px">SEE YOU SPACE COWBOY...</h2>
+						<p style="font-family: 'mainfont';">
+                            bye
+						</p>
+                        <div class="buttonholder" style="margin-left: 0px; padding: 0px; margin-top: 10px;">
+                            <div class="button" style="width: 100px; margin-left: 0px;">
+                                <a href="../blog-spamblog-list.html" target="_self" style="justify-content:center; width: 100%; height: 100%; align-items: center; height: 32px;">Return</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="emptybar"> </div>
+        </div>
+        <script type="text/javascript" src='../main.js'></script>
+        <script type="text/javascript" src='../textEffects.js'></script>
+        <script type="text/javascript" src='../config.js'></script>
+    </body>
+</html>

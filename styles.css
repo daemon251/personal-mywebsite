@@ -66,7 +66,6 @@ h2 {
 p {
     color: var(--color1);
     font-size: calc(16px);
-    /*text-shadow: 2px 2px 0px red, 0px -2px 0px green, -2px 2px 0px blue;*/
     line-height: 1;
     margin-top: 0px;
     margin-bottom: 0px;
@@ -478,7 +477,7 @@ a:hover {
 .text-rainbow {
     background: repeating-linear-gradient(45deg in hsl longer hue, red 0 50%) 0/230%; /*45 deg, 230%. 0 deg, 200%*/
     /*100% - 1050%*/
-    animation: create-rainbow-gradient-shift 2s linear infinite;
+    animation: create-rainbow-gradient-shift 2s steps(30) infinite; /*steps makes this animation not destroy the renderer. on 200 fps, this is an 80% optimization and is not very noticeable.*/
 
     font-family: "mainfont";
     text-align: center;
@@ -660,4 +659,30 @@ button:hover {
 .pt-emptyelementcontainer {
     width: 45px;
     height: 45px;
+}
+
+table {
+    margin-top: 8px;
+    margin-bottom: 8px;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid var(--color1);
+}
+
+tr {
+    border: 2px solid var(--color1);
+}
+
+td {
+    font-family: 'mainfont';
+    color: var(--color1);
+    border: 1px solid var(--color1);
+    padding: 4px;
+}
+
+th {
+    font-family: 'mainfont';
+    color: var(--color1);
+    border: 1px solid var(--color1);
+    padding: 4px;
 }
