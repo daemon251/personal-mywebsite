@@ -63,6 +63,13 @@ h2 {
     margin-top: 16px;
 }
 
+h3 {
+	color: var(--color1);
+    font-size: 18px;
+    font-family: 'VCROSDMONO';
+    margin-top: 16px;
+}
+
 p {
     color: var(--color1);
     font-size: calc(16px);

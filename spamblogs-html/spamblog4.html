@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>  
+    <head>
+        <!-- Text that appears in the browser tab -->
+        <title>Spam Blog 4 - 2^2 = 2x2 = 2+2</title>
+        <link rel="stylesheet" type="text/css" href="../styles.css">
+        <link rel="icon" type="image/x-icon" href="../data/img/icon.jpg">
+    </head>
+    <body>
+        <noscript>
+            <div class="alert">
+                This site requires javascript enabled to function properly. Sorry!
+            </div>
+        </noscript>
+        <canvas id="backgroundCanvas" width="100" height="100"></canvas>
+        <script type="text/javascript" src='../backgroundCanvasController.js'></script> 
+        <img type="button" id="darkmodeButton" onclick="darkModeButtonClick()" class="button-darkselector" src="../data/img/ui/darkModeBright.png"></button>
+        <div class="maincontainer">
+            <div class="topbar">
+                <div class="signature">
+                    <p class="text-styled" style="position: absolute; bottom: 0; margin-bottom: 4px">William Brooks / daemon47 - <span style="display: inline;" id=".site-titleDate"></span></p>
+                </div>
+                <div class="buttonholder">
+                    <div class="button">
+                        <a href="../index.html" target="_self" style="justify-content:center; width: 100%; height: 100%; align-items: center;">General</a>
+                    </div>
+                    <div class="button">
+                        <a href="../myStuffPage.html" target="_self" style="justify-content:center; width: 100%; height: 100%; align-items: center;">My Work</a>
+                    </div>
+                    <div class="button">
+                        <a href="../contactPage.html" target="_self" style="justify-content:center; width: 100%; height: 100%; align-items: center;">Contact</a>
+                    </div>
+                    <div class="button">
+                        <a href="../miscPage.html" target="_self" style="justify-content:center; width: 100%; height: 100%; align-items: center;">Misc.</a>
+                    </div>
+                </div>
+            </div>
+            <div class="genericcontainer">
+                <div class="aligner">
+                    <div class="column">
+                        <div class="row" style="justify-content: space-between;">
+                            <h1 class="text-styled" style="margin-bottom: 10px;">2^2 = 2x2 = 2+2</h1>
+                            <!--<p style="font-family: 'VCROSDMONO';">Date:</p>-->
+                            <div class="nixie-array" id=".site-yapping-nixietubes-date" style="transform: translateY(5px); margin-top: 0px; margin-bottom: 0px; margin-right: 10px;"> 
+                                <div class="nixie" style="background-image: url('../data/img/nixie-tube/0.png');"></div>
+                                <div class="nixie" style="background-image: url('../data/img/nixie-tube/8.png');"></div>
+                                <div class="nixie" style="margin-left: 8px; background-image: url('../data/img/nixie-tube/1.png');"></div>
+                                <div class="nixie" style="background-image: url('../data/img/nixie-tube/1.png');"></div>
+                                <div class="nixie" style="margin-left: 8px; background-image: url('../data/img/nixie-tube/2.png');"></div>
+                                <div class="nixie" style="background-image: url('../data/img/nixie-tube/0.png');"></div>
+                                <div class="nixie" style="background-image: url('../data/img/nixie-tube/2.png');"></div>
+                                <div class="nixie" style="background-image: url('../data/img/nixie-tube/6.png');"></div>
+                            </div>
+                        </div>
+                        <p style="font-family: 'mainfont';">
+                            It is 4.
+							<br><br>
+							Today marks a month of me doing this. I admit that I like writing. I dislike people reading my writing to me. 
+							<br><br>
+							I have started contemplating whether I should automate some parts of the process, but it would be suuuuch a pain in the &#x2665;&#x2665;&#x2665;.
+							Oh well. Future me will know the answer.
+							<br><br>
+							I have also changed blog layout in the main page. Surprisingly, I feel like my "spam" blogs turned out a lot better than the ones 
+							I had before, so I should highlight some select ones instead that I actually like instead. I could edit them to be more like what I want,
+							but I think it is better to preserve them, even if I don't like them. 
+						</p>
+						<h2 class="text-styled" style="padding-left: 1px; margin-top: 10px; margin-bottom: 0px">Prelude to the next section</h2>
+                        <p style="font-family: 'mainfont';">
+							The other day, I was running a TTT server in gmod for my friends. I've been running some custom weapons and modifications to the gamemode,
+							since the weapons it comes with are ancient (though not entirely in a bad way) and to add new features. Apparently, though, the TTT gamemode still
+							gets updated, and overwrote some of my previous work which I hadn't saved anywhere else. That sounds bad, but reallistically I only had to redo a couple of things
+							since not every file was replaced. Anyways, I got all that fixed, except for (unknown to me at first) an issue that caused a massive error on screen when ADSing.
+							<br><br>
+							You see, I never had this issue. gmod scripting is really powerful and its one of the reasons why I like Lua so much, but it's also finnicky.
+							It turns out that not <i>all</i> files are shared over a p2p server (only some!!!), so sometimes clients just get really annoying errors of stuff just not loading,
+							and not even knowing what.
+							<br><br>
+							Issues like this &#x2665;&#x2665;&#x2665;&#x2665;&#x2665;&#x2665;&#x2665; suck. So, I sought out an environment where I could get a clean install,
+							so that I could replicate this issue. I could just use my laptop as a client to test on, but I don't want to keep it at a "fresh install", and its also just annoying
+							cause I don't have the desk space and the trackpad is annoying.
+							<br><br>
+							So, I decided to try using a virtual machine, with extra effort put into making it fast. Of course, despite the annoyance, just using the laptop as a second client works. 
+							But, it wouldn't be any fun if it wasn't complicated. And, it'll save me time in the future if something similar happens again 
+							(of course, I can also use it for any of my other programming ventures in the future as well).
+						</p>
+						<h2 class="text-styled" style="padding-left: 1px; margin-top: 10px; margin-bottom: 0px">High-speed virtual machines</h2>
+                        <p style="font-family: 'mainfont';">
+							I have decided to use <a class="a-styled" href="https://virt-manager.org/" target="_blank">virt-manager</a>
+							on my laptop to test the idea. I don't currently run any flavor of Linux on my desktop (though
+							that's subject to change in the near future), so I would need some alternative or some form of trickery (or an install of 
+							Mint ^_^) to do this on my desktop.
+							That's a problem for another day though.
+							<br><br>
+							I have run point-and-click 2D games before on normal VMs, and they worked fine. The first game I chose to run on this machine, though, 
+							was the original Half Life. Image below related. 
+							<br>
+							<img src="resources/blog4/images.jfif" style="width: 30%; margin-top: 8px; margin-bottom: 8px;">
+							<br>
+							Not only should Half Life work comfortably on my setup, but it is a game from a specific time period
+							where it has the option to either be rendered with "software" (native CPU rendering) or with OpenGL.<a class="a-styled" href="spamblog4.html#sidenote">*</a>
+							<br>
+							Therefore I could test low loads on both the CPU and GPU with the same game. 
+							<br><br>
+							As expected, the CPU blitzed through rendering when on software rendering. Since I didn't have GPU passthrough, OpenGL 
+							rendering must've been done on CPU, and caused the game to run very poorly, even in menus. I was surprised this worked at all, even in its &#x2665;&#x2665;&#x2665;&#x2665;&#x2665;&#x2665;&#x2665;&#x2665;&#x2665;.
+							<br><br>
+							The next step was to start setting up GPU passthrough in the VM. I have both a dedicated GPU, and an iGPU in the processor, so theoretically
+							I could render my host machine with the iGPU and pass the dedicated GPU to the VM.
+							I was able to get the dedicated GPU to pass through, however, this was at the expense of my host machine becoming unusable because
+							it was using the dedicated GPU to render... oops. 
+							<br><br>
+							Anyways, that's as far as I get for this week. I like to &#x2665;&#x2665;&#x2665;&#x2665; around with this kind of &#x2665;&#x2665;&#x2665;&#x2665; in class
+							when I am bored (90% of the time), and classes for this week have ended, so hopefully I finish with this next week. 
+							
+							<!-- this is kind of cursed -->
+							<h3 class="text-styled" style="padding-left: 1px; margin-top: 10px; margin-bottom: 0px" id="sidenote">* Sidenote</h3>
+							<p style="font-family: 'mainfont';">
+								Having worked with graphics rendering stuff in the past, I am still amazed that realtime graphics rendering is possible.
+								To gain a sense of the magnitude of the number of calculations that are done for graphics, take a simple fragment shader
+								(also known as a pixel shader) that colorizes an image to red, which should produce an output like this:
+								<br>
+								<img src="resources/blog4/example.png" style="width: 50%; margin-top: 8px; margin-bottom: 8px;">
+								<br>
+								In HLSL, the code would look something like this (I did not test it):
+								<div style="border: 2px solid var(--color1); margin-top: 4px; margin-bottom: 4px;">
+									<p style="font-family: 'mainfont'; margin: 4px;">
+										//this is the only relevant code, but there is boilerplate to be had, omitted here<br>
+										float4 frag(Fragment_Stage_Input input) : SV_TARGET<br>
+										{<br>
+											&nbsp;&nbsp;&nbsp;&nbsp;float4 col = tex2D(_MainTex, input.uv);<br>
+											&nbsp;&nbsp;&nbsp;&nbsp;float avg = (color.r + color.g + color.b) / 3.0;<br>
+											&nbsp;&nbsp;&nbsp;&nbsp;float redValue = clamp(avg * 2, 0, 1);<br>
+											&nbsp;&nbsp;&nbsp;&nbsp;float otherChannelsValue = clamp(avg - 0.5, 0, 0.5);<br>
+											&nbsp;&nbsp;&nbsp;&nbsp;col = float4(redValue, otherChannelsValue, otherChannelsValue, 1);<br>
+											&nbsp;&nbsp;&nbsp;&nbsp;return col;<br>
+										}<br>
+									</p>
+								</div>
+							</p>
+							<p style="font-family: 'mainfont';">
+								Say for instance that this shader is running on a screen with 1920 x 1080 resolution @ 60fps. Then, this function would run 124 million times 
+								a second. If I devoted my life to doing the math to run this shader for one second, I actually would not be able to finish that. I don't think I can
+								do the math fast enough.
+								<br><br>
+								Right, and that's a pretty simple shader, running at a (nowadays) low resolution * framerate combination, and not accounting for any overhead.
+								<br><br>
+								Although the workloads of a renderer and the above shader are different and not directly comparable, 
+								the whole rendering process is still <i>much</i> more computationally expensive overall. 
+								So, it is incredible to me that something as intensive as a realtime 3D renderer can be put entirely on the CPU, and that they actually worked with a playable framerate
+								even 25 years ago, on &#x2665;&#x2665;&#x2665;&#x2665;&#x2665;&#x2665; dinosaur-era processors (albeit people ran lower resolutions).
+								It gives me a sense of wonder, that computers really are just so &#x2665;&#x2665;&#x2665;&#x2665;&#x2665;&#x2665;&#x2665; fast.
+							</p>
+						</p>
+						<h2 class="text-styled" style="padding-left: 1px; margin-top: 10px; margin-bottom: 0px">Grapefruit juice so gooood</h2>
+                        <p style="font-family: 'mainfont';">
+                            <img src="resources/blog4/juice.jpg" style="width: 30%; margin-top: 8px; margin-bottom: 8px;">
+							<br>This is 8 grapefruits worth of juice. It was so good. It didn't take me too long, but I could definitely tell that 
+							this process is not good for my wrists. This is definitely something to do only every now and then.
+						</p>
+                        <h2 class="text-styled" style="padding-left: 1px; margin-top: 10px; margin-bottom: 0px">The return button is over yonder.</h2>
+                        <p style="font-family: 'mainfont';">
+                            The button to return is down here, or maybe alternatively the back button at the top of your browser, or maybe you can press MOUSE5 (or MOUSE4 in zero-indexed schemes).
+							That is, unless if you changed your binds, but you would never.
+						</p>
+						<div class="buttonholder" style="margin-left: 0px; padding: 0px; margin-top: 10px;">
+                            <div class="button" style="width: 100px; margin-left: 0px;">
+                                <a href="../bloglist.html" target="_self" style="justify-content:center; width: 100%; height: 100%; align-items: center; height: 32px;">Return</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="emptybar"> </div>
+        </div>
+        <script type="text/javascript" src='../main.js'></script>
+        <script type="text/javascript" src='../textEffects.js'></script>
+        <script type="text/javascript" src='../config.js'></script>
+    </body>
+</html>
