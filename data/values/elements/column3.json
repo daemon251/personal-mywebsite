@@ -1,0 +1,48 @@
+{
+	"21": 
+	{
+		"fullname": "Scandium",
+		"symbol": "Sc",
+		"series": "Transition Metal",
+		"weight": "44.956",
+		"descriptionLink": "https://en.wikipedia.org/wiki/Scandium",
+		"electronegativity": "1.36",
+		"meltingPoint": "1814",
+		"boilingPoint": "3109",
+		"heatConductivity": "15.8",
+		"electricConductivity": "(calculated) 562n",
+		"electronAffinity": "aaa",
+		"hardness": "N/A / 736-1200",
+		"densitySTP": "2.989 (solid)",
+		"densityLiquid": "2.80",
+		"specificHeat": "568",
+		"radiusVanDerWaals": "211",
+		"universalAbundance": "aaa",
+		"earthCrustAbundance": "aaa",
+		"mainIsotopes": "45: 100%, other synthetic isotopes exist",
+		"notes": "-"
+	},
+	"39": 
+	{
+		"fullname": "Yttrium",
+		"symbol": "Y",
+		"series": "Transition Metal",
+		"weight": "88.906",
+		"descriptionLink": "https://en.wikipedia.org/wiki/Yttrium",
+		"electronegativity": "1.22",
+		"meltingPoint": "1799",
+		"boilingPoint": "3203",
+		"heatConductivity": "17.2",
+		"electricConductivity": "596n",
+		"electronAffinity": "aaa",
+		"hardness": "N/A - 200-589",
+		"densitySTP": "4.469 (solid)",
+		"densityLiquid": "4.24",
+		"specificHeat": "298.4",
+		"radiusVanDerWaals": "N/A",
+		"universalAbundance": "aaa",
+		"earthCrustAbundance": "aaa",
+		"mainIsotopes": "89: 100%, other synthetic isotopes exist",
+		"notes": "-"
+	},
+}

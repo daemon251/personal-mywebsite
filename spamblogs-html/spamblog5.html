@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>  
+    <head>
+        <!-- Text that appears in the browser tab -->
+        <title>Spam Blog 5 - Boron</title>
+        <link rel="stylesheet" type="text/css" href="../styles.css">
+        <link rel="icon" type="image/x-icon" href="../data/img/icon.jpg">
+    </head>
+    <body>
+        <noscript>
+            <div class="alert">
+                This site requires javascript enabled to function properly. Sorry!
+            </div>
+        </noscript>
+        <canvas id="backgroundCanvas" width="100" height="100"></canvas>
+        <script type="text/javascript" src='../backgroundCanvasController.js'></script> 
+        <img type="button" id="darkmodeButton" onclick="darkModeButtonClick()" class="button-darkselector" src="../data/img/ui/darkModeBright.png"></button>
+        <div class="maincontainer">
+            <div class="topbar">
+                <div class="signature">
+                    <p class="text-styled" style="position: absolute; bottom: 0; margin-bottom: 4px">William Brooks / daemon47 - <span style="display: inline;" id=".site-titleDate"></span></p>
+                </div>
+                <div class="buttonholder">
+                    <div class="button">
+                        <a href="../index.html" target="_self" style="justify-content:center; width: 100%; height: 100%; align-items: center;">General</a>
+                    </div>
+                    <div class="button">
+                        <a href="../myStuffPage.html" target="_self" style="justify-content:center; width: 100%; height: 100%; align-items: center;">My Work</a>
+                    </div>
+                    <div class="button">
+                        <a href="../contactPage.html" target="_self" style="justify-content:center; width: 100%; height: 100%; align-items: center;">Contact</a>
+                    </div>
+                    <div class="button">
+                        <a href="../miscPage.html" target="_self" style="justify-content:center; width: 100%; height: 100%; align-items: center;">Misc.</a>
+                    </div>
+                </div>
+            </div>
+            <div class="genericcontainer">
+                <div class="aligner">
+                    <div class="column">
+                        <div class="row" style="justify-content: space-between;">
+                            <h1 class="text-styled" style="margin-bottom: 10px;">Boron</h1>
+                            <!--<p style="font-family: 'VCROSDMONO';">Date:</p>-->
+                            <div class="nixie-array" id=".site-yapping-nixietubes-date" style="transform: translateY(5px); margin-top: 0px; margin-bottom: 0px; margin-right: 10px;"> 
+                                <div class="nixie" style="background-image: url('../data/img/nixie-tube/1.png');"></div>
+                                <div class="nixie" style="background-image: url('../data/img/nixie-tube/6.png');"></div>
+                                <div class="nixie" style="margin-left: 8px; background-image: url('../data/img/nixie-tube/1.png');"></div>
+                                <div class="nixie" style="background-image: url('../data/img/nixie-tube/1.png');"></div>
+                                <div class="nixie" style="margin-left: 8px; background-image: url('../data/img/nixie-tube/2.png');"></div>
+                                <div class="nixie" style="background-image: url('../data/img/nixie-tube/0.png');"></div>
+                                <div class="nixie" style="background-image: url('../data/img/nixie-tube/2.png');"></div>
+                                <div class="nixie" style="background-image: url('../data/img/nixie-tube/6.png');"></div>
+                            </div>
+                        </div>
+                        <p style="font-family: 'mainfont';">
+                            This is a long one.
+						</p>
+						<h2 class="text-styled" style="padding-left: 1px; margin-top: 10px; margin-bottom: 0px">EPIC ANIMATED BACKGROUND</h2>
+                        <p style="font-family: 'mainfont';">
+                            I've been working on this 3D animated wallpaper based on the 2D one I made for the website. It took much sweat, tears, and
+							linear algebra (gross) to get here. Basically at 80% of the way through, I stopped development as classes got hard,
+							obligations crept in, and in general my time getting thin. It's unfortunate, I can either not be a shut-in or not 
+							get anything done. 
+							<br><br>
+							Well, I want to talk about since there's some things I find interesting about it. Below is an animated gif
+							showing what it looks like right now. This is a boring configuration for demonstration purposes BTW,
+							one can change the angles and sizes of things and stuff.
+							<br>
+							<img src="resources/blog5/gif0.gif" style="margin-top: 8px; margin-bottom: 8px;">
+							<br>
+							To preface, all of it is vanilla js and whatnot, wanted to do it all myself. 
+							About the "stars" (particles? what are these anymore): I've modeled them parametrically using real physics equations. It's
+							a moderate pain in the &#x2665;&#x2665;&#x2665; for elliptical orbits, but it's okay. Getting all of the "stars" to
+							render properly, though, was a big problem for a while since I was using a linear approximate (unknowingly). It really gave me the feeling
+							for a while that <i>something was wrong</i> but just having no idea what. Well, I eventually realized I was an idiot and then just used the
+							correct trigonometric function. &#x2665;&#x2665;&#x2665;&#x2665; linear algebra. 
+							<br><br>
+							The part I really like is how the planet is created. I chose not to deal with rendering a model, so instead the planet is parametrically generated
+							(I don't know what the correct terminology is here). The general process is: have a 2D color map (right now it's just lines) -> draw points along 
+							curved lines with color (shadows are also applied in this step) -> fix sizing and transparency.
+							<br><br>
+							A big slowdown earlier in development was load times generating this. Due to the algorithm used, the generation time is proportional to <i>about</i> the 
+							square of the "linear resolution" times some other constant variables. Anyways, I was generating with about 3x the linear resolution I am now (originally 1.0), 
+							so after turning that down, generation time went from about 1.5s into 150ms (with other variables set at the same values). Still kind of sucks, but I don't know
+							if better can be done in js with canvases.
+							<br><br>
+							Here's what it looks like at various resolutions. The lower resolutions turn out funny.
+							<br>
+							<img src="resources/blog5/sampler.png" style="width: 75%; margin-top: 8px; margin-bottom: 8px;">
+							<br>
+							As a bit of an aside, it is insane how consistent these time measurements are. I <i>remembered</i> the value for 1.0 resolution
+							(1485ms) from the last time I took them. What's going on there?
+							<br><br>
+							There's one more thing I'd like to show off about this that I haven't yet, which is that the main body will cast shadows on
+							the "stars" (what the &#x2665;&#x2665;&#x2665;&#x2665;? these aren't stars!) if the light vector is angled correctly.
+							<br>
+							<img src="resources/blog5/gif1.gif" style="margin-top: 8px; margin-bottom: 8px;">
+							<br>
+							It doesn't show shadow transition very will in video but it is there.
+							<br><br>
+							The goal is to put this as an option or maybe the default on this website, and also to make it a Wallpaper Engine background.
+							It works well in Wallpaper Engine, but notably is much less performant on a browser, so I'll have to see. Either way,
+							the most performance-taxing thing on the site right now isn't even the background, so perhaps adjustments can be made.
+						</p>
+						
+						<h2 class="text-styled" style="padding-left: 1px; margin-top: 10px; margin-bottom: 0px">My Laptop's NEVERENDING Battery Problem</h2>
+                        <p style="font-family: 'mainfont';">
+                            I have a Thinkpad P16 Gen 2. It's sometimes classified as a "portable workstation" rather than a laptop. 
+							<br><br>
+							I did not truly grasp what the power draw of the machine was going to be. When I was doing basic computer &#x2665;&#x2665;&#x2665;&#x2665;&#x2665;&#x2665;&#x2665;&#x2665;, 
+							my battery got low, like 2 hours in. And, I had a 94Wh battery. In the world of laptops, thats big as &#x2665;&#x2665;&#x2665;&#x2665;, and it was almost emptied in a matter of
+							<i>~two hours</i>. I did some measurements, and it was using 40W on idle.
+							<br><br>
+							Anyway, this was on Windows 11, which the laptop came with. I suspected that power would be a problem on Windows, and was already planning on trying out Linux
+							at least for the power savings. And damn, I was not expecting for there to be that big of a difference. But, on Linux, it was &#x2665;&#x2665;&#x2665;&#x2665;&#x2665;&#x2665;&#x2665; fifteen watts.
+							<br><br>
+							WHATTTT??? Microsoft, what the &#x2665;&#x2665;&#x2665;&#x2665; are you doing. 25W extra straight into the processor for &#x2665;&#x2665;&#x2665;&#x2665;&#x2665;&#x2665;&#x2665; what??? 
+							I tried the power saving &#x2665;&#x2665;&#x2665;&#x2665;&#x2665;&#x2665;&#x2665;&#x2665; and it only got down to 30W.
+							<br><br>
+							Anyways, now I laugh (in pity) at the users who complain about battery life on this laptop because for where they get two hours, I get like five.
+							Not that it is great still, since it becomes a lot more under load. But at least I can last five hours on a browser!
+							<br><br>
+							There's two reasons this topic has become important to me again. One is that my battery has noticably degraded down from 94Wh -> 78Wh due to my mistreatment of it. 
+							The second is that I am soon to be going on a camping trip, which will involve a long &#x2665;&#x2665;&#x2665; car ride and some other potential downtime.
+							<br><br>
+							I have a baseline power draw of about 15W. GPU idles at 2.5W, disabling that brings it down to 12.5W. After this, I started making a script 
+							to further reduce this before I learned of  <a class="a-styled" href="https://man.archlinux.org/man/tlp.8.en" target="_blank">tlp</a>'s existence. 
+							I started using tlp, which brought it down to 8W idle. There's still a little bit left to do that tlp seemingly doesn't cover
+							(the largest being to prioritize my processors E-cores or maybe disabling the P-cores outright). From setting it up, I also got the added benefit of having custom 
+							maximum charge levels to extend my battery's life.
+							<br><br>
+							I also need to find out how to power it without an wall connection. My big, bulky laptop doesn't support USB charging. 
+							Luckily, this was solved by getting an adapter from their proprietary charging standard "Slim-Tip" to USB-C. 
+							Though still, the battery can only be charged with a high-power connection 
+							(I don't know exactly how high, but 100W works so far). It shouldn't even be a voltage issue, 
+							since the adapter supposedly boosts the voltage up to 20V if required anyways.
+							This is going to be annoying to figure out. Hopefully I can figure it out, since there's some computer &#x2665;&#x2665;&#x2665;&#x2665;
+							I want to do.
+						</p>
+						
+						<h2 class="text-styled" style="padding-left: 1px; margin-top: 10px; margin-bottom: 0px">Two Cool Games I Played Recently</h2>
+						
+						<h3 class="text-styled" style="padding-left: 1px; margin-top: 10px;">BAIONLENJA</h3>
+						<p style="font-family: 'mainfont';">
+							
+							<a class="a-styled" href="https://store.steampowered.com/app/3509160/BAIONLENJA/" target="_blank">BAIONLENJA</a> is a Source-engine-esque movement-based game. I try to stay away from 
+							movement-based games because they tend to be easy and not super complex (there's also a large market of movement-based games where you don't even really go fast... what's the point?).
+							BAIONLENJA emulates Source/Quake-inspired movement (bhop, strafe, rocket jump), though. I thought it was kind of a corny idea at first, but it actually works.
+							<br><br>
+							I also appreciate the stylistic direction of the game. It's design is reminiscent of old games-- big blocky rooms, a clean low-poly look. There's also
+							an element of "wtf is even going on" and spookiness that adds to the experience. The game isn't full released yet, but I am excited for where it is going. 
+						</p>
+						
+						<video style="margin-top: 10px" autoplay="" muted="" loop="" playsinline="" poster="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3509160/extras/14921cf9574c967f0b0ac1ab91627766.poster.avif?t=1790360787" width="878" height="219"><source src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3509160/extras/14921cf9574c967f0b0ac1ab91627766.webm?t=1790360787" type="video/webm; codecs=vp9"><source src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3509160/extras/14921cf9574c967f0b0ac1ab91627766.mp4?t=1790360787" type="video/mp4"></video>
+						<p style="font-family: 'VCROSDMONO'; font-size: 12px">Video from the Steam page</p>
+						<!--<iframe src="https://store.steampowered.com/widget/3509160/" frameborder="0" width="646" height="190" style="margin-top: 10px"></iframe>-->
+						
+						<h3 class="text-styled" style="padding-left: 1px; margin-top: 10px;">Boomerang X</h3>
+						<p style="font-family: 'mainfont';">
+							<a class="a-styled" href="https://store.steampowered.com/app/1170060/Boomerang_X/" target="_blank">Boomerang X</a> is much more of an arena shooter. I found it interesting
+							because your weapon (the boomerang) is also your movement utility. But it's also because your movement is your weapon, and that your range is limited, that it
+							makes you put a lot of effort into pathing. The way you attack an enemy matters a lot. There is a really strong audiovisual identity, one that you can really only understand
+							from playing it. I think this game is a prime example that styling matters a whole lot more than raw visual fidelity.
+							<br><br>
+							I'm pretty sure the studio is dead, though. Oh well. The game is also kind of expensive, but there is a demo.
+						</p>
+						<!--<iframe src="https://store.steampowered.com/widget/1170060/" frameborder="0" width="646" height="190" style="margin-top: 10px"></iframe>-->
+						<div class="buttonholder" style="margin-left: 0px; padding: 0px; margin-top: 10px;">
+                            <div class="button" style="width: 100px; margin-left: 0px;">
+                                <a href="../bloglist.html" target="_self" style="justify-content:center; width: 100%; height: 100%; align-items: center; height: 32px;">Return</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="emptybar"> </div>
+        </div>
+        <script type="text/javascript" src='../main.js'></script>
+        <script type="text/javascript" src='../textEffects.js'></script>
+        <script type="text/javascript" src='../config.js'></script>
+    </body>
+</html>

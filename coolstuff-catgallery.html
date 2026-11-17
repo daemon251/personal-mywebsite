@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>  
+    <head>
+        <!-- Text that appears in the browser tab -->
+        <title>williamianbrooks - Cat Gallery</title>
+        <meta name="description" content="This is my personal website. This section contains my contact info.">   
+        <link rel="stylesheet" type="text/css" href="styles.css">
+        <link rel="icon" type="image/x-icon" href="data/img/icon.jpg">
+    </head>
+    <body>
+        <noscript>
+            <div class="alert">
+                This site requires javascript enabled to function properly. Sorry!
+            </div>
+        </noscript>
+        <canvas id="backgroundCanvas" width="100" height="100"></canvas>
+        <script type="text/javascript" src='backgroundCanvasController.js'></script> 
+        <img type="button" id="darkmodeButton" onclick="darkModeButtonClick()" class="button-darkselector" src="data/img/ui/darkModeBright.png"></button>
+        <div class="maincontainer">
+            <div class="topbar"> 
+                <div class="signature">
+                    <p class="text-styled" style="position: absolute; bottom: 0; margin-bottom: 4px">William Brooks / daemon47 - <span style="display: inline;" id=".site-titleDate"></span></p>
+                </div>
+				<div class="buttonholder">
+                    <div class="button">
+                        <a href="index.html" target="_self" style="justify-content:center; width: 100%; height: 100%; align-items: center;">General</a>
+                    </div>
+                    <div class="button">
+                        <a href="myStuffPage.html" target="_self" style="justify-content:center; width: 100%; height: 100%; align-items: center;">My Work</a>
+                    </div>
+					<div class="button">
+                        <a href="bloglist.html" target="_self" style="justify-content:center; width: 100%; height: 100%; align-items: center;">Blog</a>
+                    </div>
+                    <div class="button">
+                        <a href="contactPage.html" target="_self" style="justify-content:center; width: 100%; height: 100%; align-items: center;">Contact</a>
+                    </div>
+                </div>
+            </div>
+            <div class="genericcontainer">
+                <div class="aligner"> 
+                    <h1 class="text-styled" style="margin-bottom: 10px">Cat Gallery</h1>
+					<p style="font-family: mainfont">
+						BTW, Atom is (kind of) my cat. Technically, he is my roommate's cat. He is a cutie, but is no longer allowed in my room because he thinks my bed is a litterbox.
+						<br><br>
+						In some of my photos, he will appear younger since we got him when he was still not fully mature.
+					</p>
+							
+					<div class="row" style="width: 416px; margin-top: 10px;">
+						<div class="buttonholder" style="margin-left: 0px; padding: 0px; width: 208px; margin-bottom: 0px;">
+							<button type="button" style="width: 208px; margin-left: 0px; color: var(--color1a); border-color: var(--color1a)" id="changeToCatgifs" onclick="changeGallery('catgifs')">Cat Gifs</button><br>
+						</div>
+						<div class="buttonholder" style="margin-left: 0px; padding: 0px; width: 208px;">
+							<button type="button" style="width: 208px; margin-left: 0px;" id="changeToAtom" onclick="changeGallery('atom')">Atom</button><br>
+						</div>
+					</div>
+					
+					<div style="border: solid var(--color1) 2px; margin-top: 2px;">
+						<div class="masonry-container" id="catgifs">
+							<div class="masonry-columns">
+								<img class="masonry-brick" src="data/img/funnycates/cat-get-eaten.gif" style="width: 204px;"/>
+								<img class="masonry-brick" src="data/img/funnycates/black-cat-walking.gif" style="width: 204px;"/>
+								<img class="masonry-brick" src="data/img/funnycates/drinking-funny.gif" style="width: 204px;"/>
+								<img class="masonry-brick" src="data/img/funnycates/heavy-paper.gif" style="width: 204px;"/>
+								<img class="masonry-brick" src="data/img/funnycates/orange-cat-cat-hitting-cat.gif" style="width: 204px;"/>
+								<img class="masonry-brick" src="data/img/funnycates/seriousRightMeow.gif" style="width: 204px;"/>
+								<img class="masonry-brick" src="data/img/funnycates/he-cant-drink-it.gif" style="width: 204px;"/>
+								<img class="masonry-brick" src="data/img/funnycates/cat-driving-cat.gif" style="width: 204px;"/>
+								<img class="masonry-brick" src="data/img/funnycates/cat-explodes-with-mind.gif" style="width: 204px;"/>
+								<img class="masonry-brick" src="data/img/funnycates/milly-cat.gif" style="width: 204px;"/>
+								<img class="masonry-brick" src="data/img/funnycates/catskating.gif" style="width: 204px;"/>
+								<img class="masonry-brick" src="data/img/funnycates/cat-angry.gif" style="width: 204px;"/>
+								<img class="masonry-brick" src="data/img/funnycates/jinx-goofy.gif" style="width: 204px;"/>
+								<img class="masonry-brick" src="data/img/funnycates/cat-fan.gif" style="width: 204px;"/>
+								<img class="masonry-brick" src="data/img/funnycates/cat-smile-happy-cat.gif" style="width: 204px;"/>
+								<img class="masonry-brick" src="data/img/funnycates/snowcat.gif" style="width: 204px;"/>
+								<img class="masonry-brick" src="data/img/funnycates/consequences-cat.gif" style="width: 204px;"/>
+								<img class="masonry-brick" src="data/img/funnycates/car-down-stairs.gif" style="width: 204px;"/>
+								<img class="masonry-brick" src="data/img/funnycates/cat-bop-camera.gif" style="width: 204px;"/>
+								<img class="masonry-brick" src="data/img/funnycates/cat-weight-cat-checking-weight.gif" style="width: 204px;"/>
+								<img class="masonry-brick" src="data/img/funnycates/cat-stare-catstare.gif" style="width: 204px;"/>
+								<img class="masonry-brick" src="data/img/funnycates/cat-throw-turtles.gif" style="width: 204px;"/>
+								<img class="masonry-brick" src="data/img/funnycates/kitten-meow.gif" style="width: 204px;"/>
+								<img class="masonry-brick" src="data/img/funnycates/cat-whattt.gif" style="width: 204px;"/>
+								<img class="masonry-brick" src="data/img/funnycates/cats-push.gif" style="width: 204px;"/>
+								<img class="masonry-brick" src="data/img/funnycates/cat-on-skateboard-cat.gif" style="width: 204px;"/>
+								<img class="masonry-brick" src="data/img/funnycates/cat-evil.gif" style="width: 204px;"/>
+								<img class="masonry-brick" src="data/img/funnycates/dubious-conjecture.gif" style="width: 204px;"/>
+								<img class="masonry-brick" src="data/img/funnycates/cat-whar.gif" style="width: 204px;"/>
+								<img class="masonry-brick" src="data/img/funnycates/blbahlha.gif" style="width: 204px;"/>
+								<img class="masonry-brick" src="data/img/funnycates/cat-sus.gif" style="width: 204px;"/>
+								<img class="masonry-brick" src="data/img/funnycates/send-this-peasant-to-the-dungeons-cat.gif" style="width: 204px;"/>
+								<img class="masonry-brick" src="data/img/funnycates/jinxOnComputer.gif" style="width: 204px;"/>
+								<img class="masonry-brick" src="data/img/funnycates/cat-hit-camera.gif" style="width: 204px;"/>
+								<img class="masonry-brick" src="data/img/funnycates/crunchycat.gif" style="width: 204px;"/>
+								<img class="masonry-brick" src="data/img/funnycates/cat-mean.gif" style="width: 204px;"/>
+								<img class="masonry-brick" src="data/img/funnycates/cat-flip-ears.gif" style="width: 204px;"/>
+								<img class="masonry-brick" src="data/img/funnycates/get-real.gif" style="width: 204px;"/>
+							</div>
+						</div>
+						<div class="masonry-container" id="atom" style="display: none">
+							<div class="masonry-columns">
+								<img class="masonry-brick" src="data/img/atom/atom_see.jpg" style="width: 204px;"/>
+								<img class="masonry-brick" src="data/img/atom/atom_sit.jpg" style="width: 204px;"/>
+								<img class="masonry-brick" src="data/img/atom/atom_sprawl.jpg" style="width: 204px;"/>
+								<img class="masonry-brick" src="data/img/atom/atom_sprawl2.jpg" style="width: 204px;"/>
+								<img class="masonry-brick" src="data/img/atom/atom_sprawl3.jpg" style="width: 204px;"/>
+								<img class="masonry-brick" src="data/img/atom/atom_sprawl4.jpg" style="width: 204px;"/>
+								<img class="masonry-brick" src="data/img/atom/atom_sprawl5.jpg" style="width: 204px;"/>
+								<img class="masonry-brick" src="data/img/atom/atom_sprawl6.jpg" style="width: 204px;"/>
+								<img class="masonry-brick" src="data/img/atom/atom_sprawl7.jpg" style="width: 204px;"/>
+								<img class="masonry-brick" src="data/img/atom/atom_the_king.jpg" style="width: 204px;"/>
+								<img class="masonry-brick" src="data/img/atom/atom_turkey.jpg" style="width: 204px;"/>
+								<img class="masonry-brick" src="data/img/atom/atom_turkey_under_table.jpg" style="width: 204px;"/>
+								<img class="masonry-brick" src="data/img/atom/atom_walking_blurry.jpg" style="width: 204px;"/>
+								<img class="masonry-brick" src="data/img/atom/atom_window.jpg" style="width: 204px;"/>
+								<img class="masonry-brick" src="data/img/atom/atom_window2.jpg" style="width: 204px;"/>
+								<img class="masonry-brick" src="data/img/atom/croissant.jpg" style="width: 204px;"/>
+								<img class="masonry-brick" src="data/img/atom/he_observes.jpg" style="width: 204px;"/>
+								<img class="masonry-brick" src="data/img/atom/king_of_the_castle.jpg" style="width: 204px;"/>
+								<img class="masonry-brick" src="data/img/atom/little_guy.jpg" style="width: 204px;"/>
+								<img class="masonry-brick" src="data/img/atom/on_the_counter.jpg" style="width: 204px;"/>
+								<img class="masonry-brick" src="data/img/atom/onion_ring.jpg" style="width: 204px;"/>
+								<img class="masonry-brick" src="data/img/atom/so_cute.jpg" style="width: 204px;"/>
+								<img class="masonry-brick" src="data/img/atom/thats_a_vent.jpg" style="width: 204px;"/>
+								<img class="masonry-brick" src="data/img/atom/what_are_you_looking_at.jpg" style="width: 204px;"/>
+								<img class="masonry-brick" src="data/img/atom/what_is_that.jpg" style="width: 204px;"/>
+								<img class="masonry-brick" src="data/img/atom/you_aint_slick.jpg" style="width: 204px;"/>
+							</div>
+						</div>
+					</div>
+                    <div class="buttonholder" style="margin-left: 0px; padding: 0px">
+                        <div class="button" style="width: 100px; margin-left: 0px; margin-top: 10px;">
+                            <a href="javascript:history.back()" target="_self" style="justify-content:center; width: 100%; height: 100%; align-items: center; height: 32px;">Return</a>
+                        </div>
+                    </div>  
+                </div>
+            </div>
+        </div>
+				
+        <script type="text/javascript" src='main.js'></script>
+        <script type="text/javascript" src='textEffects.js'></script>
+        <script type="text/javascript" src='config.js'></script>
+		<script type="text/javascript" src='catgallery.js'></script>
+    </body>
+</html>
