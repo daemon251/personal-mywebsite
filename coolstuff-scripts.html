@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>  
+    <head>
+        <!-- Text that appears in the browser tab -->
+        <title>williamianbrooks - Scripts</title>
+        <meta name="description" content="This is my personal website. This section contains my contact info.">   
+        <link rel="stylesheet" type="text/css" href="styles.css">
+        <link rel="icon" type="image/x-icon" href="data/img/icon.jpg">
+    </head>
+    <body>
+        <noscript>
+            <div class="alert">
+                This site requires javascript enabled to function properly. Sorry!
+            </div>
+        </noscript>
+        <canvas id="backgroundCanvas" width="100" height="100"></canvas>
+        <script type="text/javascript" src='backgroundCanvasController.js'></script> 
+        <img type="button" id="darkmodeButton" onclick="darkModeButtonClick()" class="button-darkselector" src="data/img/ui/darkModeBright.png"></button>
+        <div class="maincontainer">
+            <div class="topbar"> 
+                <div class="signature">
+                    <p class="text-styled" style="position: absolute; bottom: 0; margin-bottom: 4px">William Brooks / daemon47 - <span style="display: inline;" id=".site-titleDate"></span></p>
+                </div>
+				<div class="buttonholder">
+                    <div class="button">
+                        <a href="index.html" target="_self" style="justify-content:center; width: 100%; height: 100%; align-items: center;">General</a>
+                    </div>
+                    <div class="button">
+                        <a href="myStuffPage.html" target="_self" style="justify-content:center; width: 100%; height: 100%; align-items: center;">My Work</a>
+                    </div>
+					<div class="button">
+                        <a href="bloglist.html" target="_self" style="justify-content:center; width: 100%; height: 100%; align-items: center;">Blog</a>
+                    </div>
+                    <div class="button">
+                        <a href="contactPage.html" target="_self" style="justify-content:center; width: 100%; height: 100%; align-items: center;">Contact</a>
+                    </div>
+                </div>
+            </div>
+            <div class="genericcontainer">
+                <div class="aligner"> 
+                    <h1 class="text-styled" style="margin-bottom: 10px">My Scripts</h1>
+					<p style="font-family: 'mainfont';">
+						These are a collection of scripts that I (mostly) have made for various purposes. Right now, all of it is stuff for Linux.
+					</p>
+					<h2 class="text-styled" style="padding-left: 1px; margin-top: 10px; margin-bottom: 0px">Linux Scripts</h2>
+					<p style="font-family: 'mainfont';">
+						Note that I distribute some code not written by me. In such cases, the license is included. Some of the scripts are also just one-liners used for
+						my Conky config, that still exist as separate files because I'm too lazy. Also, sometimes the scripts will reference files or directories (for instance, my home directory)
+						that might not exist on your machine.
+						<br><br>
+						<a class="a-styled" href="data/misc/scripts.zip" target="_new" style="width: 100%; height: 100%;">My /scripts folder</a>
+						<a class="a-styled" href="data/misc/conky.conf" target="_new" style="width: 100%; height: 100%;">My Conky config</a>
+					</p>
+                    <div class="buttonholder" style="margin-left: 0px; padding: 0px; margin-top: 10px;">
+                        <div class="button" style="width: 100px; margin-left: 0px;">
+                            <a href="javascript:history.back()" target="_self" style="justify-content:center; width: 100%; height: 100%; align-items: center; height: 32px;">Return</a>
+                        </div>
+                    </div>  
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript" src='main.js'></script>
+        <script type="text/javascript" src='textEffects.js'></script>
+        <script type="text/javascript" src='config.js'></script>
+    </body>
+</html>

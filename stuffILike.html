@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+
+<!-- todo: fix this mess-->
+
+<html>  
+
+<head>
+    <title>williamianbrooks - Stuff I Like</title>
+    <meta name="description" content="This is my personal website. This section is about stuff that I like.">   
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="icon" type="image/x-icon" href="data/img/icon.jpg">
+
+    <link rel="preload" href="data/img/nixie-tube/0.png" as="image" type="image/png"/>
+    <link rel="preload" href="data/img/nixie-tube/1.png" as="image" type="image/png"/>
+    <link rel="preload" href="data/img/nixie-tube/2.png" as="image" type="image/png"/>
+    <link rel="preload" href="data/img/nixie-tube/3.png" as="image" type="image/png"/>
+    <link rel="preload" href="data/img/nixie-tube/4.png" as="image" type="image/png"/>
+    <link rel="preload" href="data/img/nixie-tube/5.png" as="image" type="image/png"/>
+    <link rel="preload" href="data/img/nixie-tube/6.png" as="image" type="image/png"/>
+    <link rel="preload" href="data/img/nixie-tube/7.png" as="image" type="image/png"/>
+    <link rel="preload" href="data/img/nixie-tube/8.png" as="image" type="image/png"/>
+    <link rel="preload" href="data/img/nixie-tube/9.png" as="image" type="image/png"/>
+</head>
+<body>
+    <noscript>
+        <div class="alert">
+            This site requires javascript enabled to function properly. Sorry!
+        </div>
+    </noscript>
+    <canvas id="backgroundCanvas" width="100" height="100"></canvas>
+    <script type="text/javascript" src='backgroundCanvasController.js'></script> 
+    <img type="button" id="darkmodeButton" onclick="darkModeButtonClick()" class="button-darkselector" src="data/img/ui/darkModeBright.png"></button>
+    <div class="maincontainer">
+		<div class="topbar"> 
+            <div class="signature">
+                <p class="text-styled" style="position: absolute; bottom: 0; margin-bottom: 4px">William Brooks / daemon47 - <span style="display: inline;" id=".site-titleDate"></span></p>
+            </div>
+			<div class="buttonholder">
+                <div class="button">
+                    <a href="index.html" target="_self" style="justify-content:center; width: 100%; height: 100%; align-items: center;">General</a>
+                </div>
+                <div class="button">
+                    <a href="myStuffPage.html" target="_self" style="justify-content:center; width: 100%; height: 100%; align-items: center;">My Work</a>
+                </div>
+				<div class="button">
+                    <a href="bloglist.html" target="_self" style="justify-content:center; width: 100%; height: 100%; align-items: center;">Blog</a>
+                </div>
+                <div class="button">
+                    <a href="contactPage.html" target="_self" style="justify-content:center; width: 100%; height: 100%; align-items: center;">Contact</a>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="column">
+                <div class="genericcontainer">
+                    <div class="aligner">
+                        <h1 class="text-styled" style="margin-bottom: 10px;">My Favorites (brief)</h1>
+
+                        <p style="font-family: 'mainfont'; margin-top: 0px;">I have 
+                            more detailed explanations for
+                            some of the stuff I <span class="text-styled"><b>really</b></span> like further below, but I will also just list some stuff here in no particular order.
+
+                            <br><br><span class="text-styled" style="padding-left: 1px;">Video Games:</span> Balatro, Slay the Spire, Katana Zero, ULTRAKILL, of the Devil, Portal 1 & 2, Half Life 1 & 2, Team Fortress 2,
+                            Terraria, The Binding of Isaac, Celeste, Invisible Inc., SANABI, Subnautica, Space Engineers, VA-11 Hall-A, Undertale, Tactical Breach Wizards, OneShot, Borderlands 2,
+                            FTL: Faster Than Light, Into The Breach, Garry's Mod, Battleblock Theater, The Stanley Parable, Slice & Dice.
+
+                            <br><br><span class="text-styled">Shows:</span> Breaking Bad, Better Call Saul, Bob's Burgers,
+                            Rick and Morty, Arcane, BoJack Horseman, Peaky Blinders, The Marvelous Mrs. Maisel,
+                            Abbott Elementary, Cowboy Bebop, Death Note, Hunter x Hunter, Mob Psycho 100, 
+                            Violent Evergarden, Love is War, Frieren, The Apothecary Diaries, Trigun, Steins;Gate, Samurai Champloo.
+
+                            <br><br><span class="text-styled" style="padding-left: 1px;">Card Games:</span> Thirteen (Tien len), Poker, Egyptian Rat Screw (ERS), Spoons, Speed, BS.
+                        
+                            <div class="buttonholder" style="margin-left: 0px; padding: 0px; margin-top: 10px;">
+                                <div class="button" style="width: 100px; margin-left: 0px;">
+                                    <a href="javascript:history.back()" target="_self" style="justify-content:center; width: 100%; height: 100%; align-items: center; height: 32px;">Return</a>
+                                </div>
+                            </div>  
+                        </p>
+                    </div>
+                </div>
+                <div class="emptybar"> </div>
+                <div class="genericcontainer">
+                    <div class="aligner" style="padding: 0px 20px 20px 20px;">
+                        <h1 class="text-styled" style="margin-right: 10px; margin-bottom: 10px;">My Favorite Video Games</h1>
+
+                        <!--<p style="font-family: 'mainfont'; margin-right: 10px;">
+                            Games I <span class="text-styled"><b>really</b></span> like.
+                        </p>-->
+                        <div class="contentcontainer">
+                            <div class="contentgrid">
+                                <div class="contentbar-tall">
+                                    <div class="row" style:="height:100%">
+                                        <div class="smallsegment" style="display: flex; width: 31%;">
+                                            <div class="contentimagecontainer" style="margin-left: 4px; margin-top: 4px; margin-bottom: 8px;">
+                                                <img src="data/img/stuff/ultrakill.jpg">
+                                            </div>
+                                            <div class="aligner" style="padding: 0px 0px 0px 4px; text-align: center; width: calc(100% - 4px); margin: 0px">
+                                                <p style="font-family: 'mainfont';margin-bottom: 0px; font-size: 12px;"><b>Developer</b></p>
+                                                <a href="https://store.steampowered.com/search/?developer=Arsi%20%26quot%3BHakita%26quot%3B%20Patala" target="_blank" style="font-family: 'mainfont'; bottom: 0; align-items: center;justify-content: center; align-self: center; padding: 0px; margin: 0px; margin-bottom: 4px; font-size: 12px;"><u>Arsi "Hakita" Patala</u></a>
+                                                <p style="font-family: 'mainfont';margin-bottom: 0px; font-size: 12px;"><b>Publisher</b></p>
+                                                <a href="https://newblood.games/" target="_blank" style="font-family: 'mainfont'; bottom: 0; align-items: center;justify-content: center; align-self: center; padding: 0px; margin: 0px; margin-bottom: 4px; font-size: 12px;"><u>New Blood Interactive</u></a>
+                                                <p style="font-family: 'mainfont';margin-bottom: 0px; font-size: 12px;"><b>Genre / Tags</b><br>FPS, Boomer Shooter-adjacent, Arena Shooter, Singleplayer</p>
+                                            </div>
+                                        </div>
+                                        <div class="largesegment" style="width: 69%;">
+                                            <div class="aligner" style="padding: 0px 20px 10px 4%; width: calc(92%);">
+                                                <h2 style="font-family: 'VCROSDMONO'; font-size: 18px; margin-bottom: 0px; margin-top: 2%; bottom: 0;">ULTRAKILL</h2>
+                                                <p style="font-family: 'mainfont'; margin-top: 1.5%; font-size: 14px;">
+                                                    There's really quite no game like this. It really evolves on the boomer-shooter genre into something else. 
+                                                    There's so much that it does right.
+
+                                                    <br><br>The game is unique with how the player's health works: the player heals by damaging enemies closeby. 
+                                                    There's so much that I love about this mechanic; it fundamentally changes the way that the game plays in many organic and interesting ways.
+
+                                                    <br><br>Enemies and bosses are well designed and more varied than in any other game I've played. The player's kit is genuinely synergistic and well thought out.
+                                                    Also, the parrying mechanic is really cool :D.
+                                                    
+                                                    <br><br>This game also got me into modding. As far as games without direct modding support go, it's pretty straightforward.
+                                                </p>
+                                            </div>
+                                            <div class="row" style="position: absolute; bottom: 0; width: 353px">
+                                                <div class="textbox">
+                                                    <p style="font-family: 'mainfont'; bottom: 0; margin-bottom: 4px; line-height: 1; font-size: 12px;"><b>Reviews</b><br><span id=".uk-reviews"></span></p>
+                                                </div>
+                                                <div class="textbox">
+                                                    <p style="font-family: 'mainfont'; bottom: 0; margin-bottom: 4px; line-height: 1; font-size: 12px;"><b>Release</b><br>Sep. 2020</p>
+                                                </div>
+                                                <div class="textbox">
+                                                    <p style="font-family: 'mainfont'; bottom: 0; margin-bottom: 4px; line-height: 1; font-size: 12px;"><b># Players</b><br><span id=".uk-players"></span></p>
+                                                </div>
+                                                <div class="textbox">
+                                                    <p style="font-family: 'mainfont'; bottom: 0; margin-bottom: 0px; font-size: 12px;"><b>Link</b></p>
+                                                    <a href="https://store.steampowered.com/app/1229490/ULTRAKILL/" target="_blank" style="font-family: 'mainfont'; bottom: 0; align-items: center;justify-content: center; align-self: center; padding: 0px; margin: 0px; margin-bottom: 4px; font-size: 12px; font-size: 12px;"><u>Steam Page</u></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="contentbar-tall">
+                                    <div class="row" style:="height:100%">
+                                        <div class="smallsegment" style="display: flex; width: 31%;">
+                                            <div class="contentimagecontainer" style="margin-left: 4px; margin-top: 4px; margin-bottom: 8px;">
+                                                <img src="data/img/stuff/ofthedevil.jpg">
+                                            </div>
+                                            <div class="aligner" style="padding: 0px 0px 0px 4px; text-align: center; width: calc(100% - 4px); margin: 0px">
+                                                <p style="font-family: 'mainfont';margin-bottom: 0px; font-size: 12px;"><b>Developer</b></p>
+                                                <a href="https://linktr.ee/otdevil" target="_blank" style="font-family: 'mainfont'; bottom: 0; align-items: center;justify-content: center; align-self: center; padding: 0px; margin: 0px; margin-bottom: 4px; font-size: 12px;"><u>nth Circle Studios</u></a>
+                                                <p style="font-family: 'mainfont';margin-bottom: 0px; font-size: 12px;"><b>Publisher</b></p>
+                                                <a href="https://linktr.ee/otdevil" target="_blank" style="font-family: 'mainfont'; bottom: 0; align-items: center;justify-content: center; align-self: center; padding: 0px; margin: 0px; margin-bottom: 4px; font-size: 12px;"><u>nth Circle Studios</u></a>
+                                                <p style="font-family: 'mainfont';margin-bottom: 0px; font-size: 12px;"><b>Genre / Tags</b><br>Singleplayer, VN, Dystopian, Detective, Cyberpunk</p>
+                                            </div>
+                                        </div>
+                                        <div class="largesegment" style="width: 69%;">
+                                            <div class="aligner" style="padding: 0px 20px 10px 4%; width: calc(92%);">
+                                                <h2 style="font-family: 'VCROSDMONO'; font-size: 18px; margin-bottom: 0px; margin-top: 2%; bottom: 0;">of the Devil</h2>
+                                                <p style="font-family: 'mainfont'; margin-top: 1.5%; font-size: 14px;">
+                                                    To be honest, this game really surprised me. I went in with zero expectations, and was completely blown away. 
+                                                    If you are familiar with the Series <i>Ace Attorney</i>, I would say that this game
+                                                    has the same level of quality so far. (it is 2/6 finished as of writing).
+                                                    
+                                                    <br><br>The most outstanding part of this game is the writing. All of the dialogue flows naturally, the humor is there, etc. 
+                                                    Most importantly, the cases are interesting and non-obvious. The sections where you have to piece together
+                                                    what actually happened are generally well done, most of the time neither being too easy nor too difficult.
+
+                                                    <br><br>The cyberpunk/futuristic setting is well-developed. The asthetic is also pretty unique and clean.
+
+                                                    <br><br>Also, the G.O.A.T. Lena Raine has some good tracks in this game.</p>
+                                            </div>
+                                            <div class="row" style="position: absolute; bottom: 0; width: 353px">
+                                                <div class="textbox">
+                                                    <p style="font-family: 'mainfont'; bottom: 0; margin-bottom: 4px; line-height: 1; font-size: 12px;"><b>Reviews</b><br><span id =".otd-reviews"></span></p>
+                                                </div>
+                                                <div class="textbox">
+                                                    <p style="font-family: 'mainfont'; bottom: 0; margin-bottom: 4px; line-height: 1; font-size: 12px;"><b>Release</b><br>Feb. 2025</p>
+                                                </div>
+                                                <div class="textbox">
+                                                    <p style="font-family: 'mainfont'; bottom: 0; margin-bottom: 4px; line-height: 1; font-size: 12px;"><b># Players</b><br><span id=".otd-players"></span></p>
+                                                </div>
+                                                <div class="textbox">
+                                                    <p style="font-family: 'mainfont'; bottom: 0; margin-bottom: 0px; font-size: 12px;"><b>Link</b></p>
+                                                    <a href="https://store.steampowered.com/app/2739630/of_the_Devil/" target="_blank" style="font-family: 'mainfont'; bottom: 0; align-items: center;justify-content: center; align-self: center; padding: 0px; margin: 0px; margin-bottom: 4px; font-size: 12px; font-size: 12px;"><u>Steam Page</u></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="contentbar-tall">
+                                    <div class="row" style:="height:100%">
+                                        <div class="smallsegment" style="display: flex; width: 31%; ">
+                                            <div class="contentimagecontainer" style="margin-left: 4px; margin-top: 4px; margin-bottom: 8px;">
+                                                <img src="data/img/stuff/katanazero.jpg">
+                                            </div>
+                                            <div class="aligner" style="padding: 0px 0px 0px 4px; text-align: center; width: calc(100% - 4px); margin: 0px">
+                                                <p style="font-family: 'mainfont';margin-bottom: 0px; font-size: 12px;"><b>Developer</b></p>
+                                                <a href="https://askiisoft.com/" target="_blank" style="font-family: 'mainfont'; bottom: 0; align-items: center;justify-content: center; align-self: center; padding: 0px; margin: 0px; margin-bottom: 4px; font-size: 12px;"><u>Askiisoft</u></a>
+                                                <p style="font-family: 'mainfont';margin-bottom: 0px; font-size: 12px;"><b>Publisher</b></p>
+                                                <a href="https://www.devolverdigital.com/" target="_blank" style="font-family: 'mainfont'; bottom: 0; align-items: center;justify-content: center; align-self: center; padding: 0px; margin: 0px; margin-bottom: 4px; font-size: 12px;"><u>Devolver Digital</u></a>
+                                                <p style="font-family: 'mainfont';margin-bottom: 0px; font-size: 12px;"><b>Genre / Tags</b><br>Singleplayer, Action, Difficult, 2D</p>
+                                            </div>
+                                        </div>
+                                        <div class="largesegment" style="width: 69%;">
+                                            <div class="aligner" style="padding: 0px 20px 10px 4%; width: calc(92%);">
+                                                <h2 style="font-family: 'VCROSDMONO'; font-size: 18px; margin-bottom: 0px; margin-top: 2%; bottom: 0;">Katana ZERO</h2>
+                                                <p style="font-family: 'mainfont'; margin-top: 1.5%; font-size: 14px;">
+                                                    I think of this as a spiritual successor to <i>Hotline Miami</i>.
+
+                                                    <br><br>This game nails the feeling that it's trying to give off. The MC
+                                                    has precognition abilities, so "dying" and resetting is just the player considering a failed solution and trying again. 
+                                                    In <i>Hotline Miami</i>, dying, restarting, and cheesing rooms is lame. But in this game, it's encouraged. It makes "dying" 
+                                                    work with the immersion rather than against it, and makes solving rooms satisfying rather than frustrating.
+
+                                                    <br><br>The game is just so cool. The OST, the bullet parrying, the slowdown mechanic are all great.
+                                                    There's also a lot of cool moments that result from the characters's precognition ability. 
+                                                    
+                                                    <br><br>Not to mention that the art and story are also very good. The story isn't complete (that'll come when the DLC drops any day now, surely...)
+                                                </p>
+                                            </div>
+                                            <div class="row" style="position: absolute; bottom: 0; width: 353px">
+                                                <div class="textbox">
+                                                    <p style="font-family: 'mainfont'; bottom: 0; margin-bottom: 4px; line-height: 1; font-size: 12px;"><b>Reviews</b><br><span id=".kz-reviews"></span></p>
+                                                </div>
+                                                <div class="textbox">
+                                                    <p style="font-family: 'mainfont'; bottom: 0; margin-bottom: 4px; line-height: 1; font-size: 12px;"><b>Release</b><br>Apr. 2019</p>
+                                                </div>
+                                                <div class="textbox">
+                                                    <p style="font-family: 'mainfont'; bottom: 0; margin-bottom: 4px; line-height: 1; font-size: 12px;"><b># Players</b><br><span id=".kz-players"></span></p>
+                                                </div>
+                                                <div class="textbox">
+                                                    <p style="font-family: 'mainfont'; bottom: 0; margin-bottom: 0px; font-size: 12px;"><b>Link</b></p>
+                                                    <a href="https://store.steampowered.com/app/460950/Katana_ZERO/" target="_blank" style="font-family: 'mainfont'; bottom: 0; align-items: center;justify-content: center; align-self: center; padding: 0px; margin: 0px; margin-bottom: 4px; font-size: 12px; font-size: 12px;"><u>Steam Page</u></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="contentbar-tall">
+                                    <div class="row" style:="height:100%">
+                                        <div class="smallsegment" style="display: flex; width: 31%;">
+                                            <div class="contentimagecontainer" style="margin-left: 4px; margin-top: 4px; margin-bottom: 8px;">
+                                                <img src="data/img/stuff/balatro.jpg">
+                                            </div>
+                                            <div class="aligner" style="padding: 0px 0px 0px 4px; text-align: center; width: calc(100% - 4px); margin: 0px">
+                                                <p style="font-family: 'mainfont';margin-bottom: 0px; font-size: 12px;"><b>Developer</b></p>
+                                                <a href="https://localthunk.com/" target="_blank" style="font-family: 'mainfont'; bottom: 0; align-items: center;justify-content: center; align-self: center; padding: 0px; margin: 0px; margin-bottom: 4px; font-size: 12px;"><u>LocalThunk</u></a>
+                                                <p style="font-family: 'mainfont';margin-bottom: 0px; font-size: 12px;"><b>Publisher</b></p>
+                                                <a href="https://www.playstack.com/" target="_blank" style="font-family: 'mainfont'; bottom: 0; align-items: center;justify-content: center; align-self: center; padding: 0px; margin: 0px; margin-bottom: 4px; font-size: 12px;"><u>Playstack</u></a>
+                                                <p style="font-family: 'mainfont';margin-bottom: 0px; font-size: 12px;"><b>Genre / Tags</b><br>Roguelike, Card Game, 2D, Arcade</p>
+                                            </div>
+                                        </div>
+                                        <div class="largesegment" style="width: 69%;">
+                                            <div class="aligner" style="padding: 0px 20px 10px 4%; width: calc(92%);">
+                                                <h2 style="font-family: 'VCROSDMONO'; font-size: 18px; margin-bottom: 0px; margin-top: 2%; bottom: 0;">Balatro</h2>
+                                                <p style="font-family: 'mainfont'; margin-top: 1.5%; font-size: 14px;">
+                                                    The game follows an unconventional gameplay loop; 
+                                                    I was actually confused when it was first described to me. It's something that you have to play to understand.
+
+                                                    <br><br>The game is simultaneously chill but also a proper roguelike, with strategy and depth. It's a game that I can play
+                                                    while doing something else, or play when I don't feel like doing anything.
+
+                                                    <br><br>Everything in this game is so satisfying. Playing cards, scoring big numbers, etc. all feel good. 
+                                                    The soundtrack, which by the way is literally just one track 
+                                                    is great and really adds to the experience. I'm always excited to hear it again when I boot up the game.
+                                                    <br><br>
+                                                    It's a game that was made because the guy who made it wanted to play it- that's awesome. I'm glad that we got to see
+                                                    LocalThunk's vision.                               
+                                                </p>
+                                            </div>
+                                            <div class="row" style="position: absolute; bottom: 0; width: 353px">
+                                                <div class="textbox">
+                                                    <p style="font-family: 'mainfont'; bottom: 0; margin-bottom: 4px; line-height: 1; font-size: 12px;"><b>Reviews</b><br><span id=".bal-reviews"></span></p>
+                                                </div>
+                                                <div class="textbox">
+                                                    <p style="font-family: 'mainfont'; bottom: 0; margin-bottom: 4px; line-height: 1; font-size: 12px;"><b>Release</b><br>Feb. 2024</p>
+                                                </div>
+                                                <div class="textbox">
+                                                    <p style="font-family: 'mainfont'; bottom: 0; margin-bottom: 4px; line-height: 1; font-size: 12px;"><b># Players</b><br><span id=".bal-players"></span></p>
+                                                </div>
+                                                <div class="textbox">
+                                                    <p style="font-family: 'mainfont'; bottom: 0; margin-bottom: 0px; font-size: 12px;"><b>Link</b></p>
+                                                    <a href="https://store.steampowered.com/app/2379780/Balatro/" target="_blank" style="font-family: 'mainfont'; bottom: 0; align-items: center;justify-content: center; align-self: center; padding: 0px; margin: 0px; margin-bottom: 4px; font-size: 12px; font-size: 12px;"><u>Steam Page</u></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="contentbar-tall">
+                                    <div class="row" style:="height:100%">
+                                        <div class="smallsegment" style="display: flex; width: 31%;">
+                                            <div class="contentimagecontainer" style="margin-left: 4px; margin-top: 4px; margin-bottom: 8px;">
+                                                <img src="data/img/stuff/ftl.webp">
+                                            </div>
+                                            <div class="aligner" style="padding: 0px 0px 0px 4px; text-align: center; width: calc(100% - 4px); margin: 0px">
+                                                <p style="font-family: 'mainfont';margin-bottom: 0px; font-size: 12px;"><b>Developer</b></p>
+                                                <a href="https://www.subsetgames.com/" target="_blank" style="font-family: 'mainfont'; bottom: 0; align-items: center;justify-content: center; align-self: center; padding: 0px; margin: 0px; margin-bottom: 4px; font-size: 12px;"><u>Subset Games</u></a>
+                                                <p style="font-family: 'mainfont';margin-bottom: 0px; font-size: 12px;"><b>Publisher</b></p>
+                                                <a href="https://www.subsetgames.com/" target="_blank" style="font-family: 'mainfont'; bottom: 0; align-items: center;justify-content: center; align-self: center; padding: 0px; margin: 0px; margin-bottom: 4px; font-size: 12px;"><u>Subset Games</u></a>
+                                                <p style="font-family: 'mainfont';margin-bottom: 0px; font-size: 12px;"><b>Genre / Tags</b><br>Roguelike, Card Game, 2D, Arcade</p>
+                                            </div>
+                                        </div>
+                                        <div class="largesegment" style="width: 69%;">
+                                            <div class="aligner" style="padding: 0px 20px 10px 4%; width: calc(92%);">
+                                                <h2 style="font-family: 'VCROSDMONO'; font-size: 18px; margin-bottom: 0px; margin-top: 2%; bottom: 0;">FTL: Faster Than Light</h2>
+                                                <p style="font-family: 'mainfont'; margin-top: 1.5%; font-size: 14px;">
+                                                    I think this game has the exact best amount of player agency for a roguelike. It is difficult, very difficult. There's a lot to learn, but very little  
+                                                    high-level strategy is about precise maneuvers, but instead about making better decisions. The base game definitely has some pitfalls and
+                                                    questionable balance decisions, but these can be addressed by using any of the mods from the active modding scene.
+
+                                                    <br><br>The soundtrack is awesome. It fits the game well. Visual design is also good: little clutter, and a consistent art 
+                                                    style and theme.
+
+                                                    <br><br>A definite must-try for anyone that likes roguelikes. It's a game that will constantly force you into tough decisions.
+                                                    It's a game that will sometimes ♥♥♥♥ you over so hard, yet you still claw your way to victory- and it will be glorious.
+                                                </p>
+                                            </div>
+                                            <div class="row" style="position: absolute; bottom: 0; width: 353px">
+                                                <div class="textbox">
+                                                    <p style="font-family: 'mainfont'; bottom: 0; margin-bottom: 4px; line-height: 1; font-size: 12px;"><b>Reviews</b><br><span id=".ftl-reviews"></span></p>
+                                                </div>
+                                                <div class="textbox">
+                                                    <p style="font-family: 'mainfont'; bottom: 0; margin-bottom: 4px; line-height: 1; font-size: 12px;"><b>Release</b><br>Feb. 2024</p>
+                                                </div>
+                                                <div class="textbox">
+                                                    <p style="font-family: 'mainfont'; bottom: 0; margin-bottom: 4px; line-height: 1; font-size: 12px;"><b># Players</b><br><span id=".ftl-players"></span></p>
+                                                </div>
+                                                <div class="textbox">
+                                                    <p style="font-family: 'mainfont'; bottom: 0; margin-bottom: 0px; font-size: 12px;"><b>Link</b></p>
+                                                    <a href="https://store.steampowered.com/app/212680/FTL_Faster_Than_Light/" target="_blank" style="font-family: 'mainfont'; bottom: 0; align-items: center;justify-content: center; align-self: center; padding: 0px; margin: 0px; margin-bottom: 4px; font-size: 12px; font-size: 12px;"><u>Steam Page</u></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="contentbar-tall">
+                                    <div class="row" style:="height:100%">
+                                        <div class="smallsegment" style="display: flex; width: 31%;">
+                                            <div class="contentimagecontainer" style="margin-left: 4px; margin-top: 4px; margin-bottom: 8px;">
+                                                <img src="data/img/stuff/portal2.webp">
+                                            </div>
+                                            <div class="aligner" style="padding: 0px 0px 0px 4px; text-align: center; width: calc(100% - 4px); margin: 0px">
+                                                <p style="font-family: 'mainfont';margin-bottom: 0px; font-size: 12px;"><b>Developer</b></p>
+                                                <a href="https://store.steampowered.com/developer/valve" target="_blank" style="font-family: 'mainfont'; bottom: 0; align-items: center;justify-content: center; align-self: center; padding: 0px; margin: 0px; margin-bottom: 4px; font-size: 12px;"><u>Valve</u></a>
+                                                <p style="font-family: 'mainfont';margin-bottom: 0px; font-size: 12px;"><b>Publisher</b></p>
+                                                <a href="https://store.steampowered.com/developer/valve" target="_blank" style="font-family: 'mainfont'; bottom: 0; align-items: center;justify-content: center; align-self: center; padding: 0px; margin: 0px; margin-bottom: 4px; font-size: 12px;"><u>Valve</u></a>
+                                                <p style="font-family: 'mainfont';margin-bottom: 0px; font-size: 12px;"><b>Genre / Tags</b><br>First Person, Puzzle, Sci-Fi</p>
+                                            </div>
+                                        </div>
+                                        <div class="largesegment" style="width: 69%;">
+                                            <div class="aligner" style="padding: 0px 20px 10px 4%; width: calc(92%);">
+                                                <h2 style="font-family: 'VCROSDMONO'; font-size: 18px; margin-bottom: 0px; margin-top: 2%; bottom: 0;">Portal 2</h2>
+                                                <p style="font-family: 'mainfont'; margin-top: 1.5%; font-size: 14px;">
+                                                    Portal 1 is also a great game, but this one really nails it.
+
+                                                    <br><br>The puzzles are uniquely intuitive but yet difficult. There are no tricks, there are no items tucked away in corners. The player is 
+                                                    gradually introduced to puzzle mechanics.
+
+                                                    <br><br>The story flows well despite it really only involving three characters- which are all well voice acted, well developed, and interesting. Cave Johnson (voiced 
+                                                    by J.K. Simmons) was a super interesting character to me- it's part of why chapters 6 & 7 are my favorite parts of any video game ever.
+
+                                                    <br><br>There's also a lot of replayability due to the custom chambers. There's also
+                                                    a co-op mode, which is surprisingly fun. The co-op campaign also allows you to troll your partner, giveing you ample oppurtunity to throw your partner into a 
+                                                    pit of acid, or into spikes, etc. The co-op puzzles themselves are also good.
+                                                </p>
+                                            </div>
+                                            <div class="row" style="position: absolute; bottom: 0; width: 353px">
+                                                <div class="textbox">
+                                                    <p style="font-family: 'mainfont'; bottom: 0; margin-bottom: 4px; line-height: 1; font-size: 12px;"><b>Reviews</b><br><span id=".po2-reviews"></span></p>
+                                                </div>
+                                                <div class="textbox">
+                                                    <p style="font-family: 'mainfont'; bottom: 0; margin-bottom: 4px; line-height: 1; font-size: 12px;"><b>Release</b><br>Apr. 2011</p>
+                                                </div>
+                                                <div class="textbox">
+                                                    <p style="font-family: 'mainfont'; bottom: 0; margin-bottom: 4px; line-height: 1; font-size: 12px;"><b># Players</b><br><span id=".po2-players"></span></p>
+                                                </div>
+                                                <div class="textbox">
+                                                    <p style="font-family: 'mainfont'; bottom: 0; margin-bottom: 0px; font-size: 12px;"><b>Link</b></p>
+                                                    <a href="https://store.steampowered.com/app/620/Portal_2/" target="_blank" style="font-family: 'mainfont'; bottom: 0; align-items: center;justify-content: center; align-self: center; padding: 0px; margin: 0px; margin-bottom: 4px; font-size: 12px; font-size: 12px;"><u>Steam Page</u></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="contentbar-tall">
+                                    <div class="row" style:="height:100%">
+                                        <div class="smallsegment" style="display: flex; width: 31%;">
+                                            <div class="contentimagecontainer" style="margin-left: 4px; margin-top: 4px; margin-bottom: 8px;">
+                                                <img src="data/img/stuff/tf2.png">
+                                            </div>
+                                            <div class="aligner" style="padding: 0px 0px 0px 4px; text-align: center; width: calc(100% - 4px); margin: 0px">
+                                                <p style="font-family: 'mainfont';margin-bottom: 0px; font-size: 12px;"><b>Developer</b></p>
+                                                <a href="https://store.steampowered.com/developer/valve" target="_blank" style="font-family: 'mainfont'; bottom: 0; align-items: center;justify-content: center; align-self: center; padding: 0px; margin: 0px; margin-bottom: 4px; font-size: 12px;"><u>Valve</u></a>
+                                                <p style="font-family: 'mainfont';margin-bottom: 0px; font-size: 12px;"><b>Publisher</b></p>
+                                                <a href="https://store.steampowered.com/developer/valve" target="_blank" style="font-family: 'mainfont'; bottom: 0; align-items: center;justify-content: center; align-self: center; padding: 0px; margin: 0px; margin-bottom: 4px; font-size: 12px;"><u>Valve</u></a>
+                                                <p style="font-family: 'mainfont';margin-bottom: 0px; font-size: 12px;"><b>Genre / Tags</b><br>FPS, Multiplayer, Class-based</p>
+                                            </div>
+                                        </div>
+                                        <div class="largesegment" style="width: 69%;">
+                                            <div class="aligner" style="padding: 0px 20px 10px 4%; width: calc(92%);">
+                                                <h2 style="font-family: 'VCROSDMONO'; font-size: 18px; margin-bottom: 0px; margin-top: 2%; bottom: 0;">Team Fortress 2</h2>
+                                                <p style="font-family: 'mainfont'; margin-top: 1.5%; font-size: 14px;">
+                                                    <br><br>I love the visual design of the game. The use of a cartoon style instead of a realistic one gives it much more character,
+                                                    it looks like a comic book or an early 2000's animated movie (in a good way). Visual clarity is very well done, characters and projectiles stand out from environments.
+                                                
+                                                    <br><br>All of the characters are purposefully designed and have distinct roles. They all play differently, but play well together. The game is 
+                                                    also designed around CQC in many ways, which facilitates a more fun experience- you don't instantly die to a guy you don't see, or a guy camping a corner, etc.
+
+                                                    <br><br>The game is also pretty funny. Ragdolls, voice commands, funny playstyles, etc. exist. It is a game well designed to be fun, 
+                                                    rather than just to be sweaty. The new player experience is also good for the type of game it is.
+                                                </p>
+                                            </div>
+                                            <div class="row" style="position: absolute; bottom: 0; width: 353px;">
+                                                <div class="textbox">
+                                                    <p style="font-family: 'mainfont'; bottom: 0; margin-bottom: 4px; line-height: 1; font-size: 12px;"><b>Reviews</b><br><span id=".tf2-reviews"></span></p>
+                                                </div>
+                                                <div class="textbox">
+                                                    <p style="font-family: 'mainfont'; bottom: 0; margin-bottom: 4px; line-height: 1; font-size: 12px;"><b>Release</b><br>Oct. 2007</p>
+                                                </div>
+                                                <div class="textbox">
+                                                    <p style="font-family: 'mainfont'; bottom: 0; margin-bottom: 4px; line-height: 1; font-size: 12px;"><b># Players</b><br><span id=".tf2-players"></span></p>
+                                                </div>
+                                                <div class="textbox">
+                                                    <p style="font-family: 'mainfont'; bottom: 0; margin-bottom: 0px; font-size: 12px;"><b>Link</b></p>
+                                                    <a href="https://store.steampowered.com/app/2379780/Balatro/" target="_blank" style="font-family: 'mainfont'; bottom: 0; align-items: center;justify-content: center; align-self: center; padding: 0px; margin: 0px; margin-bottom: 4px; font-size: 12px; font-size: 12px;"><u>Steam Page</u></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="emptybar"> </div>
+            </div>
+            <!--<div class="sidebar"> </div>-->
+        </div>
+    </div>
+    <script type="text/javascript" src='main.js'></script>
+    <script type="text/javascript" src='textEffects.js'></script>
+    <script type="text/javascript" src='config.js'></script>
+</body>
+
+</html>
