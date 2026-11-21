@@ -428,6 +428,7 @@ funnyCatImages =
 	"cat-whar.gif",
 	"cat-weight-cat-checking-weight.gif",
 	"cat-throw-turtles.gif",
+	"cat-in-car-wash.gif",
 ]
 
 funnyCatImagesRandomSorted = [];
@@ -506,7 +507,7 @@ var quotes =
     {text: "The man who can smile when things go wrong has thought of someone else he can blame it on.", author: "Robert Bloch", date: "late 20th century"},
     {text: "It's easy to quit smoking - I've done it a thousand times!", author: "Mark Twain", date: null},
     {text: "Outside of a dog, a book is man's best friend. Inside of a dog it's too dark to read.", author: "Groucho Marx", date: null},
-    {text: "What do I think of Western civilization? I think it would be a very good idea.", author: "Mahatma Gandhi", date: null},
+    {text: "What do I think of Western civilization? I think it would be a very good idea.", author: "Mahatma Gandhi?", date: null},
     {text: "You'll never know what worse luck your bad luck has saved you from.", author: "Cormac McCarthy", date: null},
     {text: "A problem properly stated is a problem partly solved.", author: "Henry Hazlitt", date: null},
     {text: "Arguing with an engineer is like wrestling with a pig in the mud- after a few minutes you realize the pig likes it.", author: "Unknown", date: null},

@@ -174,7 +174,7 @@ function visitorDataLogic()
 
 function initLogic()
 {
-    writeToOutputMap("none", "none", ".site-titleDate", "2026/11/08"); //this should be hardcoded and not current date. I need to change this value every time I update this site
+    writeToOutputMap("none", "none", ".site-titleDate", "2026/11/21"); //this should be hardcoded and not current date. I need to change this value every time I update this site
     writeToOutputMap("none", "none", ".emp-totalDownloads", "N/A");
     //visitorDataLogic();
 
